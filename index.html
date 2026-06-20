@@ -322,6 +322,42 @@ header{
 
     <a class="join-btn" href="https://discord.gg/HAuyp9NP" target="_blank">
         月詠に参加    </a>
+
+<p>
+下のボタンでray がパートごとで流れるよ！
+<p>
+
+<div style="margin-top:20px;">
+
+<button onclick="playMusic('music1.opus')">
+🎵 1パート
+</button>
+
+<button onclick="playMusic('music2.opus')">
+🎵 2パート
+</button>
+
+<button onclick="playMusic('music3.opus')">
+🎵 ラスサビ
+</button>
+
+<button onclick="stopMusic()">
+⏹ 停止
+</button>
+
+<br><br>
+
+音量
+<input
+type="range"
+id="volume"
+min="0"
+max="1"
+step="0.01"
+value="0.5">
+
+</div>
+
 </div>
 <div class="intro big">
     <h2>🌙 サーバー紹介</h2>
@@ -549,6 +585,8 @@ function changeBG(){
 
 setInterval(changeBG,5000);
 const bgm=document.getElementById("bgm");
+
+const volume=document.getElementById("volume"); bgm.volume=0.5; volume.addEventListener("input",()=>{ bgm.volume=volume.value; });
 
 function playMusic(file){
     bgm.src=file;
