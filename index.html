@@ -306,6 +306,56 @@ header{
     color:#0f172a;
     margin-top:20px;
 }
+
+.member .intro-box{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.5s ease;
+    margin-top:10px;
+}
+
+.member.active .intro-box{
+    max-height:200px;
+}
+
+.member .name{
+    cursor:pointer;
+}
+
+.intro-content{
+    padding:10px;
+    border-radius:10px;
+    background:rgba(0,0,0,0.08);
+}
+
+.name{
+    cursor:pointer;
+}
+
+/* 鯖主・副官・モデレーターに▼ */
+.owner .name::after,
+.sub .name::after,
+.mod .name::after{
+    content:" ▼";
+    font-size:12px;
+}
+
+.sub .name,
+.mod .name{
+    cursor:pointer;
+}
+
+.sub .name::after,
+.mod .name::after,
+.owner .name::after{
+    content:" ▼";
+    font-size:12px;
+}
+
+.owner.active .intro-box {
+    max-height: 500px;
+}
+
 </style>
 
 </head>
@@ -424,41 +474,46 @@ value="0.5">
 <div class="role">
 <h2>👑 鯖主</h2>
 
-
-<div class="member show">
+<div class="member owner">
 
     <img src="illust.png" class="square">
     <img src="myphoto2.png" class="icon">
 
     <span class="name rainbow">よっしー</span>
 
-    <!-- SNSはここ（名前の直下） -->
-<div class="sns">
+    <div class="intro-box">
+こんにちは！鯖主のよっしーです！<br>
+軽く自己紹介をさせていただきますね。<br>
 
-    <a class="sns-btn youtube"
-       href="https://youtube.com/@yoccie44?si=NoVAeRK-YVcSEvVA"
-       target="_blank">
-       YouTube
-    </a>
+【年齢】<br>
+・17歳の高校3年生<br>
 
-    <a class="sns-btn twitter"
-       href="https://x.com/yoccie044"
-       target="_blank">
-       X
-    </a>
+【好きなこと】<br>
+・超かぐグッズ集め<br>
+・運動<br>
+・模写<br>
 
-    <a class="sns-btn tiktok"
-       href="https://www.tiktok.com/@yoccie44?_r=1&_t=ZS-97L6AjS58xm"
-       target="_blank">
-       TikTok
-    </a>
+【特にやっているゲーム】<br>
+・ホヨバース全般<br>
+・フォトナ エペ ヴァロ<br>
 
-</div>
+このサーバーでは、「超かぐや姫！」好きが集まる場所は勿論<br>
+雑談やゲーム、作品共有など幅広い交流会となっております！<br>
+少しでも気になる方がいれば是非サーバーに入室してみてはいかがでしょうか？<br>
+ちなみにかなりの確率で鯖主は浮上するので権限関係なく仲良くしてもらえると嬉しいです！<br>
+
+管理人一同心よりお待ちしております！<br>
+    </div>
+
+    <div class="sns">
+        <a class="sns-btn youtube" href="https://youtube.com/@yoccie44?si=NoVAeRK-YVcSEvVA" target="_blank">YouTube</a>
+        <a class="sns-btn twitter" href="https://x.com/yoccie044" target="_blank">X</a>
+        <a class="sns-btn tiktok" href="https://www.tiktok.com/@yoccie44?_r=1&_t=ZS-97L6AjS58xm" target="_blank">TikTok</a>
+    </div>
 
     <div class="etc">運営</div>
 
 </div>
-
 </div>
 
 <!-- 副官 -->
@@ -466,49 +521,149 @@ value="0.5">
 <h2>⭐ 副官</h2>
 <div class="member sub">
     <div class="name sub-name">inono</div>
+
+ <div class="intro-box">
+サーバー副官のinonoです！<br>
+浮上はたまにしかしませんがちゃんとチャットは見ています。<br>
+高校１年生です、<br>
+同い年の人がいれば仲良くしてください！<br>
+好きなゲームはホヨバース全般とヴァロラント、フォトナです！<br>
+最近はヴァロラントにはまっているので、<br>
+一緒にやれる人がいればぜひ誘ってくれると嬉しいです！<br>
+よろしくお願いします！！！<br>
 </div>
+</div>
+
 <div class="member mod">
     <div class="name sub-name">抹茶ラテ</div>
-</div>
+
+    <div class="intro-box">
+        <div class="intro-content">
+            初めまして！副官を務めている「抹茶ラテ」です！<br>
+            この度「ひーくん」と共にツクヨミ交流会公式サイトを作りました！<br>
+            サーバーでは基本メンバー皆のお悩みなどを聞いて一緒に考えたりしています！<br>
+            相談内容は多種受け付けているので基本何でも相談してもいいよ！<br>
+            ゲームなどもスプラやマイクラなどやってるので参加したら仲良くしてね〜<br>
+            よろしくお願いします〜！<br><br>
+            後鯖主の秘書だよ😉
+        </div>
+    </div>
 
 </div>
 
 
 <!-- モデ -->
+<!-- モデレーター -->
 <div class="role">
 <h2>🛡️ モデレーター</h2>
+
 <div class="member mod">
     <div class="name mod-name">りとりと</div>
+    <div class="intro-box">
+        <div class="intro-content">
+            こんにちは～!!りとりとです～!!<br>
+            モデレーターやってます！<br>
+            アンダーテール好きです！<br>
+            高校一年です！！よろしく！！
+        </div>
+    </div>
 </div>
 
 <div class="member mod">
     <div class="name mod-name">てるる</div>
+    <div class="intro-box">
+        <div class="intro-content">
+        ど〜も！一応モデレーターさせてもらってる高二のてるるだよ〜！！<br>
+元々の名前がネコタだったからそうやって呼ばれたりしてる！<br>
+ゲームは色んな種類してるよ〜！<br>
+ん〜と、この鯖では多分盛り上げ役、かな？この鯖はね〜みんな仲良いから新規さんもすぐ馴染めると思うよ〜！！<br>
+興味があったらぜひ！入ってみてね！<br>
+俺もこの鯖のみんなと絶っっ対仲良くするから！<br>
+ま！興味があったら絶対来い！楽しいから！！俺が保証する！！！<br>
+よろしくね〜！！
+        </div>
+    </div>
 </div>
 
 <div class="member mod">
     <div class="name mod-name">わっぴぃ</div>
+    <div class="intro-box">
+        <div class="intro-content">やほやほ〜！！わっぴぃだよ〜！！<br>
+モデレーターを務めさせてもらってるよ！<br>
+高2の学生やから同年代繋がろ〜！！<br>
+基本雑談、apex、ブロスタら辺をしてるよ！<br>
+この鯖歌枠あるから歌に自信ある人、歌うのが好きな人、歌ってみたい…って人はバシバシ来てくれ！！<br>
+鯖の皆のままをやらせてもらってるから新規さんも沢山可愛がってあげるからね！<br>
+よろしくね〜！！！ 
+</div>
+    </div>
 </div>
 
 <div class="member mod">
     <div class="name mod-name">たこ</div>
+    <div class="intro-box">
+        <div class="intro-content">こんちは〜たこだよ！<br>
+このサーバーで一応モデレーターやらせてもらってる人です！<br>
+基本的にボイチャにいてテンションが高い人だよ！<br>
+気軽に話しかけてね！<br>
+よろしくおねがいしま〜す！！</div>
+    </div>
 </div>
 
 <div class="member mod">
     <div class="name mod-name">setojiii(自由)</div>
+    <div class="intro-box">
+        <div class="intro-content">どうもモデレーターで仲介人をしている自由がない不自由な「setojiii@自由」です！<br>
+基本は学校にいる時間以外はあまり姿がなく、<br>
+学校が終わればボイスチャットで過ごしています。<br>
+喧嘩などトラブルがあった場合は、<br>
+相談対応や仲介も行います。<br>
+ゲームは主にバウンティとポケGOをしています。<br>
+何かあれば気軽に相談してください！<br>
+楽しい超かぐライフを。！</div>
+    </div>
 </div>
 
 <div class="member mod">
     <div class="name mod-name">ため</div>
+    <div class="intro-box">
+        <div class="intro-content">よろしくお願いします。<br>
+ため＠てるる推しです。<br>
+このサーバーではモデレーターを担当しています。<br>
+学校やサーバー内のこと、進路の相談など、<br>
+気になることがあればいつでも気軽に話しかけてください。<br>
+基本的に対応できます。<br>
+サブ垢として「たっちゃん」でも活動しています。<br>
+ツクヨミへぜひお越しください。<br>
+よろしくお願いします。</div>
+    </div>
 </div>
 
 <div class="member mod">
     <div class="name mod-name">ゆろ</div>
+    <div class="intro-box">
+        <div class="intro-content">初めまして「ゆろ」って言います！<br>
+ツクヨミ交流会の<br>
+モデレーターをやっています！<br>
+質問だったり相談はいつでも大歓迎！！<br>
+僕はみんなを笑顔にすることが目標なのです！<br>
+僕は暇な時間はこのツクヨミ交流会にいるのでたくさん話しかけてくれると喜ぶよ〜( * ॑˘ ॑* )<br>
+よろしくね〜 <br>
+</div>
+    </div>
 </div>
 
 <div class="member mod">
     <div class="name mod-name">みずいろ</div>
+    <div class="intro-box">
+        <div class="intro-content">よろしく！みずいろです<br>
+このサーバーでモデレーターやらせてもらってます<br>
+多分お笑い担当です。多分ね<br>
+どうぞツクヨミにお越しくださいませ～<br>
+よろしくお願いします。<br>
 </div>
-
+    </div>
+</div>
 
 </div>
 
@@ -638,6 +793,13 @@ const obs=new IntersectionObserver(entries=>{
 },{threshold:0.1});
 
 document.querySelectorAll(".member").forEach(m=>obs.observe(m));
+
+document.querySelectorAll(".member .name").forEach(name=>{
+    name.addEventListener("click",()=>{
+        name.parentElement.classList.toggle("active");
+    });
+});
+
 </script>
 
 </body>
