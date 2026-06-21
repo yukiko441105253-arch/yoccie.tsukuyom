@@ -24,15 +24,16 @@ body{
     transition:opacity 1s ease;
     z-index:0;
 }
-@media(max-width:768px){
-    .container{
-        padding:10px;
-    }
 
-    .hero h1{
-        font-size:28px;
-    }
+/* コンテンツ */
+.container{
+    position:relative;
+    z-index:1;
+    max-width:1000px;
+    margin:auto;
+    padding:20px;
 }
+
 /* ヘッダー */
 header{
     text-align:center;
@@ -310,10 +311,11 @@ header{
     max-height:0;
     overflow:hidden;
     transition:max-height 0.5s ease;
+    margin-top:10px;
 }
 
 .member.active .intro-box{
-    max-height:1000px; /* もしくは 9999px */
+    max-height:200px;
 }
 
 .member .name{
@@ -354,6 +356,36 @@ header{
     max-height: 500px;
 }
 
+img, video {
+    max-width: 100%;
+    height: auto;
+}
+
+.member, .intro, .role, .name{
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+@media(max-width:768px){
+    .member-list{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hero h1{
+        font-size:28px;
+    }
+}
+
+@media(max-width:480px){
+    .member-list{
+        grid-template-columns:1fr;
+    }
+}
+
+.owner.active .intro-box {
+    max-height: 500px;
+}
+
 .member,
 .intro,
 .intro-content{
@@ -376,7 +408,7 @@ header{
     <p>月詠ではみんなが表現者！雑談やボイスチャット、コミュニティーで個性を出していこう！！</p>
 
     <a class="join-btn" href="https://discord.gg/HAuyp9NP" target="_blank">
-        月詠に参加    </a>
+        ツクヨミに参加    </a>
 
 <p>
 下のボタンでray がパートごとで流れるよ！
