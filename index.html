@@ -366,10 +366,6 @@ img, video {
     overflow-wrap: anywhere;
 }
 
-@media(max-width:768px){
-    .member-list{
-        grid-template-columns:repeat(2,1fr);
-    }
 
     .hero h1{
         font-size:28px;
@@ -382,6 +378,25 @@ img, video {
     }
 }
 
+.member-list{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+/* タブレット */
+@media(max-width:768px){
+    .member-list{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+/* スマホ */
+@media(max-width:480px){
+    .member-list{
+        grid-template-columns:1fr;
+    }
+}
 
 </style>
 
