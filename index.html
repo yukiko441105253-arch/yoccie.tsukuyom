@@ -382,16 +382,7 @@ img, video {
     }
 }
 
-.owner.active .intro-box {
-    max-height: 500px;
-}
 
-.member,
-.intro,
-.intro-content{
-    word-break: break-word;
-    overflow-wrap: anywhere;
-}
 
 .member, .intro, .role, .name{
     word-break: break-word;
@@ -414,6 +405,21 @@ img, video {
     .member-list{
         grid-template-columns:1fr;
     }
+}
+
+
+.owner.active .intro-box {
+    max-height: 500px;
+}
+
+img, video {
+    max-width: 100%;
+    height: auto;
+}
+
+.member, .intro, .role, .name{
+    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 </style>
