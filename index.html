@@ -288,7 +288,7 @@ body {
     <footer class="footer">
         <p>© 月詠交流会 作成者：ひーくん・抹茶ラテ</p>
         <div class="meta-info">
-            <span>最終更新日: 2026年6月22日</span> │ <span>Version 1.1.0</span>
+            <span>最終更新日: 2026年6月22日</span> │ <span>Version 1.2.0</span>
         </div>
     </footer>
 
@@ -318,18 +318,43 @@ const bgm = document.getElementById("bgm");
 const volume = document.getElementById("volume");
 const ytPlayer = document.getElementById("youtube-player");
 
+// ページ読み込み時に前回の音量や状態をロード
+window.addEventListener("DOMContentLoaded", () => {
+    const savedVolume = localStorage.getItem("tsukuyomi_volume");
+    if (savedVolume !== null && volume) {
+        volume.value = savedVolume;
+    }
+    
+    // 自己紹介から戻ってきたときに自動演奏を引き継ぐ処理
+    const activeType = localStorage.getItem("tsukuyomi_bgm_type");
+    const savedTime = localStorage.getItem("tsukuyomi_bgm_time");
+    
+    if (activeType === "opus" && bgm) {
+        bgm.src = localStorage.getItem("tsukuyomi_bgm_src");
+        bgm.volume = volume ? volume.value : 0.5;
+        bgm.currentTime = savedTime ? parseFloat(savedTime) : 0;
+        bgm.play().catch(() => {
+            document.addEventListener("click", () => { bgm.play(); }, { once: true });
+        });
+    } else if (activeType === "youtube") {
+        // YouTubeのAPI読み込み後に再生指示を投げるため少し遅延
+        setTimeout(() => {
+            playYouTubeMusic();
+        }, 1200);
+    }
+});
+
 if (bgm) {
-    bgm.volume = 0.5;
+    bgm.volume = volume ? volume.value : 0.5;
 }
 
-// 音量スライダーの連動設定（通常音楽 0~1、YouTube 0~100）
 if (volume) {
     volume.addEventListener("input", () => {
-        if (bgm) {
-            bgm.volume = volume.value;
-        }
+        const val = volume.value;
+        localStorage.setItem("tsukuyomi_volume", val);
+        if (bgm) bgm.volume = val;
         if (ytPlayer) {
-            const ytVolume = Math.round(volume.value * 100);
+            const ytVolume = Math.round(val * 100);
             ytPlayer.contentWindow.postMessage(`{"event":"command","func":"setVolume","args":[${ytVolume}]}`, '*');
         }
     });
@@ -337,12 +362,16 @@ if (volume) {
 
 // 通常の音楽（music1 ~ music3）を再生する関数
 function playMusic(file) {
+    localStorage.setItem("tsukuyomi_bgm_type", "opus");
+    localStorage.setItem("tsukuyomi_bgm_src", file);
+
     if (ytPlayer) {
         ytPlayer.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
     }
     
     if (bgm) {
         bgm.src = file;
+        bgm.volume = volume ? volume.value : 0.5;
         bgm.play().catch(err => {
             console.log("ユーザー操作前の自動再生はブロックされる場合があります:", err);
         });
@@ -351,22 +380,24 @@ function playMusic(file) {
 
 // 「全部」ボタン（YouTube）を再生する関数
 function playYouTubeMusic() {
+    localStorage.setItem("tsukuyomi_bgm_type", "youtube");
+
     if (bgm) {
         bgm.pause();
         bgm.currentTime = 0;
     }
     
     if (ytPlayer) {
-        if (volume) {
-            const ytVolume = Math.round(volume.value * 100);
-            ytPlayer.contentWindow.postMessage(`{"event":"command","func":"setVolume","args":[${ytVolume}]}`, '*');
-        }
+        const val = volume ? volume.value : 0.5;
+        const ytVolume = Math.round(val * 100);
+        ytPlayer.contentWindow.postMessage(`{"event":"command","func":"setVolume","args":[${ytVolume}]}`, '*');
         ytPlayer.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
     }
 }
 
 // すべての音楽（通常＋YouTube）を停止する関数
 function stopAllMusic() {
+    localStorage.removeItem("tsukuyomi_bgm_type");
     if (bgm) {
         bgm.pause();
         bgm.currentTime = 0;
@@ -380,6 +411,14 @@ function stopAllMusic() {
 function stopMusic() {
     stopAllMusic();
 }
+
+// 0.5秒おきに再生秒数を記憶する（ページ移動時の引き継ぎ用）
+setInterval(() => {
+    const activeType = localStorage.getItem("tsukuyomi_bgm_type");
+    if (activeType === "opus" && bgm && !bgm.paused) {
+        localStorage.setItem("tsukuyomi_bgm_time", bgm.currentTime);
+    }
+}, 500);
 </script>
 
 </body>
