@@ -13,33 +13,36 @@
 body {
     margin: 0;
     font-family: sans-serif;
-    color: #0f172a; /* 基本の文字色（背景が白ベースのため） */
+    color: #0f172a; /* 基本の文字色 */
     overflow-x: hidden;
     background-color: #0f172a; /* 背景画像が読み込まれるまでのベース色 */
 }
 
-/* 背景 */
+/* 【修正】背景を画面全体に完全固定 */
 .bg {
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh; /* 画面の高さ100%に固定 */
     background-size: cover;
     background-position: center;
-    transition: opacity 1s ease;
-    z-index: 0;
+    background-repeat: no-repeat;
+    z-index: -1; /* コンテンツの裏側に配置 */
 }
 
 /* ヘッダーナビゲーション（画面上部に常に固定） */
 .site-header {
-    position: fixed; /* スクロールしても上に固定 */
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 100; /* 最前面に表示 */
+    z-index: 100; 
     padding: 15px 0;
     display: flex;
     justify-content: center;
-    background: rgba(15, 23, 42, 0.6); /* スクロール時に文字が重なっても見やすいよう薄い背景を設置 */
-    backdrop-filter: blur(8px); /* 背景を少しぼかして高級感をプラス */
+    background: rgba(15, 23, 42, 0.6); 
+    backdrop-filter: blur(8px); 
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -53,12 +56,12 @@ body {
 
 .nav-menu a {
     text-decoration: none;
-    color: #ffffff; /* 背景が動く画像のため文字は白に設定 */
+    color: #ffffff; 
     font-size: 16px;
     font-weight: bold;
     opacity: 0.8;
     transition: opacity 0.3s ease;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); /* 視認性を上げるための影 */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); 
 }
 
 .nav-menu a:hover {
@@ -72,12 +75,12 @@ body {
     max-width: 1000px;
     margin: auto;
     padding: 20px;
-    padding-top: 90px; /* 固定ヘッダーにコンテンツが被らないように上部余白を確保 */
+    padding-top: 90px; 
 }
 
 /* 各セクション共通のカードデザイン */
 .role, .intro, .member {
-    background: rgba(255, 255, 255, 0.93); /* 白背景をわずかに濃くして文字を読みやすく */
+    background: rgba(255, 255, 255, 0.93); 
     color: #0f172a;
     border-radius: 15px;
 }
@@ -123,12 +126,12 @@ img, video {
 /* 鯖主イラスト（スマホ画面いっぱいの限界サイズ ＆ PCでも超特大表示） */
 .member img.square {
     width: 100%;
-    max-width: 650px; /* パソコン表示時の限界値を650pxまで引き上げました */
+    max-width: 650px; 
     height: auto;
     border-radius: 12px;
     display: block;
     margin: 10px auto 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* 画像が大きくなったので影も少し強調 */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
 }
 
 .member img.icon {
@@ -165,9 +168,9 @@ img, video {
 }
 
 /* 役職ごとの名前の色 */
-.sub-name { color: #0284c7; } /* 視認性を上げるため少し濃いめの青に変更 */
-.mod-name { color: #2563eb; } /* 視認性を上げるため少し濃いめの青に変更 */
-.member.mem .name { color: #16a34a; } /* 一般メンバーの文字色をクッキリした緑に調整 */
+.sub-name { color: #0284c7; } 
+.mod-name { color: #2563eb; } 
+.member.mem .name { color: #16a34a; } 
 
 /* 矢印アイコンの付与（メンバー以外） */
 .owner .name::after,
@@ -207,7 +210,7 @@ img, video {
 }
 
 .member.active .intro-box {
-    max-height: 1500px; /* 特大画像に対応できるよう、最大の高さをさらに広げました */
+    max-height: 1500px; 
 }
 
 .intro-content {
@@ -215,8 +218,8 @@ img, video {
     border-radius: 10px;
     background: rgba(0, 0, 0, 0.05);
     margin-top: 10px;
-    font-size: 15px; /* 文字を少しだけ大きく */
-    line-height: 1.7; /* 行間を広げて読みやすく調整 */
+    font-size: 15px; 
+    line-height: 1.7; 
     color: #1e293b;
 }
 
@@ -277,7 +280,6 @@ img, video {
     .member-list { grid-template-columns: repeat(2, 1fr); }
     .nav-menu ul { gap: 20px; }
     
-    /* スマホ環境のみ、さらに画像を限界まで引き伸ばす微調整 */
     .role { padding: 12px; }
     .member.owner { padding: 8px; }
     .container { padding-top: 80px; } 
@@ -290,6 +292,7 @@ img, video {
 </head>
 <body>
 
+<!-- 【修正】背景のHTML要素の配置をbody直下に明確化 -->
 <div class="bg" id="bg"></div>
 
 <!-- ヘッダーメニューエリア -->
@@ -345,7 +348,6 @@ img, video {
     <div class="role">
         <h2>⭐ 副官</h2>
          
-        <!-- ▼ inonoさん枠（画像のパスを直接指定に変更） -->
         <div class="member sub">
             <img src="inono.png" class="mini-icon" alt="inono">
             <div class="name sub-name">
@@ -365,7 +367,6 @@ img, video {
             </div>
         </div>
 
-        <!-- ▼ 抹茶ラテさん枠（画像のパスを直接指定に変更） -->
         <div class="member sub">
             <img src="matcha.png" class="mini-icon" alt="抹茶ラテ">
             <div class="name sub-name">
@@ -595,7 +596,7 @@ img, video {
 </footer>
 
 <script>
-// --- 背景画像の固定化（bg1~3削除に対応） ---
+// --- 背景画像の固定化 ---
 const bg = document.getElementById("bg");
 if (bg) {
     bg.style.backgroundImage = `url(images/bg.png)`;
@@ -623,7 +624,7 @@ if (bgm) {
     }
 }
 
-// --- スクロール時のふわっと表示（IntersectionObserver） ---
+// --- スクロール時のふわっと表示 ---
 const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
         if (e.isIntersecting) e.target.classList.add("show");
@@ -632,7 +633,7 @@ const obs = new IntersectionObserver(entries => {
 
 document.querySelectorAll(".member").forEach(m => obs.observe(m));
 
-// --- アコーディオン開閉（名前クリックで詳細表示） ---
+// --- アコーディオン開閉 ---
 document.querySelectorAll(".member .name").forEach(name => {
     name.addEventListener("click", (e) => {
         const memberBox = name.closest(".member");
