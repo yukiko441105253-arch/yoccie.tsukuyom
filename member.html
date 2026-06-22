@@ -75,7 +75,7 @@ body {
     padding-top: 90px; /* 固定ヘッダーにコンテンツが被らないように上部余白を確保 */
 }
 
-/* 各セクション共通のカードデザイン（headerを除外しました） */
+/* 各セクション共通のカードデザイン */
 .role, .intro, .member {
     background: rgba(255, 255, 255, 0.93); /* 白背景をわずかに濃くして文字を読みやすく */
     color: #0f172a;
@@ -145,6 +145,8 @@ img, video {
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid rgba(0, 0, 0, 0.2);
+    display: block;
+    margin: 0 auto 10px;
 }
 
 /* 名前表示とアコーディオンのトリガー */
@@ -160,7 +162,7 @@ img, video {
     gap: 8px;
 }
 
-/* 役職ごとの名前の色（優先度を上げて確実に適用） */
+/* 役職ごとの名前の色 */
 .sub-name { color: #0284c7; } /* 視認性を上げるため少し濃いめの青に変更 */
 .mod-name { color: #2563eb; } /* 視認性を上げるため少し濃いめの青に変更 */
 .member.mem .name { color: #16a34a; } /* 一般メンバーの文字色をクッキリした緑に調整 */
@@ -334,13 +336,12 @@ img, video {
         </div>
     </div>
 
-<div class="role">
+    <div class="role">
         <h2>⭐ 副官</h2>
          
-        <!-- ▼ inonoさん枠の修正 -->
+        <!-- ▼ inonoさん枠（画像のパスを直接指定に変更） -->
         <div class="member sub">
-            <!-- <img>タグを .name の外（上）へ移動 -->
-            <img src="icons/inono.png" class="mini-icon" alt="inono">
+            <img src="inono.png" class="mini-icon" alt="inono">
             <div class="name sub-name">
                 <span>inono</span>
             </div>
@@ -358,10 +359,9 @@ img, video {
             </div>
         </div>
 
-        <!-- ▼ 抹茶ラテさん枠の修正 -->
+        <!-- ▼ 抹茶ラテさん枠（画像のパスを直接指定に変更） -->
         <div class="member sub">
-            <!-- <img>タグを .name の外（上）へ移動 -->
-            <img src="icons/matcha.png" class="mini-icon" alt="抹茶ラテ">
+            <img src="matcha.png" class="mini-icon" alt="抹茶ラテ">
             <div class="name sub-name">
                 <span>抹茶ラテ</span>
             </div>
@@ -433,7 +433,7 @@ img, video {
                     このサーバーで一応モデレーターやらせてもらってる人です！<br>
                     基本的にボイチャにいてテンションが高い人だよ！<br>
                     気軽に話しかけてね！<br>
-                    よろしくおねがいしま〜す！！
+                    よろしくお願いします〜！！
                 </div>
             </div>
         </div>
@@ -589,25 +589,15 @@ img, video {
 </footer>
 
 <script>
-// --- 背景画像の自動切替 ---
+// --- 背景画像の固定化（bg1~3削除に対応） ---
 const bg = document.getElementById("bg");
-const images = ["images/bg1.png", "images/bg2.png", "images/bg3.png"];
-
-if (bg && images.length > 0) {
-    bg.style.backgroundImage = `url(${images[0]})`;
-    let i = 1;
-    function changeBG() {
-        bg.style.opacity = 0;
-        setTimeout(() => {
-            bg.style.backgroundImage = `url(${images[i]})`;
-            bg.style.opacity = 1;
-            i = (i + 1) % images.length;
-        }, 500);
-    }
-    setInterval(changeBG, 5000);
+if (bg) {
+    // もし別の背景画像(例: images/bg.png)を使う場合は、下のパスを書き換えてください
+    bg.style.backgroundImage = `url(images/bg.png)`;
+    bg.style.opacity = 1;
 }
 
-// --- 音楽再生コントロール（HTMLに該当要素がある場合のみ動作） ---
+// --- 音楽再生コントロール ---
 const bgm = document.getElementById("bgm");
 const volume = document.getElementById("volume");
 
