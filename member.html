@@ -13,22 +13,23 @@
 body {
     margin: 0;
     font-family: sans-serif;
-    color: #0f172a; /* 基本の文字色 */
+    color: #0f172a; 
     overflow-x: hidden;
-    background-color: #0f172a; /* 背景画像が読み込まれるまでのベース色 */
+    background-color: #0f172a; /* 画像が読み込まれるまでのベース色 */
 }
 
-/* 【修正】背景を画面全体に完全固定 */
+/* 【修正】CSSで直接背景画像を読み込み、確実に固定する */
 .bg {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh; /* 画面の高さ100%に固定 */
+    height: 100vh; 
+    background-image: url('images/bg.png'); /* ここで直接画像を読み込みます */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    z-index: -1; /* コンテンツの裏側に配置 */
+    z-index: -1; 
 }
 
 /* ヘッダーナビゲーション（画面上部に常に固定） */
@@ -292,10 +293,8 @@ img, video {
 </head>
 <body>
 
-<!-- 【修正】背景のHTML要素の配置をbody直下に明確化 -->
-<div class="bg" id="bg"></div>
+<div class="bg"></div>
 
-<!-- ヘッダーメニューエリア -->
 <header class="site-header">
     <nav class="nav-menu">
         <ul>
@@ -596,13 +595,6 @@ img, video {
 </footer>
 
 <script>
-// --- 背景画像の固定化 ---
-const bg = document.getElementById("bg");
-if (bg) {
-    bg.style.backgroundImage = `url(images/bg.png)`;
-    bg.style.opacity = 1;
-}
-
 // --- 音楽再生コントロール ---
 const bgm = document.getElementById("bgm");
 const volume = document.getElementById("volume");
