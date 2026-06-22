@@ -120,13 +120,15 @@ img, video {
     height: auto;
 }
 
+/* 鯖主イラスト（少し大きく修正） */
 .member img.square {
     width: 100%;
-    max-width: 400px;
+    max-width: 550px; /* 400pxから550pxに大きくしました */
     height: auto;
-    border-radius: 8px;
+    border-radius: 12px; /* 少し大きくなったので角丸も調整 */
     display: block;
-    margin: 0 auto 10px;
+    margin: 10px auto 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* 高級感を出すため薄い影を追加 */
 }
 
 .member img.icon {
@@ -205,7 +207,7 @@ img, video {
 }
 
 .member.active .intro-box {
-    max-height: 1000px;
+    max-height: 1200px; /* 画像が大きくなった分、最大高さを少し広げました */
 }
 
 .intro-content {
@@ -564,7 +566,7 @@ img, video {
             <div class="member mem"><span class="name">ちょこ</span></div>
             <div class="member mem"><span class="name">ひま</span></div>
             <div class="member mem"><span class="name">はやと</span></div>
-            <div class="member mem"><span class="name">ゆずレモンサイダー</span></div>
+            <div class="member mem"><span class="name">ゆぞレモンサイダー</span></div>
             <div class="member mem"><span class="name">SENNA</span></div>
             <div class="member mem"><span class="name">かなてぃバー</span></div>
             <div class="member mem"><span class="name">ポピー</span></div>
@@ -592,7 +594,6 @@ img, video {
 // --- 背景画像の固定化（bg1~3削除に対応） ---
 const bg = document.getElementById("bg");
 if (bg) {
-    // もし別の背景画像(例: images/bg.png)を使う場合は、下のパスを書き換えてください
     bg.style.backgroundImage = `url(images/bg.png)`;
     bg.style.opacity = 1;
 }
