@@ -18,18 +18,14 @@ body {
     background-color: #0f172a; /* 画像が読み込まれるまでのベース色 */
 }
 
-/* 【修正】トップページに合わせて bg1.png を直接読み込み、画面全体に完全固定 */
+/* 背景画像の自動切替用CSS */
 .bg {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh; 
-    background-image: url('images/bg1.png'); /* 💡 bg.png から bg1.png に修正しました */
+    inset: 0;
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    z-index: -1; 
+    transition: opacity 1s ease; /* 切り替わるときのふわっとするエフェクト */
+    z-index: -1; /* コンテンツの後ろに配置 */
 }
 
 /* ヘッダーナビゲーション（画面上部に常に固定） */
@@ -124,7 +120,7 @@ img, video {
     height: auto;
 }
 
-/* 鯖主イラスト（スマホ画面いっぱいの限界サイズ ＆ PCでも超特大表示） */
+/* 鯖主イラスト */
 .member img.square {
     width: 100%;
     max-width: 650px; 
@@ -293,8 +289,13 @@ img, video {
 </head>
 <body>
 
-<div class="bg"></div>
+<!-- 背景用のタグ -->
+<div class="bg" id="bg"></div>
 
+<!-- 隠しオーディオタグ（BGM演奏用） -->
+<audio id="bgm" loop></audio>
+
+<!-- ヘッダーメニューエリア -->
 <header class="site-header">
     <nav class="nav-menu">
         <ul>
@@ -595,24 +596,75 @@ img, video {
 </footer>
 
 <script>
-// --- 音楽再生コントロール ---
-const bgm = document.getElementById("bgm");
-const volume = document.getElementById("volume");
+// --- 背景画像の自動切替システム ---
+const bg = document.getElementById("bg");
+const images = ["images/bg1.png", "images/bg2.png", "images/bg3.png"];
 
-if (bgm) {
-    bgm.volume = 0.5;
-    if (volume) {
-        volume.addEventListener("input", () => {
-            bgm.volume = volume.value;
-        });
+if (bg && images.length > 0) {
+    bg.style.backgroundImage = `url(${images[0]})`;
+    let i = 1;
+    function changeBG() {
+        bg.style.opacity = 0; 
+        setTimeout(() => {
+            bg.style.backgroundImage = `url(${images[i]})`; 
+            bg.style.opacity = 1; 
+            i = (i + 1) % images.length; 
+        }, 500); 
     }
-    function playMusic(file) {
+    setInterval(changeBG, 5000); 
+}
+
+// --- 🎵 ホームとシームレスに繋がるBGMシステム 🎵 ---
+const bgm = document.getElementById("bgm");
+
+// ページ読み込み時に保存されているBGM状態を復元
+window.addEventListener("DOMContentLoaded", () => {
+    const savedSrc = localStorage.getItem("bgm_src");
+    const savedTime = localStorage.getItem("bgm_time");
+    const savedVolume = localStorage.getItem("bgm_volume");
+    const isPlaying = localStorage.getItem("bgm_playing");
+
+    if (savedSrc && bgm) {
+        bgm.src = savedSrc;
+        bgm.currentTime = savedTime ? parseFloat(savedTime) : 0;
+        bgm.volume = savedVolume ? parseFloat(savedVolume) : 0.5;
+
+        // ホームで流れていた場合は自動で再生を再開
+        if (isPlaying === "true") {
+            bgm.play().catch(err => {
+                console.log("ブラウザの保護機能により、画面クリック後に再生が開始されます。");
+                // ユーザーが画面を触ったら再生する予備トリガー
+                document.addEventListener("click", () => { bgm.play(); }, { once: true });
+            });
+        }
+    }
+});
+
+// 再生状況をリアルタイムで保存（秒数・音量・再生中フラグ）
+if (bgm) {
+    setInterval(() => {
+        if (!bgm.paused) {
+            localStorage.setItem("bgm_time", bgm.currentTime);
+            localStorage.setItem("bgm_playing", "true");
+        } else {
+            localStorage.setItem("bgm_playing", "false");
+        }
+        localStorage.setItem("bgm_volume", bgm.volume);
+    }, 500); // 0.5秒ごとに記憶をアップデート
+}
+
+// 互換性のための既存関数（もし他の場所から呼び出された場合の保険）
+function playMusic(file) {
+    if (bgm) {
         bgm.src = file;
+        localStorage.setItem("bgm_src", file);
         bgm.play();
     }
-    function stopMusic() {
+}
+function stopMusic() {
+    if (bgm) {
         bgm.pause();
-        bgm.currentTime = 0;
+        localStorage.setItem("bgm_playing", "false");
     }
 }
 
