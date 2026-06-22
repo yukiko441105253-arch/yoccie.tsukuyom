@@ -120,15 +120,15 @@ img, video {
     height: auto;
 }
 
-/* 鯖主イラスト（少し大きく修正） */
+/* 鯖主イラスト（スマホ画面いっぱいの限界サイズ ＆ PCでも超特大表示） */
 .member img.square {
     width: 100%;
-    max-width: 550px; /* 400pxから550pxに大きくしました */
+    max-width: 650px; /* パソコン表示時の限界値を650pxまで引き上げました */
     height: auto;
-    border-radius: 12px; /* 少し大きくなったので角丸も調整 */
+    border-radius: 12px;
     display: block;
     margin: 10px auto 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* 高級感を出すため薄い影を追加 */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* 画像が大きくなったので影も少し強調 */
 }
 
 .member img.icon {
@@ -207,7 +207,7 @@ img, video {
 }
 
 .member.active .intro-box {
-    max-height: 1200px; /* 画像が大きくなった分、最大高さを少し広げました */
+    max-height: 1500px; /* 特大画像に対応できるよう、最大の高さをさらに広げました */
 }
 
 .intro-content {
@@ -276,7 +276,11 @@ img, video {
 @media(max-width: 768px) {
     .member-list { grid-template-columns: repeat(2, 1fr); }
     .nav-menu ul { gap: 20px; }
-    .container { padding-top: 80px; } /* スマホ用のヘッダー高さに合わせる */
+    
+    /* スマホ環境のみ、さらに画像を限界まで引き伸ばす微調整 */
+    .role { padding: 12px; }
+    .member.owner { padding: 8px; }
+    .container { padding-top: 80px; } 
 }
 
 @media(max-width: 480px) {
