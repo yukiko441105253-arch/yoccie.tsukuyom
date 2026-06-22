@@ -269,7 +269,7 @@ body {
         <p>・ツクヨミ交流会ではメンバー全員優しく、お互いの良いところを尊重し合っています！</p>
         <p>・その他にも一部のメンバーは、お悩み相談などサーバー外で起きた事などにも親身に対応して一緒に協力してくれます！</p>
         <p>・「超かぐや姫！」以外にも日常雑談・ゲームの話なども盛んに行われております！</p>
-        <p>・APEX、フォートナイト、マインクラフトやその他の戦闘系のゲーム、作業系のゲーム、ソーシャルゲームやホヨバースのゲームなど、様々なゲームを遊んでるメンバー達が沢山います！！</p>
+        <p>・APEX、フォートナイト、マインクラフトやその他の戦闘系のゲーム、作業系のゲーム, ソーシャルゲームやホヨバースのゲームなど、様々なゲームを遊んでるメンバー達が沢山います！！</p>
         <p>もしかしたらゲーム関連で仲の良い友達が作れるかも…？？</p>
         <p>・全員が新規さんの事を歓迎いたしますので皆さん方の参加を待っています！お友達も誘って参加してみてください！</p>
 
@@ -295,7 +295,7 @@ body {
 </div>
 
 <script>
-// --- 背景画像の自動切替（そのまま残しました！） ---
+// --- 背景画像の自動切替 ---
 const bg = document.getElementById("bg");
 const images = ["images/bg1.png", "images/bg2.png", "images/bg3.png"];
 
@@ -320,16 +320,23 @@ const ytPlayer = document.getElementById("youtube-player");
 
 if (bgm) {
     bgm.volume = 0.5;
-    if (volume) {
-        volume.addEventListener("input", () => {
+}
+
+// 音量スライダーの連動設定（通常音楽 0~1、YouTube 0~100）
+if (volume) {
+    volume.addEventListener("input", () => {
+        if (bgm) {
             bgm.volume = volume.value;
-        });
-    }
+        }
+        if (ytPlayer) {
+            const ytVolume = Math.round(volume.value * 100);
+            ytPlayer.contentWindow.postMessage(`{"event":"command","func":"setVolume","args":[${ytVolume}]}`, '*');
+        }
+    });
 }
 
 // 通常の音楽（music1 ~ music3）を再生する関数
 function playMusic(file) {
-    // YouTubeの音が出ていたら止める
     if (ytPlayer) {
         ytPlayer.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
     }
@@ -342,35 +349,34 @@ function playMusic(file) {
     }
 }
 
-// 追加：music4（YouTube）を再生する関数
+// 「全部」ボタン（YouTube）を再生する関数
 function playYouTubeMusic() {
-    // 通常の音楽が流れていたら止める
     if (bgm) {
         bgm.pause();
         bgm.currentTime = 0;
     }
     
-    // YouTubeの動画を再生
     if (ytPlayer) {
+        if (volume) {
+            const ytVolume = Math.round(volume.value * 100);
+            ytPlayer.contentWindow.postMessage(`{"event":"command","func":"setVolume","args":[${ytVolume}]}`, '*');
+        }
         ytPlayer.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
     }
 }
 
 // すべての音楽（通常＋YouTube）を停止する関数
 function stopAllMusic() {
-    // 通常の音楽を停止
     if (bgm) {
         bgm.pause();
         bgm.currentTime = 0;
     }
-    // YouTubeの音楽を停止
     if (ytPlayer) {
         ytPlayer.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-        ytPlayer.contentWindow.postMessage('{"event":"command","func":"seekTo","args":[0, true]}', '*'); // 最初に戻す
+        ytPlayer.contentWindow.postMessage('{"event":"command","func":"seekTo","args":[0, true]}', '*');
     }
 }
 
-// 互換性のために古い関数名も残しておく
 function stopMusic() {
     stopAllMusic();
 }
