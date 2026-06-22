@@ -220,6 +220,8 @@ body {
 
 <audio id="bgm" loop></audio>
 
+<iframe id="youtube-player" width="0" height="0" src="https://www.youtube.com/embed/bx4lbDvsVW4?enablejsapi=1&controls=0" allow="autoplay" style="display:none; border:none;"></iframe>
+
 <header class="site-header">
     <nav class="nav-menu">
         <ul>
@@ -246,7 +248,8 @@ body {
             <button onclick="playMusic('music1.opus')">🎵 1パート</button>
             <button onclick="playMusic('music2.opus')">🎵 2パート</button>
             <button onclick="playMusic('music3.opus')">🎵 ラスサビ</button>
-            <button onclick="stopMusic()" style="background: #ef4444;">⏹ 停止</button>
+            <button onclick="playYouTubeMusic()" style="background: #a855f7;">🎵 全部</button>
+            <button onclick="stopAllMusic()" style="background: #ef4444;">⏹ 停止</button>
             
             <div style="margin-top:15px; font-size: 14px;">
                 音量：
@@ -277,8 +280,8 @@ body {
         <span class="section-title">【📌サーバー入室方法】</span>
         <p>・サーバー創立者「yoccie よっしー」さんとフレンドになって頂きサーバーに入ってください。</p>
         <p>※上記の「ツクヨミに参加」をクリックしたらサーバーに入れます。</p>
-        <p>入ったらまず最初に認証から入るのでマークリアクションするだけなので、かるくルール読んでから入ってください！<p>
-       <p>チャンネルの「認証」ってところに✅マークがあるからリアクションしてね <p>
+        <p>入ったらまず最初に認証から入するのでマークリアクションするだけなので、かるくルール読んでから入ってください！</p>
+        <p>チャンネルの「認証」ってところに✅マークがあるからリアクションしてね </p>
         <p>・フレンドになった際、サーバーを知るきっかけとなったルートを鯖主に報告してください。</p>
     </div>
 
@@ -292,7 +295,7 @@ body {
 </div>
 
 <script>
-// --- 背景画像の自動切替 ---
+// --- 背景画像の自動切替（そのまま残しました！） ---
 const bg = document.getElementById("bg");
 const images = ["images/bg1.png", "images/bg2.png", "images/bg3.png"];
 
@@ -313,6 +316,7 @@ if (bg && images.length > 0) {
 // --- 音楽再生コントロール ---
 const bgm = document.getElementById("bgm");
 const volume = document.getElementById("volume");
+const ytPlayer = document.getElementById("youtube-player");
 
 if (bgm) {
     bgm.volume = 0.5;
@@ -321,16 +325,54 @@ if (bgm) {
             bgm.volume = volume.value;
         });
     }
-    function playMusic(file) {
+}
+
+// 通常の音楽（music1 ~ music3）を再生する関数
+function playMusic(file) {
+    // YouTubeの音が出ていたら止める
+    if (ytPlayer) {
+        ytPlayer.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+    }
+    
+    if (bgm) {
         bgm.src = file;
         bgm.play().catch(err => {
-            console.log("ユーザー操作前の自動再生はブラウザにブロックされる場合があります:", err);
+            console.log("ユーザー操作前の自動再生はブロックされる場合があります:", err);
         });
     }
-    function stopMusic() {
+}
+
+// 追加：music4（YouTube）を再生する関数
+function playYouTubeMusic() {
+    // 通常の音楽が流れていたら止める
+    if (bgm) {
         bgm.pause();
         bgm.currentTime = 0;
     }
+    
+    // YouTubeの動画を再生
+    if (ytPlayer) {
+        ytPlayer.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+    }
+}
+
+// すべての音楽（通常＋YouTube）を停止する関数
+function stopAllMusic() {
+    // 通常の音楽を停止
+    if (bgm) {
+        bgm.pause();
+        bgm.currentTime = 0;
+    }
+    // YouTubeの音楽を停止
+    if (ytPlayer) {
+        ytPlayer.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        ytPlayer.contentWindow.postMessage('{"event":"command","func":"seekTo","args":[0, true]}', '*'); // 最初に戻す
+    }
+}
+
+// 互換性のために古い関数名も残しておく
+function stopMusic() {
+    stopAllMusic();
 }
 </script>
 
