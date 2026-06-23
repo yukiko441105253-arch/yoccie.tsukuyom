@@ -141,12 +141,19 @@ body {
     border-radius: 10px;
     font-weight: bold;
     transition: transform 0.2s;
-    margin: 10px 0;
+    margin: 10px 5px; /* 複数並んだときのために左右に少し余白を追加 */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .join-btn:hover {
     transform: scale(1.05);
+}
+
+/* X（旧Twitter）ボタン用の固有スタイル */
+.x-btn {
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 @keyframes rainbowMove {
@@ -211,6 +218,7 @@ body {
     .intro h2 { font-size: 22px; }
     .nav-menu ul { gap: 20px; }
     .container { padding-top: 80px; } /* スマホ用のヘッダー高さに合わせる */
+    .join-btn { display: block; margin: 10px auto; max-width: 200px; } /* スマホ時はボタンを縦並びに */
 }
 </style>
 </head>
@@ -219,8 +227,6 @@ body {
 <div class="bg" id="bg"></div>
 
 <audio id="bgm" loop></audio>
-
-<iframe id="youtube-player" width="0" height="0" src="https://www.youtube.com/embed/bx4lbDvsVW4?enablejsapi=1&controls=0" allow="autoplay" style="display:none; border:none;"></iframe>
 
 <header class="site-header">
     <nav class="nav-menu">
@@ -238,7 +244,10 @@ body {
         <h1>月詠交流会へようこそ</h1>
         <p>月詠ではみんなが表現者！雑談やボイスチャット、コミュニティーで個性を出していこう！！</p>
 
-        <a class="join-btn" href="https://discord.gg/EzyWgp6ur" target="_blank">ツクヨミに参加</a>
+        <div>
+            <a class="join-btn" href="https://discord.gg/EzyWgp6ur" target="_blank">ツクヨミに参加</a>
+            <a class="join-btn x-btn" href="https://x.com/tukuyomikouryu" target="_blank">公式X（旧Twitter）</a>
+        </div>
 
         <p style="margin-top: 20px; font-size: 14px; opacity: 0.9;">
             下のボタンでrayがパートごとで流れるよ！
@@ -248,8 +257,8 @@ body {
             <button onclick="playMusic('music1.opus')">🎵 1パート</button>
             <button onclick="playMusic('music2.opus')">🎵 2パート</button>
             <button onclick="playMusic('music3.opus')">🎵 ラスサビ</button>
-            <button onclick="playYouTubeMusic()" style="background: #a855f7;">🎵 全部</button>
-            <button onclick="stopAllMusic()" style="background: #ef4444;">⏹ 停止</button>
+            <button onclick="playMusic('music4.opus')" style="background: #a855f7;">🎵 全部</button>
+            <button onclick="stopMusic()" style="background: #ef4444;">⏹ 停止</button>
             
             <div style="margin-top:15px; font-size: 14px;">
                 音量：
@@ -316,109 +325,25 @@ if (bg && images.length > 0) {
 // --- 音楽再生コントロール ---
 const bgm = document.getElementById("bgm");
 const volume = document.getElementById("volume");
-const ytPlayer = document.getElementById("youtube-player");
-
-// ページ読み込み時に前回の音量や状態をロード
-window.addEventListener("DOMContentLoaded", () => {
-    const savedVolume = localStorage.getItem("tsukuyomi_volume");
-    if (savedVolume !== null && volume) {
-        volume.value = savedVolume;
-    }
-    
-    // 自己紹介から戻ってきたときに自動演奏を引き継ぐ処理
-    const activeType = localStorage.getItem("tsukuyomi_bgm_type");
-    const savedTime = localStorage.getItem("tsukuyomi_bgm_time");
-    
-    if (activeType === "opus" && bgm) {
-        bgm.src = localStorage.getItem("tsukuyomi_bgm_src");
-        bgm.volume = volume ? volume.value : 0.5;
-        bgm.currentTime = savedTime ? parseFloat(savedTime) : 0;
-        bgm.play().catch(() => {
-            document.addEventListener("click", () => { bgm.play(); }, { once: true });
-        });
-    } else if (activeType === "youtube") {
-        // YouTubeのAPI読み込み後に再生指示を投げるため少し遅延
-        setTimeout(() => {
-            playYouTubeMusic();
-        }, 1200);
-    }
-});
 
 if (bgm) {
-    bgm.volume = volume ? volume.value : 0.5;
-}
-
-if (volume) {
-    volume.addEventListener("input", () => {
-        const val = volume.value;
-        localStorage.setItem("tsukuyomi_volume", val);
-        if (bgm) bgm.volume = val;
-        if (ytPlayer) {
-            const ytVolume = Math.round(val * 100);
-            ytPlayer.contentWindow.postMessage(`{"event":"command","func":"setVolume","args":[${ytVolume}]}`, '*');
-        }
-    });
-}
-
-// 通常の音楽（music1 ~ music3）を再生する関数
-function playMusic(file) {
-    localStorage.setItem("tsukuyomi_bgm_type", "opus");
-    localStorage.setItem("tsukuyomi_bgm_src", file);
-
-    if (ytPlayer) {
-        ytPlayer.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-    }
-    
-    if (bgm) {
-        bgm.src = file;
-        bgm.volume = volume ? volume.value : 0.5;
-        bgm.play().catch(err => {
-            console.log("ユーザー操作前の自動再生はブロックされる場合があります:", err);
+    bgm.volume = 0.5;
+    if (volume) {
+        volume.addEventListener("input", () => {
+            bgm.volume = volume.value;
         });
     }
-}
-
-// 「全部」ボタン（YouTube）を再生する関数
-function playYouTubeMusic() {
-    localStorage.setItem("tsukuyomi_bgm_type", "youtube");
-
-    if (bgm) {
+    function playMusic(file) {
+        bgm.src = file;
+        bgm.play().catch(err => {
+            console.log("ユーザー操作前の自動再生はブラウザにブロックされる場合があります:", err);
+        });
+    }
+    function stopMusic() {
         bgm.pause();
         bgm.currentTime = 0;
     }
-    
-    if (ytPlayer) {
-        const val = volume ? volume.value : 0.5;
-        const ytVolume = Math.round(val * 100);
-        ytPlayer.contentWindow.postMessage(`{"event":"command","func":"setVolume","args":[${ytVolume}]}`, '*');
-        ytPlayer.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-    }
 }
-
-// すべての音楽（通常＋YouTube）を停止する関数
-function stopAllMusic() {
-    localStorage.removeItem("tsukuyomi_bgm_type");
-    if (bgm) {
-        bgm.pause();
-        bgm.currentTime = 0;
-    }
-    if (ytPlayer) {
-        ytPlayer.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-        ytPlayer.contentWindow.postMessage('{"event":"command","func":"seekTo","args":[0, true]}', '*');
-    }
-}
-
-function stopMusic() {
-    stopAllMusic();
-}
-
-// 0.5秒おきに再生秒数を記憶する（ページ移動時の引き継ぎ用）
-setInterval(() => {
-    const activeType = localStorage.getItem("tsukuyomi_bgm_type");
-    if (activeType === "opus" && bgm && !bgm.paused) {
-        localStorage.setItem("tsukuyomi_bgm_time", bgm.currentTime);
-    }
-}, 500);
 </script>
 
 </body>
