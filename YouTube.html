@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交流会コミュニティ - 月詠交流会（動画一覧）</title>
+    <link rel="icon" href="images/favicon.png" type="image/png" />
+    <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            color: white;
+            overflow-x: hidden;
+            background-color: #0f172a; /* ベース背景色 */
+        }
+
+        /* ✨ 共通背景システム（スライドショー用） */
+        .bg {
+            position: fixed;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 1s ease;
+            z-index: 0;
+        }
+
+        /* ✨ 固定ヘッダーナビゲーションバー */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+            gap: 35px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+        }
+
+        .nav-menu a:hover {
+            opacity: 1;
+        }
+
+        /* メインコンテンツエリア */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px; /* 見やすさのため少しスリムに調整 */
+            margin: auto;
+            padding: 20px;
+            padding-top: 100px; /* ヘッダーバーに被らないための余白 */
+        }
+
+        h1 {
+            color: #ff0000;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 28px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+        }
+
+        /* 動画リスト */
+        .video-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        /* 動画カード（月詠のカードデザインを踏襲しつつ、動画が見やすい半透明の黒に変更） */
+        .video-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(8px);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-card:hover {
+            transform: translateY(-3px);
+            border-color: #ff0000;
+            box-shadow: 0 6px 20px rgba(255, 0, 0, 0.2);
+        }
+
+        .video-link {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (min-width: 600px) {
+            .video-link {
+                flex-direction: row;
+            }
+        }
+
+        /* サムネイルボックス */
+        .thumbnail-box {
+            flex: 2;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+        }
+
+        .thumbnail-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* テキスト情報ボックス */
+        .info-box {
+            flex: 3;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .video-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            color: #ffffff;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .video-url {
+            font-size: 13px;
+            color: #38bdf8; /* 月詠のメインカラー（水色）に変更 */
+            word-break: break-all;
+        }
+
+        /* フッター（月詠共通の白ベースカードデザイン） */
+        .footer {
+            background: rgba(255, 255, 255, 0.93);
+            color: #0f172a;
+            border-radius: 15px;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .footer p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #0f172a;
+        }
+
+        .footer .meta-info {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 8px;
+        }
+
+        /* スマホ用レスポンシブ */
+        @media(max-width: 768px) {
+            h1 { font-size: 22px; }
+            .nav-menu ul { gap: 20px; }
+            .container { padding-top: 90px; }
+            .video-title { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg" id="bg"></div>
+
+<header class="site-header">
+    <nav class="nav-menu">
+        <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="member.html">自己紹介</a></li>
+            <li><a href="YouTube.html">鯖主の動画</a></li>
+            <li><a href="javascript:void(0);" style="cursor: default;">Coming Soon</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+
+    <h1>🎬 鯖主の投稿動画一覧</h1>
+    
+    <div class="video-list">
+
+        <div class="video-card">
+            <a class="video-link" href="https://youtu.be/5Ci6nGl2Qm4?si=dmFskIfFWbkvXqXF" target="_blank">
+                <div class="thumbnail-box">
+                    <img src="https://img.youtube.com/vi/5Ci6nGl2Qm4/hqdefault.jpg" alt="サムネイル">
+                </div>
+                <div class="info-box">
+                    <div class="video-title">【1本目】実写版自己紹介</div>
+                    <div class="video-url">https://youtu.be/5Ci6nGl2Qm4?si=dmFskIfFWbkvXqXF</div>
+                </div>
+            </a>
+        </div>
+
+        <div class="video-card">
+            <a class="video-link" href="https://youtu.be/ese5JpCOlCE?si=6BVmxa5LzAZYOn88" target="_blank">
+                <div class="thumbnail-box">
+                    <img src="https://img.youtube.com/vi/ese5JpCOlCE/hqdefault.jpg" alt="サムネイル">
+                </div>
+                <div class="info-box">
+                    <div class="video-title">【2本目】見よ、俺の推しを！！</div>
+                    <div class="video-url">https://youtu.be/ese5JpCOlCE?si=6BVmxa5LzAZYOn88</div>
+                </div>
+            </a>
+        </div>
+
+        <div class="video-card">
+            <a class="video-link" href="https://youtu.be/OkWjhCMi5hY?si=rb-wqK8aE_3dWT67" target="_blank">
+                <div class="thumbnail-box">
+                    <img src="https://img.youtube.com/vi/OkWjhCMi5hY/hqdefault.jpg" alt="サムネイル">
+                </div>
+                <div class="info-box">
+                    <div class="video-title">【3本目】ここに動画のタイトルを入れてね</div>
+                    <div class="video-url">https://youtu.be/OkWjhCMi5hY?si=rb-wqK8aE_3dWT67</div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <p>© 月詠交流会 作成者：ひーくん・抹茶ラテ</p>
+        <div class="meta-info">
+            <span>最終更新日: 2026年6月24日</span> │ <span>Version 1.4.4</span>
+        </div>
+    </footer>
+
+</div>
+
+<script>
+// --- ✨ 背景画像の自動切替システム ---
+const bg = document.getElementById("bg");
+const images = ["images/bg1.png", "images/bg2.png", "images/bg3.png"];
+
+if (bg && images.length > 0) {
+    bg.style.backgroundImage = `url(${images[0]})`;
+    let i = 1;
+    function changeBG() {
+        bg.style.opacity = 0;
+        setTimeout(() => {
+            bg.style.backgroundImage = `url(${images[i]})`;
+            bg.style.opacity = 1;
+            i = (i + 1) % images.length;
+        }, 500);
+    }
+    setInterval(changeBG, 5000);
+}
+</script>
+
+</body>
+</html>
