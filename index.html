@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>交流会コミュニティ - 月詠交流会</title>
 
-**<link rel="icon" href="images/favicon.png" type="image/png" />**
+<strong><link rel="icon" href="images/favicon.png" type="image/png" /></strong>
 
 <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
 
@@ -194,6 +194,19 @@ body {
     display: block;
 }
 
+/* 受付時間用の追加枠スタイル */
+.time-box {
+    background: #f1f5f9;
+    border-left: 5px solid #eab308; /* アクセントに黄色の左線 */
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 4px;
+}
+.time-box p {
+    margin: 5px 0 !important;
+    font-weight: bold;
+}
+
 /* フッター */
 .footer {
     text-align: center;
@@ -261,7 +274,7 @@ body {
             <button onclick="playMusic('music3.opus')">🎵 ラスサビ</button>
             <button onclick="playMusic('music4.opus')" style="background: #a855f7;">🎵 全部</button>
             <button onclick="stopMusic()" style="background: #ef4444;">⏹ 停止</button>
-            
+             
             <div style="margin-top:15px; font-size: 14px;">
                 音量：
                 <input type="range" id="volume" min="0" max="1" step="0.01" value="0.5" style="vertical-align: middle;">
@@ -271,7 +284,7 @@ body {
 
     <div class="intro">
         <h2>🌙 サーバー紹介</h2>
-        
+         
         <span class="section-title">【初めに】</span>
         <p>・「yoccie よっしー」が率いる「ツクヨミ交流会！」では毎日楽しく活動をしています！</p>
         <p>・精度高く、サーバー内のメンバーである「ひーくん」「抹茶ラテ」にツクヨミ交流会のホームページを制作していただきました！</p>
@@ -284,23 +297,25 @@ body {
         <p>もしかしたらゲーム関連で仲の良い友達が作れるかも…？？</p>
         <p>・全員が新規さんの事を歓迎いたしますので皆さん方の参加を待っています！お友達も誘って参加してみてください！</p>
 
-<span class="section-title">【📌サーバー入室方法】</span>
+        <span class="section-title">【📌サーバー入室方法】</span>
 
-</p>・上記の「ツクヨミに参加」をクリックしたら「ツクヨミ交流会認証サーバー」に参加します。</p>
+        <div class="time-box">
+            <p>【受付時間】</p>
+            <p>・平日：夕方〜夜の16時〜22時</p>
+            <p>・休日：朝〜夜の10時〜22時</p>
+        </div>
 
-</p>・初めに2つの質問がありますが答えてください</p>
-
-</p>・2つの質問に答えて貰った後、認証サーバーに入れます。下項目の「認証」にある三つの事項に答えてください。</p>
-
-</p>・答えていただいた後交流鯖の「モデレーター、副官、管理人」の誰かが確認した後、その人たちのフレンド申請が届きます</p>
-
-</p>・申請を許可していただいたら改めてツクヨミ交流会の参加リンクを貼らせて頂きます。</p>
+        <p>・上記の「ツクヨミに参加」をクリックしたら「ツクヨミ交流会認証サーバー」に参加します。</p>
+        <p>・初めに2つの質問がありますが答えてください</p>
+        <p>・2つの質問に答えて貰った後、認証サーバーに入れます。下項目の「認証」にある三つの事項に答えてください。</p>
+        <p>・答えていただいた後交流鯖の「モデレーター、副官、管理人」の誰かが確認した後、その人たちのフレンド申請が届きます</p>
+        <p>・申請を許可していただいたら改めてツクヨミ交流会の参加リンクを貼らせて頂きます。</p>
      </div>
 
     <footer class="footer">
         <p>© 月詠交流会 作成者：ひーくん・抹茶ラテ</p>
         <div class="meta-info">
-            <span>最終更新日: 2026年6月24日</span> │ <span>Version 1.4.4</span>
+            <span>最終更新日: 2026年6月25日</span> │ <span>Version 1.4.7</span>
         </div>
     </footer>
 
