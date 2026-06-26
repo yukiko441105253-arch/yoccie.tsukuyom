@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>月詠交流会 公式サイト - メンバー紹介</title>
 
+<!-- 地球儀マークから独自のアイコン（favicon）に変える設定 -->
+<link rel="icon" href="/images/favicon.png" type="image/png" />
+
 <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
 
 <style>
@@ -13,7 +16,7 @@
 body {
     margin: 0;
     font-family: sans-serif;
-    color: #0f172a; 
+    color: #ffffff; /* 読みやすさのためベースの文字色を白に変更 */
     overflow-x: hidden;
     background-color: #0f172a; /* 画像が読み込まれるまでのベース色 */
 }
@@ -87,12 +90,15 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.93);
+    color: #0f172a;
 }
 
 .role h2 {
     margin-top: 0;
     border-bottom: 2px solid #3b82f6;
     padding-bottom: 5px;
+    color: #0f172a;
 }
 
 /* メンバー共通 */
@@ -107,6 +113,12 @@ body {
     transition: opacity 0.6s ease, transform 0.6s ease;
     word-break: break-word;
     overflow-wrap: anywhere;
+}
+
+/* 一般メンバーカードの白ベース背景（文字を読みやすく修正） */
+.member.mem {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .member.show {
@@ -255,6 +267,7 @@ img, video {
     font-size: 10px;
     opacity: 0.7;
     margin-top: 8px;
+    color: #0f172a;
 }
 
 /* 一般メンバー用グリッドレイアウト */
@@ -331,7 +344,7 @@ img, video {
                     ・ホヨバース全般<br>
                     ・フォトナ エペ ヴァロ<br><br>
                     このサーバーでは、「超かぐや姫！」好きが集まる場所は勿論<br>
-                    雑談やゲーム、作品共有など幅広い交流会となっております！<br>
+                    雑談やゲーム, 作品共有など幅広い交流会となっております！<br>
                     少しでも気になる方がいれば是非サーバーに入室してみてはいかがでしょうか？<br>
                     ちなみにかなりの確率で鯖主は浮上するので権限関係なく仲良くしてもらえると嬉しいです！<br><br>
                     管理人一同心よりお待ちしております！
@@ -538,7 +551,7 @@ img, video {
                 <div class="intro-content">
                     よろしくお願いします！みずいろです<br>
                     このサーバーでモデレーターやらせてもらってます<br>
-                    多分お笑い担当です。多分ね<br>
+                    多分配信お笑い担当です。多分ね<br>
                     どうぞツクヨミにお越しくださいませ～<br>
                     よろしくお願いします。
                 </div>

@@ -17,14 +17,25 @@
             background-color: #0f172a; /* ベース背景色 */
         }
 
-        /* ✨ 共通背景システム（スライドショー用） */
-        .bg {
+        /* ✨ 背景システム（チラつき防止と2つのレイヤーによるクロスフェード） */
+        #bg-container {
             position: fixed;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .bg-layer {
+            position: absolute;
             inset: 0;
             background-size: cover;
             background-position: center;
-            transition: opacity 1s ease;
-            z-index: 0;
+            background-repeat: no-repeat;
+            transition: opacity 1.5s ease-in-out; /* 滑らかなクロスフェード */
+            opacity: 0;
+        }
+
+        .bg-layer.active {
+            opacity: 1;
         }
 
         /* ✨ 固定ヘッダーナビゲーションバー */
@@ -48,6 +59,12 @@
             gap: 35px;
             margin: 0;
             padding: 0;
+            flex-wrap: wrap; /* スマホでの折り返し対策 */
+            justify-content: center;
+        }
+
+        .nav-menu li {
+            white-space: nowrap; /* テキストの途中で改行されるのを防ぐ */
         }
 
         .nav-menu a {
@@ -68,10 +85,10 @@
         .container {
             position: relative;
             z-index: 1;
-            max-width: 800px; /* 見やすさのため少しスリムに調整 */
+            max-width: 800px;
             margin: auto;
             padding: 20px;
-            padding-top: 100px; /* ヘッダーバーに被らないための余白 */
+            padding-top: 100px;
         }
 
         h1 {
@@ -90,7 +107,7 @@
             margin-bottom: 40px;
         }
 
-        /* 動画カード（月詠のカードデザインを踏襲しつつ、動画が見やすい半透明の黒に変更） */
+        /* 動画カード */
         .video-card {
             background: rgba(15, 23, 42, 0.75);
             backdrop-filter: blur(8px);
@@ -157,11 +174,11 @@
 
         .video-url {
             font-size: 13px;
-            color: #38bdf8; /* 月詠のメインカラー（水色）に変更 */
+            color: #38bdf8;
             word-break: break-all;
         }
 
-        /* フッター（月詠共通の白ベースカードデザイン） */
+        /* フッター */
         .footer {
             background: rgba(255, 255, 255, 0.93);
             color: #0f172a;
@@ -187,22 +204,26 @@
         /* スマホ用レスポンシブ */
         @media(max-width: 768px) {
             h1 { font-size: 22px; }
-            .nav-menu ul { gap: 20px; }
-            .container { padding-top: 90px; }
+            .nav-menu ul { gap: 15px 20px; } /* 縦方向の隙間も確保 */
+            .container { padding-top: 120px; } /* メニュー折り返しに備えて余白を少し広めに */
             .video-title { font-size: 16px; }
         }
     </style>
 </head>
 <body>
 
-<div class="bg" id="bg"></div>
+<div id="bg-container">
+    <div class="bg-layer active" id="bg1"></div>
+    <div class="bg-layer" id="bg2"></div>
+</div>
 
 <header class="site-header">
     <nav class="nav-menu">
         <ul>
             <li><a href="index.html">ホーム</a></li>
             <li><a href="member.html">自己紹介</a></li>
-            <li><a href="youtube.html">鯖主の動画</a></li> <li><a href="javascript:void(0);" style="cursor: default;">Coming Soon</a></li>
+            <li><a href="youtube.html">鯖主の動画</a></li>
+            <li><a href="javascript:void(0);" style="cursor: default;">Coming Soon</a></li>
         </ul>
     </nav>
 </header>
@@ -261,21 +282,41 @@
 </div>
 
 <script>
-// --- ✨ 背景画像の自動切替システム ---
-const bg = document.getElementById("bg");
+// --- ✨ 滑らかな背景画像の自動クロスフェードシステム ---
 const images = ["images/bg1.png", "images/bg2.png", "images/bg3.png"];
 
-if (bg && images.length > 0) {
-    bg.style.backgroundImage = `url(${images[0]})`;
-    let i = 1;
+if (images.length > 0) {
+    const bg1 = document.getElementById("bg1");
+    const bg2 = document.getElementById("bg2");
+    
+    // 初期画像のセット
+    bg1.style.backgroundImage = `url(${images[0]})`;
+    
+    let currentIndex = 0;
+    let isBg1Active = true;
+
     function changeBG() {
-        bg.style.opacity = 0;
-        setTimeout(() => {
-            bg.style.backgroundImage = `url(${images[i]})`;
-            bg.style.opacity = 1;
-            i = (i + 1) % images.length;
-        }, 500);
+        // 次の画像のインデックスを計算
+        currentIndex = (currentIndex + 1) % images.length;
+        const nextImageUrl = `url(${images[currentIndex]})`;
+
+        if (isBg1Active) {
+            // 現在bg1が表示中なら、非表示のbg2に次の画像をセットしてフェードイン
+            bg2.style.backgroundImage = nextImageUrl;
+            bg2.classList.add("active");
+            bg1.classList.remove("active");
+        } else {
+            // 現在bg2が表示中なら、非表示のbg1に次の画像をセットしてフェードイン
+            bg1.style.backgroundImage = nextImageUrl;
+            bg1.classList.add("active");
+            bg2.classList.remove("active");
+        }
+        
+        // フラグを反転
+        isBg1Active = !isBg1Active;
     }
+    
+    // 5秒ごとに切り替え
     setInterval(changeBG, 5000);
 }
 </script>
