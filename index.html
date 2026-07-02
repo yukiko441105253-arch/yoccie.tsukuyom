@@ -32,16 +32,16 @@ body {
 
 /* ヘッダーナビゲーション（画面上部に常に固定） */
 .site-header {
-    position: fixed; /* スクロールしても上に固定 */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 100; /* 最前面に表示 */
+    z-index: 100;
     padding: 15px 0;
     display: flex;
     justify-content: center;
-    background: rgba(15, 23, 42, 0.6); /* スクロール時に文字が重なっても見やすいよう薄い背景を設置 */
-    backdrop-filter: blur(8px); /* 背景を少しぼかして高級感をプラス */
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(8px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -60,7 +60,7 @@ body {
     font-weight: bold;
     opacity: 0.8;
     transition: opacity 0.3s ease;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); /* 背景画像に紛れないように文字影を追加 */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 .nav-menu a:hover {
@@ -74,12 +74,12 @@ body {
     max-width: 1000px;
     margin: auto;
     padding: 20px;
-    padding-top: 90px; /* 固定ヘッダーにコンテンツが被らないように上部余白を確保 */
+    padding-top: 90px;
 }
 
 /* 共通の白ベースカード設定 */
 .intro, .footer {
-    background: rgba(255, 255, 255, 0.93); /* 白背景をわずかに濃くして文字を読みやすく */
+    background: rgba(255, 255, 255, 0.93);
     color: #0f172a;
     border-radius: 15px;
 }
@@ -90,7 +90,7 @@ body {
     z-index: 1;
     text-align: center;
     padding: 80px 20px;
-    background: rgba(0, 0, 0, 0.55); /* 黒背景を少し濃くして文字の視認性を向上 */
+    background: rgba(0, 0, 0, 0.55);
     backdrop-filter: blur(8px);
     border-radius: 15px;
     margin-bottom: 20px;
@@ -109,28 +109,143 @@ body {
 }
 
 .hero p {
-    opacity: 1; /* 透明度をなくしてハッキリ見せる */
     font-size: 17px;
     margin-bottom: 20px;
     line-height: 1.7;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-/* 音楽コントロール周辺 */
-.music-controls button {
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    margin: 5px;
-    transition: background 0.2s;
+/* --- 音楽アコーディオン用スタイル --- */
+.music-list-container {
+    margin: 20px auto 0;
+    max-width: 500px;
 }
 
-.music-controls button:hover {
-    background: rgba(255, 255, 255, 0.4);
+.music-accordion {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* カテゴリーを押すトリガーボタン */
+.accordion-trigger {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    padding: 14px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+}
+
+.accordion-trigger:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.accordion-trigger::after {
+    content: '▼';
+    font-size: 12px;
+    transition: transform 0.3s ease;
+    opacity: 0.7;
+}
+
+.accordion-trigger.is-open::after {
+    transform: rotate(180deg);
+}
+
+/* スライド展開する中身 */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.accordion-inner {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    /* 12曲入ると縦に長くなるため、最大高さを指定してスクロールできるように設定 */
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* 全体停止ボタンのスタイル */
+.stop-btn-area {
+    position: sticky;
+    top: 0;
+    background: rgba(15, 23, 42, 0.95);
+    z-index: 10;
+    text-align: center;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+}
+
+.stop-btn-area button {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 8px 30px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: 100%;
+    max-width: 200px;
+}
+.stop-btn-area button:hover {
+    background: #f87171;
+}
+
+/* 曲名ボタンのスタイル */
+.song-btn {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 10px 15px;
+    font-size: 15px;
+    text-align: left;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.song-btn:hover {
+    background: #38bdf8;
+    color: #0f172a;
+    font-weight: bold;
+    transform: translateX(4px);
+}
+
+/* ボリュームバー配置 */
+.volume-area {
+    position: sticky;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.95);
+    z-index: 10;
+    margin-top: 15px;
+    padding-top: 12px;
+    font-size: 14px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.volume-area input[type="range"] {
+    vertical-align: middle;
+    width: 60%;
+    max-width: 200px;
+    margin-left: 8px;
 }
 
 /* ボタン共通 */
@@ -143,7 +258,7 @@ body {
     border-radius: 10px;
     font-weight: bold;
     transition: transform 0.2s;
-    margin: 10px 5px; /* 複数並んだときのために左右に少し余白を追加 */
+    margin: 10px 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
@@ -151,7 +266,6 @@ body {
     transform: scale(1.05);
 }
 
-/* X（旧Twitter）ボタン用の固有スタイル */
 .x-btn {
     background: #000000;
     color: #ffffff;
@@ -180,16 +294,16 @@ body {
 }
 
 .intro p {
-    font-size: 16px; /* 文字サイズを少し調整 */
-    line-height: 1.9; /* 行間を広げて読みやすく */
+    font-size: 16px;
+    line-height: 1.9;
     margin: 14px 0;
-    color: #1e293b; /* よりはっきりしたダークグレーに変更 */
+    color: #1e293b;
 }
 
 .section-title {
     font-size: 1.4em;
     font-weight: bold;
-    color: #1d4ed8; /* 濃いめの青にしてメリハリをつける */
+    color: #1d4ed8;
     margin-top: 25px;
     display: block;
 }
@@ -197,7 +311,7 @@ body {
 /* 受付時間用の追加枠スタイル */
 .time-box {
     background: #f1f5f9;
-    border-left: 5px solid #eab308; /* アクセントに黄色の左線 */
+    border-left: 5px solid #eab308;
     padding: 15px;
     margin: 15px 0;
     border-radius: 4px;
@@ -232,8 +346,8 @@ body {
     .hero h1 { font-size: 28px; }
     .intro h2 { font-size: 22px; }
     .nav-menu ul { gap: 20px; }
-    .container { padding-top: 80px; } /* スマホ用のヘッダー高さに合わせる */
-    .join-btn { display: block; margin: 10px auto; max-width: 200px; } /* スマホ時はボタンを縦並びに */
+    .container { padding-top: 80px; }
+    .join-btn { display: block; margin: 10px auto; max-width: 200px; }
 }
 </style>
 </head>
@@ -248,7 +362,8 @@ body {
         <ul>
             <li><a href="index.html">ホーム</a></li>
             <li><a href="member.html">自己紹介</a></li>
-            <li><a href="youtube.html">鯖主の動画</a></li> <li><a href="javascript:void(0);" style="cursor: default;">Coming Soon</a></li>
+            <li><a href="youtube.html">鯖主の動画</a></li>
+            <li><a href="javascript:void(0);" style="cursor: default;">Coming Soon</a></li>
         </ul>
     </nav>
 </header>
@@ -264,22 +379,40 @@ body {
             <a class="join-btn x-btn" href="https://x.com/tukuyomikouryu" target="_blank">公式X（旧Twitter）</a>
         </div>
 
-        <p style="margin-top: 20px; font-size: 14px; opacity: 0.9;">
-            下のボタンでrayがパートごとで流れるよ！
+        <p style="margin-top: 25px; font-size: 14px; opacity: 0.9;">
+            下のカテゴリーを押すと、曲名リストが表示されるよ！
         </p>
 
-        <div class="music-controls" style="margin-top:15px;">
-            <button onclick="playMusic('music1.opus')">🎵 1パート</button>
-            <button onclick="playMusic('music2.opus')">🎵 2パート</button>
-            <button onclick="playMusic('music3.opus')">🎵 ラスサビ</button>
-            <button onclick="playMusic('music4.opus')" style="background: #a855f7;">🎵 全部</button>
-            <button onclick="stopMusic()" style="background: #ef4444;">⏹ 停止</button>
-             
-            <div style="margin-top:15px; font-size: 14px;">
-                音量：
-                <input type="range" id="volume" min="0" max="1" step="0.01" value="0.5" style="vertical-align: middle;">
+        <div class="music-list-container">
+            <div class="music-accordion">
+                <button class="accordion-trigger" onclick="toggleAccordion(this)">🌙 超かぐや姫！楽曲リスト</button>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        
+                        <div class="stop-btn-area">
+                            <button onclick="stopMusic()">⏹ 全体停止</button>
+                        </div>
+
+                        <button class="song-btn" onclick="playMusic('music1.opus')">🎵 星降る海</button>
+                        <button class="song-btn" onclick="playMusic('music2.opus')">🎵 瞬間シンフォニー</button>
+                        <button class="song-btn" onclick="playMusic('music3.opus')">🎵 remember</button>
+                        <button class="song-btn" onclick="playMusic('music4.opus')">🎵 EX-Otogibanashi</button>
+                        <button class="song-btn" onclick="playMusic('music5.opus')">🎵 ワールドイズマイン</button>
+                        <button class="song-btn" onclick="playMusic('music6.opus')">🎵 Onyxxx</button>
+                        <button class="song-btn" onclick="playMusic('music7.opus')">🎵 私は私のことが好き</button>
+                        <button class="song-btn" onclick="playMusic('music8.opus')">🎵 メルト</button>
+                        <button class="song-btn" onclick="playMusic('music9.opus')">🎵 ray</button>
+                        <button class="song-btn" onclick="playMusic('music10.opus')">🎵 Reply</button>
+
+                        <div class="volume-area">
+                            音量：<input type="range" id="volume" min="0" max="1" step="0.01" value="0.5">
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
 
     <div class="intro">
@@ -293,7 +426,7 @@ body {
         <p>・ツクヨミ交流会ではメンバー全員優しく、お互いの良いところを尊重し合っています！</p>
         <p>・その他にも一部のメンバーは、お悩み相談などサーバー外で起きた事などにも親身に対応して一緒に協力してくれます！</p>
         <p>・「超かぐや姫！」以外にも日常雑談・ゲームの話なども盛んに行われております！</p>
-        <p>・APEX、フォートナイト、マインクラフトやその他の戦闘系のゲーム、作業系のゲーム, ソーシャルゲームやホヨバースのゲームなど、様々なゲームを遊んでるメンバー達が沢山います！！</p>
+        <p>・APEX、フォートナイト、マインクラフトやその他の戦闘系のゲーム, 作業系のゲーム, ソーシャルゲームやホヨバースのゲームなど、様々なゲームを遊んでるメンバー達が沢山います！！</p>
         <p>もしかしたらゲーム関連で仲の良い友達が作れるかも…？？</p>
         <p>・全員が新規さんの事を歓迎いたしますので皆さん方の参加を待っています！お友達も誘って参加してみてください！</p>
 
@@ -340,7 +473,7 @@ if (bg && images.length > 0) {
     setInterval(changeBG, 5000);
 }
 
-// --- 音楽再生コントロール ---
+// --- 確実にながれる音楽再生コントロール ---
 const bgm = document.getElementById("bgm");
 const volume = document.getElementById("volume");
 
@@ -360,6 +493,23 @@ if (bgm) {
     function stopMusic() {
         bgm.pause();
         bgm.currentTime = 0;
+    }
+}
+
+// --- アコーディオン開閉 ---
+function toggleAccordion(trigger) {
+    const content = trigger.nextElementSibling;
+    document.querySelectorAll('.accordion-trigger').forEach(el => {
+        if (el !== trigger) {
+            el.classList.remove('is-open');
+            if (el.nextElementSibling) el.nextElementSibling.style.maxHeight = '0px';
+        }
+    });
+    trigger.classList.toggle("is-open");
+    if (content.style.maxHeight && content.style.maxHeight !== "0px") {
+        content.style.maxHeight = "0px";
+    } else {
+        content.style.maxHeight = content.scrollHeight + "px";
     }
 }
 </script>
