@@ -5,8 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>交流会コミュニティ - ツクヨミ交流会</title>
 
-<link rel="icon" href="/images/favicon.png" type="image/png" />
+<link rel="icon" href="images/favicon.png" type="image/png" />
 
+<script>
+window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
 <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
 
 <style>
@@ -28,6 +31,7 @@ body {
     background-position: center;
     transition: opacity 1s ease;
     z-index: 0;
+    opacity: 1; /* 初期状態を明示 */
 }
 
 /* ヘッダーナビゲーション（画面上部に常に固定） */
@@ -65,6 +69,14 @@ body {
 
 .nav-menu a:hover {
     opacity: 1;
+}
+
+/* Coming Soon用の特殊スタイル（カーソルを指にさせない、ホバーで光らせない） */
+.nav-menu a.coming-soon {
+    cursor: default;
+}
+.nav-menu a.coming-soon:hover {
+    opacity: 0.5; /* 準備中感を出すために少し薄くキープ */
 }
 
 /* コンテンツ */
@@ -174,7 +186,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    /* 12曲入ると縦に長くなるため、最大高さを指定してスクロールできるように設定 */
     max-height: 400px;
     overflow-y: auto;
 }
@@ -321,6 +332,92 @@ body {
     font-weight: bold;
 }
 
+/* --- 変更：リアルタイム人数表示用スタイル --- */
+.server-status-container {
+    background-color: #1e293b; 
+    border-radius: 12px;
+    max-width: 400px;
+    margin: 25px 0; 
+    padding: 20px;
+    color: #f1f5f9;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.server-header-mini {
+    display: flex;
+    align-items: center;
+}
+
+.server-icon-mini {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #38bdf8, #1d4ed8); 
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    margin-right: 12px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.server-info-mini h4 {
+    margin: 0;
+    font-size: 17px;
+    color: white;
+}
+
+.status-count-mini {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 15px; /* オンラインと総人数の間隔 */
+}
+
+/* 緑の点（オンライン用） */
+.online-wrapper, .total-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #22c55e; 
+    border-radius: 50%;
+    margin-right: 6px;
+    position: relative;
+}
+
+.pulse-dot::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #22c55e;
+    border-radius: 50%;
+    animation: pulseAnimate 2s infinite;
+}
+
+/* 灰色の点（総人数用） */
+.gray-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #475569;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+@keyframes pulseAnimate {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(2.5); opacity: 0; }
+}
+
 /* フッター */
 .footer {
     text-align: center;
@@ -348,6 +445,7 @@ body {
     .nav-menu ul { gap: 20px; }
     .container { padding-top: 80px; }
     .join-btn { display: block; margin: 10px auto; max-width: 200px; }
+    .server-status-container { margin: 25px auto; } 
 }
 </style>
 </head>
@@ -363,7 +461,8 @@ body {
             <li><a href="index.html">ホーム</a></li>
             <li><a href="member.html">自己紹介</a></li>
             <li><a href="youtube.html">鯖主の動画</a></li>
-            <li><a href="javascript:void(0);" style="cursor: default;">Coming Soon</a></li>
+            <li><a href="sava.html">サーバーの歴史</a></li>
+            <li><a href="javascript:void(0);" class="coming-soon">Coming Soon</a></li>
         </ul>
     </nav>
 </header>
@@ -422,10 +521,9 @@ body {
         <p>・「yoccie よっしー」が率いる「ツクヨミ交流会！」では毎日楽しく活動をしています！</p>
         <p>・精度高く、サーバー内のメンバーである「ひーくん」「抹茶ラテ」にツクヨミ交流会のホームページを制作していただきました！</p>
 
-        <span class="section-title">【ツクヨミ交流会の様子】</span>
-        <p>・ツクヨミ交流会ではメンバー全員優しく、お互いの良いところを尊重し合っています！</p>
+   
         <p>・その他にも一部のメンバーは、お悩み相談などサーバー外で起きた事などにも親身に対応して一緒に協力してくれます！</p>
-        <p>・「超かぐや姫！」以外にも日常雑談・ゲームの話なども盛んに行われております！</p>
+        <p>・「超かぐや姫！」以外にも日常雑談・ゲームの話なども盛んで行われております！</p>
         <p>・APEX、フォートナイト、マインクラフトやその他の戦闘系のゲーム, 作業系のゲーム, ソーシャルゲームやホヨバースのゲームなど、様々なゲームを遊んでるメンバー達が沢山います！！</p>
         <p>もしかしたらゲーム関連で仲の良い友達が作れるかも…？？</p>
         <p>・全員が新規さんの事を歓迎いたしますので皆さん方の参加を待っています！お友達も誘って参加してみてください！</p>
@@ -455,6 +553,35 @@ body {
 </div>
 
 <script>
+// --- 追加：Discordからリアルタイムに人数を取得するプログラム ---
+// ⚠️「ここにコピーしたサーバーIDを入れる」をあなたのDiscordサーバーID（数字だけ）に書き換えてください！
+const DISCORD_SERVER_ID = "ここにコピーしたサーバーIDを入れる"; 
+
+function fetchDiscordStatus() {
+    if(!DISCORD_SERVER_ID || DISCORD_SERVER_ID.includes("ここ")) return;
+    
+    fetch(`https://discord.com/api/guilds/${DISCORD_SERVER_ID}/widget.json`)
+    .then(response => response.json())
+    .then(data => {
+        if(data) {
+            // サーバー名、オンライン人数、招待リンクを自動セット
+            if(data.name) document.getElementById("discord-server-name").textContent = data.name;
+            if(data.presence_count !== undefined) document.getElementById("discord-online-count").textContent = data.presence_count + "人";
+            if(data.instant_invite) document.getElementById("discord-widget-link").href = data.instant_invite;
+            
+            // 💡 補足: Discord公式APIの仕様上、Widgetデータからは「サーバーの総人数」は直接取得できません。
+            // そのため、総人数（目標値など）を固定にするか、オンライン数をベースに算出する必要があります。
+            // ここでは目安として、固定表示、もしくは大体の総メンバー数を表示させるために書き換えます。
+            document.getElementById("discord-total-count").textContent = "150人"; // 必要に応じて書き換えてください
+        }
+    })
+    .catch(err => console.error("Discordデータの取得に失敗しました:", err));
+}
+// ページを開いた時と、その後1分ごとに自動で人数を更新する
+fetchDiscordStatus();
+setInterval(fetchDiscordStatus, 60000);
+
+
 // --- 背景画像の自動切替 ---
 const bg = document.getElementById("bg");
 const images = ["images/bg1.png", "images/bg2.png", "images/bg3.png"];
@@ -468,28 +595,65 @@ if (bg && images.length > 0) {
             bg.style.backgroundImage = `url(${images[i]})`;
             bg.style.opacity = 1;
             i = (i + 1) % images.length;
-        }, 500);
+        }, 1000);
     }
     setInterval(changeBG, 5000);
 }
 
-// --- 確実にながれる音楽再生コントロール ---
+// --- 確実にながれる音楽再生コントロール（ローカルCORS制限＆スマホ音量バグ両対応型） ---
 const bgm = document.getElementById("bgm");
-const volume = document.getElementById("volume");
+const volumeInput = document.getElementById("volume");
+
+let audioCtx = null;
+let gainNode = null;
+let sourceNode = null;
+
+function updateVolume() {
+    if (!bgm || !volumeInput) return;
+    const vol = volumeInput.value;
+    if (gainNode) {
+        gainNode.gain.value = vol;
+    }
+    bgm.volume = vol;
+}
 
 if (bgm) {
     bgm.volume = 0.5;
-    if (volume) {
-        volume.addEventListener("input", () => {
-            bgm.volume = volume.value;
-        });
+
+    if (volumeInput) {
+        volumeInput.addEventListener("input", updateVolume);
+        volumeInput.addEventListener("change", updateVolume);
     }
+
     function playMusic(file) {
         bgm.src = file;
+        updateVolume();
+
+        if (!audioCtx && window.location.protocol !== 'file:') {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (AudioContext) {
+                try {
+                    audioCtx = new AudioContext();
+                    sourceNode = audioCtx.createMediaElementSource(bgm);
+                    gainNode = audioCtx.createGain();
+                    sourceNode.connect(gainNode);
+                    gainNode.connect(audioCtx.destination);
+                    gainNode.gain.value = volumeInput.value;
+                } catch (e) {
+                    console.log("Web Audio Context はスキップされました");
+                }
+            }
+        }
+        
+        if (audioCtx && audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+
         bgm.play().catch(err => {
-            console.log("ユーザー操作前の自動再生はブラウザにブロックされる場合があります:", err);
+            console.log("再生エラー:", err);
         });
     }
+
     function stopMusic() {
         bgm.pause();
         bgm.currentTime = 0;

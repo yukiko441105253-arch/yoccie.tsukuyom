@@ -29,6 +29,7 @@ body {
     background-position: center;
     transition: opacity 1s ease; /* 切り替わるときのふわっとするエフェクト */
     z-index: -1; /* コンテンツの後ろに配置 */
+    opacity: 1;
 }
 
 /* ヘッダーナビゲーション（画面上部に常に固定） */
@@ -176,6 +177,11 @@ img, video {
     gap: 8px;
 }
 
+/* 一般メンバーはカーソルをデフォルトに（開閉しないため） */
+.member.mem .name {
+    cursor: default;
+}
+
 /* 役職ごとの名前の色 */
 .web-name { color: #0284c7; } 
 .sub-name { color: #0284c7; } 
@@ -277,6 +283,91 @@ img, video {
     gap: 10px;
 }
 
+/* --- ➕ 追加：リアルタイム人数表示用スタイル --- */
+.server-status-container {
+    background-color: #1e293b; 
+    border-radius: 12px;
+    max-width: 400px;
+    margin: 25px auto 10px; 
+    padding: 20px;
+    color: #f1f5f9;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    text-align: left;
+}
+
+.server-header-mini {
+    display: flex;
+    align-items: center;
+}
+
+.server-icon-mini {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #38bdf8, #1d4ed8); 
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    margin-right: 12px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.server-info-mini h4 {
+    margin: 0;
+    font-size: 17px;
+    color: white;
+}
+
+.status-count-mini {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.online-wrapper, .total-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #22c55e; 
+    border-radius: 50%;
+    margin-right: 6px;
+    position: relative;
+}
+
+.pulse-dot::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #22c55e;
+    border-radius: 50%;
+    animation: pulseAnimate 2s infinite;
+}
+
+.gray-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #475569;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+@keyframes pulseAnimate {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(2.5); opacity: 0; }
+}
+
 /* フッター */
 .footer {
     text-align: center;
@@ -316,7 +407,9 @@ img, video {
         <ul>
             <li><a href="index.html">ホーム</a></li>
             <li><a href="member.html">自己紹介</a></li>
-            <li><a href="youtube.html">鯖主の動画</a></li> <li><a href="javascript:void(0);" style="cursor: default;">Coming Soon</a></li>
+            <li><a href="youtube.html">鯖主の動画</a></li>
+            <li><a href="sava.html">サーバーの歴史</a></li>
+            <li><a href="javascript:void(0);" style="cursor: default;">Coming Soon</a></li>
         </ul>
     </nav>
 </header>
@@ -456,7 +549,7 @@ img, video {
                     ど〜ど〜！一応モデレーターさせてもらってる高二のてるるだよ〜！！<br>
                     元々の名前がネコタだったからそうやって呼ばれたりしてる！<br>
                     ゲームは色んな種類してるよ〜！<br>
-                    ん〜と、この鯖では慢盛り上げ役、かな？この鯖はね〜みんな仲良いから新規さんもすぐ馴染めると思うよ〜！！<br>
+                    ん〜と、この鯖では盛り上げ役、かな？この鯖はね〜みんな仲良いから新規さんもすぐ馴染めると思うよ〜！！<br>
                     興味があったらぜひ！入ってみてね！<br>
                     俺もこの鯖のみんなと絶っっ対仲良くするから！<br>
                     ま！興味があったら絶対来い！楽しいから！！俺が保証する！！！<br>
@@ -506,7 +599,7 @@ img, video {
                     相談対応や仲介も行います。<br>
                     ゲームは主にバウンティとポケGOをしています。<br>
                     何かあれば気軽に相談してください！<br>
-                    楽しい超かぐライフを。！
+                    楽しい超かぐライフを！
                 </div>
             </div>
         </div>
@@ -637,7 +730,7 @@ img, video {
             <div class="member mem"><span class="name">コロン</span></div>
             <div class="member mem"><span class="name">SA</span></div>
             <div class="member mem"><span class="name">るな</span></div>
-            <div class="member mem"><span class="name">ひかり</span></div>
+            <div class="member mem"><span class="name">ひか</span></div>
             <div class="member mem"><span class="name">Molluvi</span></div>
             <div class="member mem"><span class="name">お茶虎</span></div>
             <div class="member mem"><span class="name">オキラク</span></div>
@@ -662,7 +755,29 @@ img, video {
             <div class="member mem"><span class="name">hako86</span></div>
             <div class="member mem"><span class="name">かしわ</span></div>
             <div class="member mem"><span class="name">あちゅ</span></div>
+            <div class="member mem"><span class="name">かなてぇ</span></div>
         </div>
+    </div>
+
+    <!-- ➕ 追加：リアルタイム人数表示用カード（VCなしのシンプル版） -->
+    <div class="server-status-container">
+        <div class="server-header-mini">
+            <div class="server-icon-mini">ツ</div>
+            <div class="server-info-mini">
+                <h4 id="discord-server-name">ツクヨミ交流会</h4>
+                <div class="status-count-mini">
+                    <div class="online-wrapper">
+                        <span class="pulse-dot"></span>
+                        <span id="discord-online-count">--人</span> オンライン
+                    </div>
+                    <div class="total-wrapper">
+                        <span class="gray-dot"></span>
+                        総メンバー: <span id="discord-total-count" style="margin-left:4px; font-weight:bold;">--人</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a id="discord-widget-link" href="https://discord.gg/twepzXcpRy" target="_blank" style="display:block; text-align:center; background:rgba(255,255,255,0.08); color:white; text-decoration:none; font-size:13px; padding:8px; margin-top:12px; border-radius:6px; font-weight:bold;">Discordを開く</a>
     </div>
 
 </div>
@@ -672,7 +787,31 @@ img, video {
 </footer>
 
 <script>
-// --- 背景画像の自動切替システム ---
+// --- ➕ 追加：Discordからリアルタイムに人数を取得するプログラム ---
+const DISCORD_SERVER_ID = "ここにコピーしたサーバーIDを入れる"; 
+
+function fetchDiscordStatus() {
+    if(!DISCORD_SERVER_ID || DISCORD_SERVER_ID.includes("ここ")) return;
+    
+    fetch(`https://discord.com/api/guilds/${DISCORD_SERVER_ID}/widget.json`)
+    .then(response => response.json())
+    .then(data => {
+        if(data) {
+            if(data.name) document.getElementById("discord-server-name").textContent = data.name;
+            if(data.presence_count !== undefined) document.getElementById("discord-online-count").textContent = data.presence_count + "人";
+            if(data.instant_invite) document.getElementById("discord-widget-link").href = data.instant_invite;
+            
+            // 目安の総メンバー数を表示させるために書き換えます（必要に応じて数値を変更してください）
+            document.getElementById("discord-total-count").textContent = "150人"; 
+        }
+    })
+    .catch(err => console.error("Discordデータの取得に失敗しました:", err));
+}
+fetchDiscordStatus();
+setInterval(fetchDiscordStatus, 60000); // 1分ごとに自動更新
+
+
+// --- 背景画像の自動切替システム（フェードのバグを修正） ---
 const bg = document.getElementById("bg");
 const images = ["images/bg1.png", "images/bg2.png", "images/bg3.png"];
 
@@ -680,12 +819,12 @@ if (bg && images.length > 0) {
     bg.style.backgroundImage = `url(${images[0]})`;
     let i = 1;
     function changeBG() {
-        bg.style.opacity = 0; 
+        bg.style.opacity = 0; // まずふわっと消す
         setTimeout(() => {
-            bg.style.backgroundImage = `url(${images[i]})`; 
-            bg.style.opacity = 1; 
+            bg.style.backgroundImage = `url(${images[i]})`; // 消えた状態で画像切り替え
+            bg.style.opacity = 1; // ふわっと出す
             i = (i + 1) % images.length; 
-        }, 500); 
+        }, 1000); // CSSの transition (1s) に合わせて1秒待つ
     }
     setInterval(changeBG, 5000); 
 }
@@ -693,7 +832,6 @@ if (bg && images.length > 0) {
 // --- 🎵 ホームとシームレスに繋がるBGMシステム 🎵 ---
 const bgm = document.getElementById("bgm");
 
-// ページ読み込み時に保存されているBGM状態を復元
 window.addEventListener("DOMContentLoaded", () => {
     const savedSrc = localStorage.getItem("bgm_src");
     const savedTime = localStorage.getItem("bgm_time");
@@ -705,18 +843,21 @@ window.addEventListener("DOMContentLoaded", () => {
         bgm.currentTime = savedTime ? parseFloat(savedTime) : 0;
         bgm.volume = savedVolume ? parseFloat(savedVolume) : 0.5;
 
-        // ホームで流れていた場合は自動で再生を再開
         if (isPlaying === "true") {
-            bgm.play().catch(err => {
-                console.log("ブラウザの保護機能により、画面クリック後に再生が開始されます。");
-                // ユーザーが画面を触ったら再生する予備トリガー
-                document.addEventListener("click", () => { bgm.play(); }, { once: true });
-            });
+            const startPlay = () => {
+                bgm.play().then(() => {
+                    document.removeEventListener("click", startPlay);
+                }).catch(err => {
+                    console.log("ブラウザの保護機能により、画面クリック後に再生が開始されます。");
+                });
+            };
+            
+            startPlay();
+            document.addEventListener("click", startPlay, { once: true });
         }
     }
 });
 
-// 再生状況をリアルタイムで保存（秒数・音量・再生中フラグ）
 if (bgm) {
     setInterval(() => {
         if (!bgm.paused) {
@@ -726,15 +867,14 @@ if (bgm) {
             localStorage.setItem("bgm_playing", "false");
         }
         localStorage.setItem("bgm_volume", bgm.volume);
-    }, 500); // 0.5秒ごとに記憶をアップデート
+    }, 500);
 }
 
-// 互換性のための既存関数（もし他の場所から呼び出された場合の保険）
 function playMusic(file) {
     if (bgm) {
         bgm.src = file;
         localStorage.setItem("bgm_src", file);
-        bgm.play();
+        bgm.play().catch(e => console.log(e));
     }
 }
 function stopMusic() {
@@ -753,11 +893,11 @@ const obs = new IntersectionObserver(entries => {
 
 document.querySelectorAll(".member").forEach(m => obs.observe(m));
 
-// --- アコーディオン開閉 ---
+// --- アコーディオン開閉（一般メンバーをスキップするよう修正） ---
 document.querySelectorAll(".member .name").forEach(name => {
     name.addEventListener("click", (e) => {
         const memberBox = name.closest(".member");
-        if (memberBox) {
+        if (memberBox && !memberBox.classList.contains("mem")) {
             memberBox.classList.toggle("active");
         }
     });
