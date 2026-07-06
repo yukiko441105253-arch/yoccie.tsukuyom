@@ -186,12 +186,14 @@ img, video {
 .web-name { color: #0284c7; } 
 .sub-name { color: #0284c7; } 
 .mod-name { color: #2563eb; } 
+.helper-name { color: #e11d48; } /* 協力者用の名前の色を追加 */
 .member.mem .name { color: #16a34a; } 
 
 /* 矢印アイコンの付与（メンバー以外） */
 .owner .name::after,
 .web .name::after,
 .sub .name::after,
+.helper .name::after,
 .mod .name::after {
     content: " ▼";
     font-size: 12px;
@@ -458,16 +460,15 @@ img, video {
         <h2>💻 WEB作成者</h2>
          
         <div class="member web">
-            <img src="hi-kun.png" class="mini-icon" alt="ひーくん">
+            <img src="yuro.png" class="mini-icon" alt="ゆろ">
             <div class="name web-name">
-                <span>ひーくん</span>
+                <span>ゆろ</span>
             </div>
             <div class="intro-box">
                 <div class="intro-content">
-                    ツクヨミ交流会ホームページ作成者の「ひーくん」です！<br>
-                    抹茶ラテと共に、メンバーの皆さんが使いやすく、楽しく見られるような公式サイトを目指して制作しました！<br>
-                    サーバー内でも一般メンバーとして楽しくお話ししています。<br>
-                    新しく入ってくれた皆さんとお会いできるのを楽しみにしています！よろしくお願いします！
+                    初めまして「ゆろ」って言います！<br>
+                    WEB作成を担当しました！メンバーの皆さんが使いやすく、楽しく見られるような公式サイトを目指して制作しました！<br>
+                    よろしくお願いします〜！
                 </div>
             </div>
         </div>
@@ -480,8 +481,26 @@ img, video {
             <div class="intro-box">
                 <div class="intro-content">
                     初めまして！「抹茶ラテ」です！<br>
-                    この度ひーくんと共に、メンバーの皆さんが使いやすく、楽しく見られるような公式サイトを目指して制作しました！<br>
+                    この度メンバーの皆さんが使いやすく、楽しく見られるような公式サイトを目指して制作しました！<br>
                     仲よくしてねー！！よろしくお願いします〜！<br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🤝 協力者セクション -->
+    <div class="role">
+        <h2>🤝 協力者</h2>
+        <div class="member helper">
+            <img src="hikun.png" class="mini-icon" alt="ひーくん"> <!-- 💡 ひーくんのアイコン枠を追加 -->
+            <div class="name helper-name">
+                <span>ひーくん</span>
+            </div>
+            <div class="intro-box">
+                <div class="intro-content">
+                    公式サイトの制作に協力させていただきました！<br>
+                    みんなで作り上げた素晴らしいサイトなので、たくさん使ってもらえると嬉しいです！<br>
+                    よろしくお願いします！
                 </div>
             </div>
         </div>
@@ -759,57 +778,11 @@ img, video {
         </div>
     </div>
 
-    <!-- ➕ 追加：リアルタイム人数表示用カード（VCなしのシンプル版） -->
-    <div class="server-status-container">
-        <div class="server-header-mini">
-            <div class="server-icon-mini">ツ</div>
-            <div class="server-info-mini">
-                <h4 id="discord-server-name">ツクヨミ交流会</h4>
-                <div class="status-count-mini">
-                    <div class="online-wrapper">
-                        <span class="pulse-dot"></span>
-                        <span id="discord-online-count">--人</span> オンライン
-                    </div>
-                    <div class="total-wrapper">
-                        <span class="gray-dot"></span>
-                        総メンバー: <span id="discord-total-count" style="margin-left:4px; font-weight:bold;">--人</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a id="discord-widget-link" href="https://discord.gg/twepzXcpRy" target="_blank" style="display:block; text-align:center; background:rgba(255,255,255,0.08); color:white; text-decoration:none; font-size:13px; padding:8px; margin-top:12px; border-radius:6px; font-weight:bold;">Discordを開く</a>
-    </div>
-
-</div>
-
 <footer class="footer">
-    <p>© 月詠交流会 作成者：ひーくん・抹茶ラテ</p>
+    <p>© 月詠交流会 作成者：ゆろ・抹茶ラテ 協力者：ひーくん</p>
 </footer>
 
 <script>
-// --- ➕ 追加：Discordからリアルタイムに人数を取得するプログラム ---
-const DISCORD_SERVER_ID = "ここにコピーしたサーバーIDを入れる"; 
-
-function fetchDiscordStatus() {
-    if(!DISCORD_SERVER_ID || DISCORD_SERVER_ID.includes("ここ")) return;
-    
-    fetch(`https://discord.com/api/guilds/${DISCORD_SERVER_ID}/widget.json`)
-    .then(response => response.json())
-    .then(data => {
-        if(data) {
-            if(data.name) document.getElementById("discord-server-name").textContent = data.name;
-            if(data.presence_count !== undefined) document.getElementById("discord-online-count").textContent = data.presence_count + "人";
-            if(data.instant_invite) document.getElementById("discord-widget-link").href = data.instant_invite;
-            
-            // 目安の総メンバー数を表示させるために書き換えます（必要に応じて数値を変更してください）
-            document.getElementById("discord-total-count").textContent = "150人"; 
-        }
-    })
-    .catch(err => console.error("Discordデータの取得に失敗しました:", err));
-}
-fetchDiscordStatus();
-setInterval(fetchDiscordStatus, 60000); // 1分ごとに自動更新
-
 
 // --- 背景画像の自動切替システム（フェードのバグを修正） ---
 const bg = document.getElementById("bg");
@@ -824,7 +797,7 @@ if (bg && images.length > 0) {
             bg.style.backgroundImage = `url(${images[i]})`; // 消えた状態で画像切り替え
             bg.style.opacity = 1; // ふわっと出す
             i = (i + 1) % images.length; 
-        }, 1000); // CSSの transition (1s) に合わせて1秒待つ
+        }, 1000); // CSS of transition (1s) に合わせて1秒待つ
     }
     setInterval(changeBG, 5000); 
 }
