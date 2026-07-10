@@ -7,6 +7,10 @@
 
 <link rel="icon" href="images/favicon.png" type="image/png" />
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yomogi&display=swap" rel="stylesheet">
+
 <script>
 window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
@@ -17,24 +21,27 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
 
 body {
     margin: 0;
-    font-family: sans-serif;
+    font-family: 'Yomogi', sans-serif;
+    font-weight: bold;
     color: white;
     overflow-x: hidden;
-    background-color: #0f172a; /* 背景画像が読み込まれるまでのベース色 */
+    background-color: #050d1a;
 }
 
-/* 背景 */
+/* 1枚の写真を画面全体に完全に固定 */
 .bg {
     position: fixed;
     inset: 0;
+    background-image: url('images/bg1.png'); 
     background-size: cover;
     background-position: center;
-    transition: opacity 1s ease;
+    background-repeat: no-repeat;
     z-index: 0;
-    opacity: 1; /* 初期状態を明示 */
+    /* 💡 変更：白背景をなくした分、写真が明るすぎると文字が見えなくなるため、少しだけ画像を暗め（0.5）に調整しています */
+    opacity: 0.5; 
 }
 
-/* ヘッダーナビゲーション（画面上部に常に固定） */
+/* ヘッダーナビゲーション */
 .site-header {
     position: fixed;
     top: 0;
@@ -44,8 +51,8 @@ body {
     padding: 15px 0;
     display: flex;
     justify-content: center;
-    background: rgba(15, 23, 42, 0.6);
-    backdrop-filter: blur(8px);
+    /* 💡 変更：ヘッダーの背景の白み・グレーみをなくし、完全に透明に */
+    background: transparent;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -64,19 +71,18 @@ body {
     font-weight: bold;
     opacity: 0.8;
     transition: opacity 0.3s ease;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .nav-menu a:hover {
     opacity: 1;
 }
 
-/* Coming Soon用の特殊スタイル（カーソルを指にさせない、ホバーで光らせない） */
 .nav-menu a.coming-soon {
     cursor: default;
 }
 .nav-menu a.coming-soon:hover {
-    opacity: 0.5; /* 準備中感を出すために少し薄くキープ */
+    opacity: 0.5;
 }
 
 /* コンテンツ */
@@ -89,22 +95,20 @@ body {
     padding-top: 90px;
 }
 
-/* 共通の白ベースカード設定 */
+/* 💡 変更：紹介エリアとフッターの白背景（background）と枠線を完全に削除 */
 .intro, .footer {
-    background: rgba(255, 255, 255, 0.93);
-    color: #0f172a;
-    border-radius: 15px;
+    background: transparent;
+    color: white; /* 💡 文字色を黒から白に変更 */
+    border-radius: 0;
 }
 
-/* ヒーローエリア */
+/* 💡 変更：ヒーローエリアの黒透過背景も削除して写真と文字だけに */
 .hero {
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: 80px 20px;
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(8px);
-    border-radius: 15px;
+    padding: 60px 20px;
+    background: transparent;
     margin-bottom: 20px;
     color: white;
 }
@@ -117,31 +121,32 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: rainbowMove 8s linear infinite;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* 文字の輪郭に強い黒い影をつけて、背景がどんな画像でも読めるように加工 */
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
 .hero p {
     font-size: 17px;
     margin-bottom: 20px;
     line-height: 1.7;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
 }
 
-/* --- 音楽アコーディオン用スタイル --- */
+/* 音楽アコーディオン用スタイル */
 .music-list-container {
     margin: 20px auto 0;
     max-width: 500px;
 }
 
 .music-accordion {
+    /* ボタンやリストの枠だけを残して、ここも背景は透明に */
     background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px); /* リスト部分だけ少し背景をぼかして見やすく */
 }
 
-/* カテゴリーを押すトリガーボタン */
 .accordion-trigger {
     width: 100%;
     background: rgba(255, 255, 255, 0.1);
@@ -156,6 +161,8 @@ body {
     justify-content: space-between;
     align-items: center;
     transition: background 0.3s;
+    font-family: inherit;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
 
 .accordion-trigger:hover {
@@ -173,12 +180,11 @@ body {
     transform: rotate(180deg);
 }
 
-/* スライド展開する中身 */
 .accordion-content {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s ease-out;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.4);
 }
 
 .accordion-inner {
@@ -190,11 +196,10 @@ body {
     overflow-y: auto;
 }
 
-/* 全体停止ボタンのスタイル */
 .stop-btn-area {
     position: sticky;
     top: 0;
-    background: rgba(15, 23, 42, 0.95);
+    background: rgba(5, 13, 26, 0.95);
     z-index: 10;
     text-align: center;
     margin-bottom: 10px;
@@ -213,12 +218,12 @@ body {
     transition: background 0.2s;
     width: 100%;
     max-width: 200px;
+    font-family: inherit;
 }
 .stop-btn-area button:hover {
     background: #f87171;
 }
 
-/* 曲名ボタンのスタイル */
 .song-btn {
     width: 100%;
     background: rgba(255, 255, 255, 0.08);
@@ -230,6 +235,7 @@ body {
     border-radius: 6px;
     cursor: pointer;
     transition: background 0.2s, transform 0.1s;
+    font-family: inherit;
 }
 
 .song-btn:hover {
@@ -239,11 +245,10 @@ body {
     transform: translateX(4px);
 }
 
-/* ボリュームバー配置 */
 .volume-area {
     position: sticky;
     bottom: 0;
-    background: rgba(15, 23, 42, 0.95);
+    background: rgba(5, 13, 26, 0.95);
     z-index: 10;
     margin-top: 15px;
     padding-top: 12px;
@@ -259,7 +264,6 @@ body {
     margin-left: 8px;
 }
 
-/* ボタン共通 */
 .join-btn {
     display: inline-block;
     padding: 12px 24px;
@@ -270,7 +274,7 @@ body {
     font-weight: bold;
     transition: transform 0.2s;
     margin: 10px 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
 
 .join-btn:hover {
@@ -288,11 +292,10 @@ body {
     100% { background-position: 100% 50%; }
 }
 
-/* 紹介セクション（白背景カード） */
+/* 紹介セクション */
 .intro {
-    padding: 30px;
+    padding: 30px 10px;
     margin: 20px 0;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .intro h2 {
@@ -301,27 +304,30 @@ body {
     margin-bottom: 20px;
     border-bottom: 2px solid #3b82f6;
     padding-bottom: 8px;
-    color: #0f172a;
+    color: white; /* 💡 変更：白文字に */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .intro p {
     font-size: 16px;
     line-height: 1.9;
     margin: 14px 0;
-    color: #1e293b;
+    color: #f1f5f9; /* 💡 変更：読みやすい明るいグレーホワイトに */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9); /* 文字に影を追加 */
 }
 
 .section-title {
     font-size: 1.4em;
     font-weight: bold;
-    color: #1d4ed8;
+    color: #38bdf8; /* 💡 変更：暗い背景で見えなくなった青を、明るい水色に変更 */
     margin-top: 25px;
     display: block;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
-/* 受付時間用の追加枠スタイル */
 .time-box {
-    background: #f1f5f9;
+    /* 💡 変更：受付時間の枠も白をなくし、半透明の暗い枠に変更 */
+    background: rgba(0, 0, 0, 0.4);
     border-left: 5px solid #eab308;
     padding: 15px;
     margin: 15px 0;
@@ -330,18 +336,21 @@ body {
 .time-box p {
     margin: 5px 0 !important;
     font-weight: bold;
+    color: white !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
 
-/* --- 変更：リアルタイム人数表示用スタイル --- */
+/* リアルタイム人数表示用スタイル */
 .server-status-container {
-    background-color: #1e293b; 
+    background-color: rgba(30, 41, 59, 0.7); /* 💡 変更：ほんのり透けさせてイラストに馴染ませる */
     border-radius: 12px;
     max-width: 400px;
-    margin: 25px 0; 
+    margin: 25px auto;
     padding: 20px;
     color: #f1f5f9;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    text-align: left;
+    backdrop-filter: blur(4px);
 }
 
 .server-header-mini {
@@ -376,10 +385,9 @@ body {
     margin-top: 5px;
     display: flex;
     align-items: center;
-    gap: 15px; /* オンラインと総人数の間隔 */
+    gap: 15px;
 }
 
-/* 緑の点（オンライン用） */
 .online-wrapper, .total-wrapper {
     display: flex;
     align-items: center;
@@ -404,7 +412,6 @@ body {
     animation: pulseAnimate 2s infinite;
 }
 
-/* 灰色の点（総人数用） */
 .gray-dot {
     width: 8px;
     height: 8px;
@@ -423,13 +430,13 @@ body {
     text-align: center;
     padding: 20px;
     margin-top: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .footer p {
     margin: 5px 0;
     font-size: 14px;
-    color: #0f172a;
+    color: white; /* 💡 白文字に */
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
 
 .footer .meta-info {
@@ -451,7 +458,7 @@ body {
 </head>
 <body>
 
-<div class="bg" id="bg"></div>
+<div class="bg"></div>
 
 <audio id="bgm" loop></audio>
 
@@ -478,7 +485,24 @@ body {
             <a class="join-btn x-btn" href="https://x.com/tukuyomikouryu" target="_blank">公式X（旧Twitter）</a>
         </div>
 
-        <p style="margin-top: 25px; font-size: 14px; opacity: 0.9;">
+        <div class="server-status-container">
+            <div class="server-header-mini">
+                <div class="server-icon-mini">🌙</div>
+                <div class="server-info-mini">
+                    <h4 id="discord-server-name">サーバー名を取得中...</h4>
+                    <div class="status-count-mini">
+                        <div class="online-wrapper">
+                            <span class="pulse-dot"></span>オンライン: <span id="discord-online-count">0人</span>
+                        </div>
+                        <div class="total-wrapper">
+                            <span class="gray-dot"></span>総人数: <span id="discord-total-count">取得中...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p style="margin-top: 25px; font-size: 14px; opacity: 0.9; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">
             下のカテゴリーを押すと、曲名リストが表示されるよ！
         </p>
 
@@ -521,7 +545,6 @@ body {
         <p>・「yoccie よっしー」が率いる「ツクヨミ交流会！」では毎日楽しく活動をしています！</p>
         <p>・精度高く、サーバー内のメンバーである「ひーくん」「抹茶ラテ」にツクヨミ交流会のホームページを制作していただきました！</p>
 
-   
         <p>・その他にも一部のメンバーは、お悩み相談などサーバー外で起きた事などにも親身に対応して一緒に協力してくれます！</p>
         <p>・「超かぐや姫！」以外にも日常雑談・ゲームの話なども盛んで行われております！</p>
         <p>・APEX、フォートナイト、マインクラフトやその他の戦闘系のゲーム, 作業系のゲーム, ソーシャルゲームやホヨバースのゲームなど、様々なゲームを遊んでるメンバー達が沢山います！！</p>
@@ -539,12 +562,12 @@ body {
         <p>・上記の「ツクヨミに参加」をクリックしたら「ツクヨミ交流会認証サーバー」に参加します。</p>
         <p>・初めに2つの質問がありますが答えてください</p>
         <p>・2つの質問に答えて貰った後、認証サーバーに入れます。下項目の「認証」にある三つの事項に答えてください。</p>
-        <p>・答えていただいた後交流鯖の「モデレーター、副官、管理人」の誰かが確認した後、その人たちのフレンド申請が届きます</p>
+        <p>・答えていただいた後交流鯖の「モデレーター、副官、管理人」の誰かが確認した後、その人たちフレンド申請が届きます</p>
         <p>・申請を許可していただいたら改めてツクヨミ交流会の参加リンクを貼らせて頂きます。</p>
      </div>
 
     <footer class="footer">
-        <p>© 月詠交流会 作成者：ゆろ・抹茶ラテ　協力者：ひーくん</p>
+        <p>© 月詠交流会 作成者：ゆろ・抹茶ラテ 協力者：ひーくん</p>
         <div class="meta-info">
             <span>最終更新日: 2026年7月6日</span> │ <span>Version 2.4.1</span>
         </div>
@@ -553,8 +576,7 @@ body {
 </div>
 
 <script>
-// --- 追加：Discordからリアルタイムに人数を取得するプログラム ---
-// ⚠️「ここにコピーしたサーバーIDを入れる」をあなたのDiscordサーバーID（数字だけ）に書き換えてください！
+// --- Discordからリアルタイムに人数を取得するプログラム ---
 const DISCORD_SERVER_ID = "ここにコピーしたサーバーIDを入れる"; 
 
 function fetchDiscordStatus() {
@@ -564,43 +586,22 @@ function fetchDiscordStatus() {
     .then(response => response.json())
     .then(data => {
         if(data) {
-            // サーバー名、オンライン人数、招待リンクを自動セット
             if(data.name) document.getElementById("discord-server-name").textContent = data.name;
             if(data.presence_count !== undefined) document.getElementById("discord-online-count").textContent = data.presence_count + "人";
             if(data.instant_invite) document.getElementById("discord-widget-link").href = data.instant_invite;
-            
-            // 💡 補足: Discord公式APIの仕様上、Widgetデータからは「サーバーの総人数」は直接取得できません。
-            // そのため、総人数（目標値など）を固定にするか、オンライン数をベースに算出する必要があります。
-            // ここでは目安として、固定表示、もしくは大体の総メンバー数を表示させるために書き換えます。
-            document.getElementById("discord-total-count").textContent = "150人"; // 必要に応じて書き換えてください
+            document.getElementById("discord-total-count").textContent = "150人"; 
         }
     })
-    .catch(err => console.error("Discordデータの取得に失敗しました:", err));
+    .catch(err => {
+        console.error("Discordデータの取得に失敗しました:", err);
+        document.getElementById("discord-server-name").textContent = "ステータス取得エラー";
+    });
 }
-// ページを開いた時と、その後1分ごとに自動で人数を更新する
 fetchDiscordStatus();
 setInterval(fetchDiscordStatus, 60000);
 
 
-// --- 背景画像の自動切替 ---
-const bg = document.getElementById("bg");
-const images = ["images/bg1.png", "images/bg2.png", "images/bg3.png"];
-
-if (bg && images.length > 0) {
-    bg.style.backgroundImage = `url(${images[0]})`;
-    let i = 1;
-    function changeBG() {
-        bg.style.opacity = 0;
-        setTimeout(() => {
-            bg.style.backgroundImage = `url(${images[i]})`;
-            bg.style.opacity = 1;
-            i = (i + 1) % images.length;
-        }, 1000);
-    }
-    setInterval(changeBG, 5000);
-}
-
-// --- 確実にながれる音楽再生コントロール（ローカルCORS制限＆スマホ音量バグ両対応型） ---
+// --- 音楽再生コントロール ---
 const bgm = document.getElementById("bgm");
 const volumeInput = document.getElementById("volume");
 

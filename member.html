@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>月詠交流会 公式サイト - メンバー紹介</title>
 
-<!-- 地球儀マークから独自のアイコン（favicon）に変える設定 -->
 <link rel="icon" href="/images/favicon.png" type="image/png" />
 
 <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
@@ -15,19 +14,21 @@
 
 body {
     margin: 0;
-    font-family: sans-serif;
+    /* 読みやすく美しいフォントファミリー */
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
     color: #ffffff; /* 読みやすさのためベースの文字色を白に変更 */
     overflow-x: hidden;
     background-color: #0f172a; /* 画像が読み込まれるまでのベース色 */
 }
 
-/* 背景画像の自動切替用CSS */
+/* 💡 背景画像固定（bg1.pngのみに固定） */
 .bg {
     position: fixed;
     inset: 0;
+    background-image: url("images/bg1.png"); /* bg1.pngのみを指定 */
     background-size: cover;
     background-position: center;
-    transition: opacity 1s ease; /* 切り替わるときのふわっとするエフェクト */
+    background-attachment: fixed; /* 背景画像を完全に画面に固定 */
     z-index: -1; /* コンテンツの後ろに配置 */
     opacity: 1;
 }
@@ -79,7 +80,7 @@ body {
     padding-top: 90px; 
 }
 
-/* 各セクション共通のカードデザイン */
+/* 各セクション共通のカードデザイン（白ベースの背景はそのまま維持） */
 .role, .intro, .member {
     background: rgba(255, 255, 255, 0.93); 
     color: #0f172a;
@@ -116,7 +117,7 @@ body {
     overflow-wrap: anywhere;
 }
 
-/* 一般メンバーカードの白ベース背景（文字を読みやすく修正） */
+/* 一般メンバーカードの白ベース背景 */
 .member.mem {
     background: rgba(255, 255, 255, 0.9);
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
@@ -186,7 +187,7 @@ img, video {
 .web-name { color: #0284c7; } 
 .sub-name { color: #0284c7; } 
 .mod-name { color: #2563eb; } 
-.helper-name { color: #e11d48; } /* 協力者用の名前の色を追加 */
+.helper-name { color: #e11d48; } 
 .member.mem .name { color: #16a34a; } 
 
 /* 矢印アイコンの付与（メンバー以外） */
@@ -397,13 +398,10 @@ img, video {
 </head>
 <body>
 
-<!-- 背景用のタグ -->
 <div class="bg" id="bg"></div>
 
-<!-- 隠しオーディオタグ（BGM演奏用） -->
 <audio id="bgm" loop></audio>
 
-<!-- ヘッダーメニューエリア -->
 <header class="site-header">
     <nav class="nav-menu">
         <ul>
@@ -455,7 +453,6 @@ img, video {
         </div>
     </div>
 
-    <!-- 💻 WEB作成者セクション -->
     <div class="role">
         <h2>💻 WEB作成者</h2>
          
@@ -488,11 +485,10 @@ img, video {
         </div>
     </div>
 
-    <!-- 🤝 協力者セクション -->
     <div class="role">
         <h2>🤝 協力者</h2>
         <div class="member helper">
-            <img src="hikun.png" class="mini-icon" alt="ひーくん"> <!-- 💡 ひーくんのアイコン枠を追加 -->
+            <img src="hikun.png" class="mini-icon" alt="ひーくん">
             <div class="name helper-name">
                 <span>ひーくん</span>
             </div>
@@ -595,7 +591,7 @@ img, video {
             <div class="name mod-name">setojiii(自由)</div>
             <div class="intro-box">
                 <div class="intro-content">
-                    どうもモデレーターで仲介人をしている自由がない不自由な「setojiii@自由」です！<br>
+                    どうもモデレーターで仲仲介人をしている自由がない不自由な「setojiii@自由」です！<br>
                     基本は学校にいる時間以外はあまり姿がなく、<br>
                     学校が終わればボイスチャットで過ごしています。<br>
                     喧喧嘩などトラブルがあった場合は、<br>
@@ -607,7 +603,6 @@ img, video {
             </div>
         </div>
 
-        <!-- 💡 ためさんのアイコン枠を追加しました -->
         <div class="member mod">
             <img src="tame.png" class="mini-icon" alt="ため">
             <div class="name mod-name">ため</div>
@@ -771,24 +766,7 @@ img, video {
 </footer>
 
 <script>
-
-// --- 背景画像の自動切替システム（フェードのバグを修正） ---
-const bg = document.getElementById("bg");
-const images = ["images/bg1.png", "images/bg2.png", "images/bg3.png"];
-
-if (bg && images.length > 0) {
-    bg.style.backgroundImage = `url(${images[0]})`;
-    let i = 1;
-    function changeBG() {
-        bg.style.opacity = 0; // まずふわっと消す
-        setTimeout(() => {
-            bg.style.backgroundImage = `url(${images[i]})`; // 消えた状態で画像切り替え
-            bg.style.opacity = 1; // ふわっと出す
-            i = (i + 1) % images.length; 
-        }, 1000); // CSS of transition (1s) に合わせて1秒待つ
-    }
-    setInterval(changeBG, 5000); 
-}
+// 💡 背景自動切り替えJSシステムは、bg1.pngのみ固定にしたため削除しました。
 
 // --- 🎵 ホームとシームレスに繋がるBGMシステム 🎵 ---
 const bgm = document.getElementById("bgm");

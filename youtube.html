@@ -17,24 +17,16 @@
             background-color: #0f172a; /* ベース背景色 */
         }
 
-        /* ✨ 背景システム（チラつき防止と2つのレイヤーによるクロスフェード） */
-        #bg-container {
+        /* 💡 背景画像固定（bg1.pngのみに固定） */
+        .bg {
             position: fixed;
             inset: 0;
-            z-index: 0;
-        }
-
-        .bg-layer {
-            position: absolute;
-            inset: 0;
+            background-image: url("images/bg1.png"); /* bg1.pngのみを指定 */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            transition: opacity 1.5s ease-in-out; /* 滑らかなクロスフェード */
-            opacity: 0;
-        }
-
-        .bg-layer.active {
+            background-attachment: fixed; /* 背景画像を完全に画面に固定 */
+            z-index: -1; /* コンテンツの後ろに配置 */
             opacity: 1;
         }
 
@@ -212,10 +204,7 @@
 </head>
 <body>
 
-<div id="bg-container">
-    <div class="bg-layer active" id="bg1"></div>
-    <div class="bg-layer" id="bg2"></div>
-</div>
+<div class="bg"></div>
 
 <header class="site-header">
     <nav class="nav-menu">
@@ -274,7 +263,7 @@
     </div>
 
     <footer class="footer">
-        <p>© 月詠交流会 作成者：ゆろ・抹茶ラテ　協力者：ひーくん</p>
+        <p>© 月詠交流会 作成者：ゆろ・抹茶ラテ 協力者：ひーくん</p>
         <div class="meta-info">
             <span>最終更新日: 2026年7月6日</span> │ <span>Version 1.4.8</span> 
         </div>
@@ -283,43 +272,7 @@
 </div>
 
 <script>
-// --- ✨ 滑らかな背景画像の自動クロスフェードシステム ---
-const images = ["images/bg1.png", "images/bg2.png", "images/bg3.png"];
-
-if (images.length > 0) {
-    const bg1 = document.getElementById("bg1");
-    const bg2 = document.getElementById("bg2");
-    
-    // 初期画像のセット
-    bg1.style.backgroundImage = `url(${images[0]})`;
-    
-    let currentIndex = 0;
-    let isBg1Active = true;
-
-    function changeBG() {
-        // 次の画像のインデックスを計算
-        currentIndex = (currentIndex + 1) % images.length;
-        const nextImageUrl = `url(${images[currentIndex]})`;
-
-        if (isBg1Active) {
-            // 現在bg1が表示中なら、非表示のbg2に次の画像をセットしてフェードイン
-            bg2.style.backgroundImage = nextImageUrl;
-            bg2.classList.add("active");
-            bg1.classList.remove("active");
-        } else {
-            // 現在bg2が表示中なら、非表示のbg1に次の画像をセットしてフェードイン
-            bg1.style.backgroundImage = nextImageUrl;
-            bg1.classList.add("active");
-            bg2.classList.remove("active");
-        }
-        
-        // フラグを反転
-        isBg1Active = !isBg1Active;
-    }
-    
-    // 5秒ごとに切り替え
-    setInterval(changeBG, 5000);
-}
+// 💡 背景自動切り替えJSシステムは、bg1.pngのみ固定にしたため削除しました。
 </script>
 
 </body>
