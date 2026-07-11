@@ -19,11 +19,11 @@
             min-height: 100vh;
         }
 
-        /* 💡 背景画像固定（bg1.pngのみに固定） */
+        /* 💡 背景画像固定 */
         .bg {
             position: fixed;
             inset: 0;
-            background-image: url("images/bg1.png"); /* bg1.pngのみを指定 */
+            background-image: url("images/bg1.png");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -53,6 +53,12 @@
             gap: 35px;
             margin: 0;
             padding: 0;
+            flex-wrap: wrap; /* スマホでの折り返し対策 */
+            justify-content: center;
+        }
+
+        .nav-menu li {
+            white-space: nowrap; /* テキストの途中で改行されるのを防ぐ */
         }
 
         .nav-menu a {
@@ -67,6 +73,13 @@
 
         .nav-menu a:hover {
             opacity: 1;
+        }
+
+        /* Coming Soon 用の無効化スタイル */
+        .nav-menu a.disabled {
+            pointer-events: none;
+            opacity: 0.4;
+            cursor: default;
         }
 
         /* コンテンツコンテナ */
@@ -187,20 +200,10 @@
             white-space: pre-wrap;
         }
 
-        /* フッター */
-        .footer {
-            text-align: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            color: #0f172a;
-            margin-top: 40px;
-            border-radius: 15px;
-        }
-
         /* 📱 スマホ対応 */
         @media screen and (max-width: 768px) {
-            .nav-menu ul { gap: 20px; }
-            .container { padding-top: 90px; }
+            .nav-menu ul { gap: 15px 20px; }
+            .container { padding-top: 130px; } /* メニュー折り返しに備えて余白を広めに調整 */
 
             .timeline::after {
                 left: 31px;
@@ -241,7 +244,7 @@
             <li><a href="member.html">自己紹介</a></li>
             <li><a href="youtube.html">鯖主の動画</a></li>
             <li><a href="sava.html">サーバーの歴史</a></li>
-            <li><a href="javascript:void(0);" style="cursor: default;">Coming Soon</a></li>
+            <li><a href="#" class="disabled">Coming Soon</a></li>
         </ul>
     </nav>
 </header>
@@ -272,8 +275,8 @@
         <div class="timeline-item left">
             <div class="timeline-content">
                 <div class="timeline-date">2026年 6月15日</div>
-                <h3>👥 メンバー100人突破</h3>
-                <p>YouTubeの投稿を中心に、少しずつ新しい仲間が増えて賑やかになり始めました!</p>
+                <h3>🎉 メンバー100人突破！</h3>
+                <p>コミュニティがさらに拡大！毎日ボイスチャンネルやチャットで活発な交流が行われる、大人気サーバーへ成長しました。</p>
             </div>
         </div>
 
@@ -287,7 +290,7 @@
 
         <div class="timeline-item left">
             <div class="timeline-content">
-                <div class="timeline-date">2025年 6月21日</div>
+                <div class="timeline-date">2026年 6月21日</div> <!-- 💡 2025年から2026年に修正 -->
                 <h3>✨ 公式サイトオープン＆現在へ</h3>
                 <p>ついに月詠交流会の公式WEBサイトが完成！これからもみんなで最高の思い出と歴史を作っていきましょう！</p>
             </div>
@@ -295,7 +298,7 @@
 
     </div>
 
-    </div>
+</div>
 
 <script>
 // 💡 背景自動切り替えJSシステムは、bg1.pngのみ固定にしたため削除しました。

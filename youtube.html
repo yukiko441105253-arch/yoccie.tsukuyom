@@ -17,11 +17,11 @@
             background-color: #0f172a; /* ベース背景色 */
         }
 
-        /* 💡 背景画像固定（bg1.pngのみに固定） */
+        /* 💡 背景画像固定 */
         .bg {
             position: fixed;
             inset: 0;
-            background-image: url("images/bg1.png"); /* bg1.pngのみを指定 */
+            background-image: url("images/bg1.png");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -71,6 +71,13 @@
 
         .nav-menu a:hover {
             opacity: 1;
+        }
+
+        /* Coming Soon 用の無効化スタイル */
+        .nav-menu a.disabled {
+            pointer-events: none;
+            opacity: 0.4;
+            cursor: default;
         }
 
         /* メインコンテンツエリア */
@@ -142,7 +149,8 @@
 
         .thumbnail-box img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover; /* 画像が歪んだり引き伸ばされたりするのを防ぐ */
             display: block;
         }
 
@@ -189,7 +197,7 @@
 
         .footer .meta-info {
             font-size: 12px;
-            opacity: 0.7;
+            color: #475569; /* 透明度ではなく、読みやすいグレー系統の色に変更 */
             margin-top: 8px;
         }
 
@@ -197,7 +205,7 @@
         @media(max-width: 768px) {
             h1 { font-size: 22px; }
             .nav-menu ul { gap: 15px 20px; } /* 縦方向の隙間も確保 */
-            .container { padding-top: 120px; } /* メニュー折り返しに備えて余白を少し広めに */
+            .container { padding-top: 130px; } /* メニュー折り返しに備えて余白を最適化 */
             .video-title { font-size: 16px; }
         }
     </style>
@@ -213,7 +221,7 @@
             <li><a href="member.html">自己紹介</a></li>
             <li><a href="youtube.html">鯖主の動画</a></li>
             <li><a href="sava.html">サーバーの歴史</a></li>
-            <li><a href="javascript:void(0);" style="cursor: default;">Coming Soon</a></li>
+            <li><a href="#" class="disabled">Coming Soon</a></li>
         </ul>
     </nav>
 </header>
@@ -225,9 +233,9 @@
     <div class="video-list">
 
         <div class="video-card">
-            <a class="video-link" href="https://youtu.be/5Ci6nGl2Qm4?si=dmFskIfFWbkvXqXF" target="_blank">
+            <a class="video-link" href="https://youtu.be/5Ci6nGl2Qm4?si=dmFskIfFWbkvXqXF" target="_blank" rel="noopener noreferrer">
                 <div class="thumbnail-box">
-                    <img src="https://img.youtube.com/vi/5Ci6nGl2Qm4/hqdefault.jpg" alt="サムネイル">
+                    <img src="https://img.youtube.com/vi/5Ci6nGl2Qm4/hqdefault.jpg" alt="【1本目】実写版自己紹介のサムネイル">
                 </div>
                 <div class="info-box">
                     <div class="video-title">【1本目】実写版自己紹介</div>
@@ -237,9 +245,9 @@
         </div>
 
         <div class="video-card">
-            <a class="video-link" href="https://youtu.be/ese5JpCOlCE?si=6BVmxa5LzAZYOn88" target="_blank">
+            <a class="video-link" href="https://youtu.be/ese5JpCOlCE?si=6BVmxa5LzAZYOn88" target="_blank" rel="noopener noreferrer">
                 <div class="thumbnail-box">
-                    <img src="https://img.youtube.com/vi/ese5JpCOlCE/hqdefault.jpg" alt="サムネイル">
+                    <img src="https://img.youtube.com/vi/ese5JpCOlCE/hqdefault.jpg" alt="【2本目】見よ、俺の推しを！！のサムネイル">
                 </div>
                 <div class="info-box">
                     <div class="video-title">【2本目】見よ、俺の推しを！！</div>
@@ -249,9 +257,9 @@
         </div>
 
         <div class="video-card">
-            <a class="video-link" href="https://youtu.be/FUBjlu4lC2U?si=yqozwzPKzQ58Dan" target="_blank">
+            <a class="video-link" href="https://youtu.be/FUBjlu4lC2U?si=yqozwzPKzQ58Dan" target="_blank" rel="noopener noreferrer">
                 <div class="thumbnail-box">
-                    <img src="https://img.youtube.com/vi/FUBjlu4lC2U/hqdefault.jpg" alt="サムネイル">
+                    <img src="https://img.youtube.com/vi/FUBjlu4lC2U/hqdefault.jpg" alt="【3本目】【ライブMAD/AMV】ray ＆ 【ライブ音響】Replyのサムネイル">
                 </div>
                 <div class="info-box">
                     <div class="video-title">【3本目】【ライブMAD/AMV】ray ＆ 【ライブ音響】Reply</div>
@@ -270,10 +278,6 @@
     </footer>
 
 </div>
-
-<script>
-// 💡 背景自動切り替えJSシステムは、bg1.pngのみ固定にしたため削除しました。
-</script>
 
 </body>
 </html>

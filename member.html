@@ -14,26 +14,25 @@
 
 body {
     margin: 0;
-    /* 読みやすく美しいフォントファミリー */
     font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-    color: #ffffff; /* 読みやすさのためベースの文字色を白に変更 */
+    color: #ffffff; 
     overflow-x: hidden;
-    background-color: #0f172a; /* 画像が読み込まれるまでのベース色 */
+    background-color: #0f172a; 
 }
 
-/* 💡 背景画像固定（bg1.pngのみに固定） */
+/* 💡 背景画像固定 */
 .bg {
     position: fixed;
     inset: 0;
-    background-image: url("images/bg1.png"); /* bg1.pngのみを指定 */
+    background-image: url("images/bg1.png"); 
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* 背景画像を完全に画面に固定 */
-    z-index: -1; /* コンテンツの後ろに配置 */
+    background-attachment: fixed; 
+    z-index: -1; 
     opacity: 1;
 }
 
-/* ヘッダーナビゲーション（画面上部に常に固定） */
+/* ヘッダーナビゲーション */
 .site-header {
     position: fixed; 
     top: 0;
@@ -80,7 +79,7 @@ body {
     padding-top: 90px; 
 }
 
-/* 各セクション共通のカードデザイン（白ベースの背景はそのまま維持） */
+/* 各セクション共通のカードデザイン */
 .role, .intro, .member {
     background: rgba(255, 255, 255, 0.93); 
     color: #0f172a;
@@ -176,9 +175,15 @@ img, video {
     align-items: center;
     justify-content: center;
     gap: 8px;
+    user-select: none;
 }
 
-/* 一般メンバーはカーソルをデフォルトに（開閉しないため） */
+/* 開閉可能な名前にホバーした時の演出 */
+.member:not(.mem) .name:hover {
+    text-decoration: underline;
+}
+
+/* 一般メンバーはカーソルをデフォルトに */
 .member.mem .name {
     cursor: default;
 }
@@ -286,91 +291,6 @@ img, video {
     gap: 10px;
 }
 
-/* --- ➕ 追加：リアルタイム人数表示用スタイル --- */
-.server-status-container {
-    background-color: #1e293b; 
-    border-radius: 12px;
-    max-width: 400px;
-    margin: 25px auto 10px; 
-    padding: 20px;
-    color: #f1f5f9;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    text-align: left;
-}
-
-.server-header-mini {
-    display: flex;
-    align-items: center;
-}
-
-.server-icon-mini {
-    width: 45px;
-    height: 45px;
-    background: linear-gradient(135deg, #38bdf8, #1d4ed8); 
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 20px;
-    color: white;
-    margin-right: 12px;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-}
-
-.server-info-mini h4 {
-    margin: 0;
-    font-size: 17px;
-    color: white;
-}
-
-.status-count-mini {
-    font-size: 13px;
-    color: #94a3b8;
-    margin-top: 5px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.online-wrapper, .total-wrapper {
-    display: flex;
-    align-items: center;
-}
-
-.pulse-dot {
-    width: 8px;
-    height: 8px;
-    background-color: #22c55e; 
-    border-radius: 50%;
-    margin-right: 6px;
-    position: relative;
-}
-
-.pulse-dot::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: #22c55e;
-    border-radius: 50%;
-    animation: pulseAnimate 2s infinite;
-}
-
-.gray-dot {
-    width: 8px;
-    height: 8px;
-    background-color: #475569;
-    border-radius: 50%;
-    margin-right: 6px;
-}
-
-@keyframes pulseAnimate {
-    0% { transform: scale(1); opacity: 0.6; }
-    100% { transform: scale(2.5); opacity: 0; }
-}
-
 /* フッター */
 .footer {
     text-align: center;
@@ -471,6 +391,20 @@ img, video {
         </div>
 
         <div class="member web">
+            <img src="hikun.png" class="mini-icon" alt="ひーくん">
+            <div class="name web-name">
+                <span>ひーくん</span>
+            </div>
+            <div class="intro-box">
+                <div class="intro-content">
+                    公式サイトの制作に協力させていただきました！<br>
+                    みんなで作り上げた素晴らしいサイトなので、たくさん使ってもらえると嬉しいです！<br>
+                    よろしくお願いします！
+                </div>
+            </div>
+        </div>
+
+        <div class="member web">
             <img src="matcha.png" class="mini-icon" alt="抹茶ラテ">
             <div class="name web-name">
                 <span>抹茶ラテ</span>
@@ -485,24 +419,7 @@ img, video {
         </div>
     </div>
 
-    <div class="role">
-        <h2>🤝 協力者</h2>
-        <div class="member helper">
-            <img src="hikun.png" class="mini-icon" alt="ひーくん">
-            <div class="name helper-name">
-                <span>ひーくん</span>
-            </div>
-            <div class="intro-box">
-                <div class="intro-content">
-                    公式サイトの制作に協力させていただきました！<br>
-                    みんなで作り上げた素晴らしいサイトなので、たくさん使ってもらえると嬉しいです！<br>
-                    よろしくお願いします！
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="role">
+     <div class="role">
         <h2>⭐ 副官</h2>
          
         <div class="member sub">
@@ -649,28 +566,28 @@ img, video {
                 </div>
             </div>
         </div>
-       
+        
         <div class="member mod">
             <img src="yotya.png" class="mini-icon" alt="よっちゃ">
             <div class="name mod-name">よっちゃ</div>
             <div class="intro-box">
                 <div class="intro-content">
-どーもこんちゃっちゃ～　よっちゃ！だよ<br>
-現高２の暇人。<br>
-元のロール役割は<野良&回線落台パン発狂神>。え？なんでこんなロールになってるかって？<br>
-あぁ、((普段からゲームで発狂しまくってるからなァ!!!))<br>
-こんな奴でも謎に評価があります。知らんけど。(👈ここ重要)<br>
-ゲーム時は皆を奮い立たせたり、良い鯖にするために真面目なときは真面目。<br>
-俺はマジのYESマンではない。<br>
-皆が言い難いことや、上のモデの奴らに言いたいけど言うの難しいこととかは俺に言ってくれたら全然言うし、あいつらに喧嘩も売りに行きます。<br>
-皆で楽しく過ごせる環境にしよな～！　任せろ👊👊
+                    どーもこんちゃっちゃ～ よっちゃ！だよ<br>
+                    現高２の暇人。<br>
+                    元のロール役割は&lt;野良&amp;回線落台パン発狂神&gt;。え？なんでこんなロールになってるかって？<br>
+                    あぁ、((普段からゲームで発狂しまくってるからなァ!!!))<br>
+                    こんな奴でも謎に評価があります。知らんけど。(👈ここ重要)<br>
+                    ゲーム時は皆を奮い立たせたり、良い鯖にするために真面目なときは真面目。<br>
+                    俺はマジのYESマンではない。<br>
+                    皆が言い難いことや、上のモデの奴らに言いたいけど言うの難しいこととかは俺に言ってくれたら全然言うし、あいつらに喧嘩も売りに行きます。<br>
+                    皆で楽しく過ごせる環境にしよな～！ 任せろ👊👊
                 </div>
             </div>
         </div>
-     </div>
+    </div>
 
    
-<div class="role">
+    <div class="role">
         <h2>👥 メンバー</h2>
         <div class="member-list">
             <div class="member mem"><span class="name">ヤシロキツネ</span></div>
@@ -779,14 +696,13 @@ img, video {
             <div class="member mem"><span class="name">≡刹那≡</span></div>
         </div>
     </div>
+</div>
 
 <footer class="footer">
     <p>© 月詠交流会 作成者：ゆろ・抹茶ラテ 協力者：ひーくん</p>
 </footer>
 
 <script>
-// 💡 背景自動切り替えJSシステムは、bg1.pngのみ固定にしたため削除しました。
-
 // --- 🎵 ホームとシームレスに繋がるBGMシステム 🎵 ---
 const bgm = document.getElementById("bgm");
 
@@ -851,7 +767,7 @@ const obs = new IntersectionObserver(entries => {
 
 document.querySelectorAll(".member").forEach(m => obs.observe(m));
 
-// --- アコーディオン開閉（一般メンバーをスキップするよう修正） ---
+// --- アコーディオン開閉（一般メンバーをスキップ） ---
 document.querySelectorAll(".member .name").forEach(name => {
     name.addEventListener("click", (e) => {
         const memberBox = name.closest(".member");
