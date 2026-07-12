@@ -111,7 +111,7 @@ body {
     color: white;
 }
 
-/* ツクヨミ（月）をイメージした、幻想的な輝くゴールドグラデーションに変更 */
+/* ツクヨミ（月）をイメージした、幻想的な輝くゴールドグラデーション */
 .hero h1 {
     font-size: 42px;
     font-weight: bold;
@@ -120,7 +120,7 @@ body {
     background-size: 400% 400%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: rainbowMove 8s linear infinite;
+    animation: rainbowMove 8s ease-in-out infinite;
     text-shadow: 0 0 15px rgba(255, 226, 89, 0.2);
 }
 
@@ -198,7 +198,7 @@ body {
 .stop-btn-area {
     position: sticky;
     top: 0;
-    background: #050d1a;
+    background: rgba(15, 23, 42, 0.95);
     z-index: 10;
     text-align: center;
     margin-bottom: 10px;
@@ -256,13 +256,14 @@ body {
 .volume-area {
     position: sticky;
     bottom: 0;
-    background: #050d1a;
+    background: rgba(15, 23, 42, 0.95);
     z-index: 10;
     margin-top: 15px;
     padding-top: 12px;
     font-size: 14px;
     text-align: center;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 5px;
 }
 
 .volume-area input[type="range"] {
@@ -297,10 +298,11 @@ body {
 
 @keyframes rainbowMove {
     0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-/* 紹介セクションの読みやすさを劇的に向上 */
+/* 紹介セクションの読みやすさ向上 */
 .intro {
     padding: 30px 10px;
     margin: 20px 0;
@@ -319,15 +321,15 @@ body {
 
 .intro p {
     font-size: 16px;
-    font-weight: normal; /* 長文を読みやすくするため通常太さに */
-    line-height: 2.0;    /* 行間を少し広げてスッキリ */
-    letter-spacing: 0.03em; /* 文字の間隔を調整 */
+    font-weight: normal; 
+    line-height: 2.0;    
+    letter-spacing: 0.03em; 
     margin: 16px 0;
     color: #f1f5f9;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
 }
 
-/* 改善点：箇条書きとステップ用のスタイルを追加 */
+/* 箇条書きとステップ用のスタイル */
 .intro ul, .intro ol {
     padding-left: 20px;
     margin: 16px 0;
@@ -480,12 +482,11 @@ body {
     margin-top: 8px;
 }
 
-/* レスポンシブ（スマホ対応を強化） */
+/* レスポンシブ（スマホ対応） */
 @media(max-width: 768px) {
     .site-header {
         padding: 10px 0;
     }
-    /* スマホでメニューがはみ出さず、横スクロールで綺麗に流せるように修正 */
     .nav-menu {
         width: 100%;
         overflow-x: auto;
@@ -519,10 +520,11 @@ body {
     <nav class="nav-menu">
         <ul>
             <li><a href="index.html">ホーム</a></li>
-            <li><a href="member.html">自己紹介</a></li>
+            <li><a href="member.html">運営紹介</a></li>
+            <li><a href="member2.html">メンバー一覧</a></li>
             <li><a href="youtube.html">鯖主の動画</a></li>
             <li><a href="sava.html">サーバーの歴史</a></li>
-            <li><a href="javascript:void(0);" class="coming-soon">Coming Soon</a></li>
+            <li><a href="javascript:void(0);" style="cursor: default;">Coming Soon</a></li>
         </ul>
     </nav>
 </header>
@@ -566,7 +568,6 @@ body {
                             <button onclick="stopMusic()">⏹ 全体停止</button>
                         </div>
 
-                        <!-- JavaScriptに自分自身を伝えるため、引数に `this` を追加 -->
                         <button class="song-btn" onclick="playMusic('music1.opus', this)">🎵 星降る海</button>
                         <button class="song-btn" onclick="playMusic('music2.opus', this)">🎵 瞬間シンフォニー</button>
                         <button class="song-btn" onclick="playMusic('music3.opus', this)">🎵 remember</button>
@@ -598,7 +599,6 @@ body {
         <p>・その他にも一部のメンバーは、お悩み相談などサーバー外で起きた事などにも親身に対応して一緒に協力してくれます！</p>
         <p>・「超かぐや姫！」以外にも日常雑談・ゲームの話なども盛んで行われております！</p>
         
-        <!-- 改善点：ゲームタイトルを箇条書きにしてパッと見の視認性を向上 -->
         <p>・様々なジャンルのゲームを遊んでるメンバー達が沢山います！もしかしたらゲーム関連で仲の良い友達が作れるかも…？？</p>
         <ul>
             <li><strong>FPS・バトルロイヤル：</strong> APEX、フォートナイト などの戦闘系ゲーム</li>
@@ -613,15 +613,14 @@ body {
         <div class="time-box">
             <p>【受付時間】</p>
             <p>・平日：夕方〜夜の16時〜22時</p>
-            <p>-- 休日：朝〜夜の10時〜22時</p>
+            <p>・休日：朝〜夜の10時〜22時</p>
         </div>
 
-        <!-- 改善点：入室の手順をステップ形式（数字のリスト）に変更してわかりやすく -->
         <ol>
             <li>上記の「ツクヨミに参加」をクリックすると「ツクヨミ交流会認証サーバー」に参加します。</li>
             <li>入室後、初めに2つの質問が表示されますのでお答えください。</li>
             <li>2つの質問に答えた後、認証サーバーのメイン画面に入れます。下項目にある「認証」の3つの事項に答えてください。</li>
-            <li>内容を確認後、交流鯖の「モデレーター、副官、管理人」の誰かからDiscordのフレンド申請が届きます。<span class="note-text">※安全に本サーバーへご案内するための手続きですので、安心して許可してくださいね！</span></li>
+            <li>内容を確認後、本サーバーの「モデレーター、副官、管理人」の誰かからDiscordのフレンド申請が届きます。<span class="note-text">※安全に本サーバーへご案内するための手続きですので、安心して許可してくださいね！</span></li>
             <li>申請を許可していただいた後、改めて「ツクヨミ交流会」本サーバーの参加リンクを貼らせていただきます。</li>
         </ol>
      </div>
@@ -629,7 +628,7 @@ body {
     <footer class="footer">
         <p>© 月詠交流会 作成者：ゆろ・抹茶ラテ 協力者：ひーくん</p>
         <div class="meta-info">
-            <span>最終更新日: 2026年7月6日</span> │ <span>Version 2.4.1</span>
+            <span>最終更新日: 2026年7月12日</span> │ <span>Version 2.8.6</span>
         </div>
     </footer>
 
@@ -642,7 +641,6 @@ const DISCORD_SERVER_ID = "1518612097494290532";
 function fetchDiscordStatus() {
     if(!DISCORD_SERVER_ID) return;
     
-    // キャッシュ回避用のタイムスタンプを追加して常に最新データを取得
     fetch(`https://discord.com/api/guilds/${DISCORD_SERVER_ID}/widget.json?_=${new Date().getTime()}`)
     .then(response => {
         if (!response.ok) {
@@ -670,10 +668,8 @@ function fetchDiscordStatus() {
     });
 }
 
-// ページ読み込み時に実行
 document.addEventListener("DOMContentLoaded", () => {
     fetchDiscordStatus();
-    // 60秒ごとに自動更新（リアルタイム同期）
     setInterval(fetchDiscordStatus, 60000);
 });
 
@@ -703,12 +699,10 @@ if (bgm) {
         volumeInput.addEventListener("change", updateVolume);
     }
 
-    // btnElement 引数を追加して、クリックされたボタンに装飾をつけられるように拡張
     function playMusic(file, btnElement) {
         bgm.src = file;
         updateVolume();
 
-        // 一旦すべてのボタンから再生中クラスを消し、クリックされたものだけに付与
         document.querySelectorAll('.song-btn').forEach(btn => {
             btn.classList.remove('is-playing');
         });
@@ -741,7 +735,6 @@ if (bgm) {
         });
     }
 
-    // 停止時はすべての再生中クラスを解除
     function stopMusic() {
         bgm.pause();
         bgm.currentTime = 0;
@@ -764,7 +757,6 @@ function toggleAccordion(trigger) {
     if (content.style.maxHeight && content.style.maxHeight !== "0px") {
         content.style.maxHeight = "0px";
     } else {
-        // スクロール可能な高さに合わせて動的に変更
         content.style.maxHeight = content.scrollHeight + "px";
     }
 }

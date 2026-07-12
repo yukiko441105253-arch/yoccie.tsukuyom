@@ -42,7 +42,7 @@ body {
     padding: 15px 0;
     display: flex;
     justify-content: center;
-    background: rgba(15, 23, 42, 0.6); 
+    background: rgba(15, 23, 42, 0.7); 
     backdrop-filter: blur(8px); 
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -79,47 +79,64 @@ body {
     padding-top: 90px; 
 }
 
-/* 各セクション共通のカードデザイン */
-.role, .intro, .member {
-    background: rgba(255, 255, 255, 0.93); 
-    color: #0f172a;
-    border-radius: 15px;
-}
-
-/* ロール枠 */
+/* 💡 白ベースを排除し、透明感のあるダーク枠に統一 */
 .role {
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-    background: rgba(255, 255, 255, 0.93);
-    color: #0f172a;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 35px;
 }
 
 .role h2 {
     margin-top: 0;
     border-bottom: 2px solid #3b82f6;
-    padding-bottom: 5px;
-    color: #0f172a;
+    padding-bottom: 8px;
+    color: #ffffff;
+    font-size: 22px;
 }
 
-/* メンバー共通 */
+/* 💡 3列並びにするための共通リスト枠 */
+.member-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+    align-items: start; /* カード同士の縦幅を連動させない */
+}
+
+/* 💡 1つの要素を3列の真ん中に配置するための設定 */
+.center-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+    align-items: start; /* カード同士の縦幅を連動させない */
+}
+.center-grid .member {
+    grid-column: 2; /* 2列目（真ん中）に固定 */
+}
+
+/* メンバー共通カード設定（白背景を透過ダークに変更） */
 .member {
-    background: rgba(0, 0, 0, 0.04);
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 20px 15px;
+    border-radius: 12px;
     text-align: center;
     opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transform: translateY(15px);
+    transition: opacity 0.6s ease, transform 0.6s ease, background 0.3s ease;
     word-break: break-word;
     overflow-wrap: anywhere;
+    display: flex;
+    flex-direction: column;
+    height: fit-content; /* カード自体の高さを中身にジャストフィットさせる */
 }
 
-/* 一般メンバーカードの白ベース背景 */
-.member.mem {
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+.member:hover {
+    background: rgba(255, 255, 255, 0.09);
 }
 
 .member.show {
@@ -128,29 +145,13 @@ body {
 }
 
 /* 画像設定 */
-img, video {
-    max-width: 100%;
-    height: auto;
-}
-
-/* 鯖主イラスト */
-.member img.square {
-    width: 100%;
-    max-width: 650px; 
-    height: auto;
-    border-radius: 12px;
-    display: block;
-    margin: 10px auto 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
-}
-
 .member img.icon {
-    width: 120px;
-    height: 120px;
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
     object-fit: cover;
     display: block;
-    margin: 0 auto 10px;
+    margin: 0  auto 12px; 
     border: 3px solid #3b82f6;
 }
 
@@ -159,23 +160,24 @@ img, video {
     height: 88px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     display: block;
-    margin: 0 auto 10px;
+    margin: 0 auto 12px;
 }
 
 /* 名前表示とアコーディオンのトリガー */
 .name {
     font-weight: bold;
     font-size: 17px;
-    margin-top: 8px;
-    margin-bottom: 6px;
+    margin-top: 5px;
+    margin-bottom: 8px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
     user-select: none;
+    color: #ffffff;
 }
 
 /* 開閉可能な名前にホバーした時の演出 */
@@ -183,28 +185,23 @@ img, video {
     text-decoration: underline;
 }
 
-/* 一般メンバーはカーソルをデフォルトに */
-.member.mem .name {
-    cursor: default;
-}
-
 /* 役職ごとの名前の色 */
-.web-name { color: #0284c7; } 
-.sub-name { color: #0284c7; } 
-.mod-name { color: #2563eb; } 
-.helper-name { color: #e11d48; } 
-.member.mem .name { color: #16a34a; } 
+.web-name { color: #38bdf8; } 
+.sub-name { color: #38bdf8; } /* 副官：ゴールド */ 
+.mod-name { color: #3b82f6; } /* モデレーター：エメラルドグリーン */ 
+.helper-name { color: #fb7185; } 
 
-/* 矢印アイコンの付与（メンバー以外） */
+/* 矢印アイコンの付与（メンバー、役職） */
 .owner .name::after,
 .web .name::after,
 .sub .name::after,
 .helper .name::after,
 .mod .name::after {
     content: " ▼";
-    font-size: 12px;
+    font-size: 11px;
     display: inline-block;
     transition: transform 0.3s ease;
+    opacity: 0.7;
 }
 
 /* アクティブ時に矢印を回転 */
@@ -214,7 +211,7 @@ img, video {
 
 /* 虹色アニメーション（鯖主用） */
 .rainbow {
-    background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet, red);
+    background: linear-gradient(90deg, #ff6b6b, #feca57, #1dd1a1, #10ac84, #54a0ff, #5f27cd, #ff6b6b);
     background-size: 400% 400%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -230,27 +227,29 @@ img, video {
 .member .intro-box {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.6s ease;
+    transition: max-height 0.5s ease;
     text-align: left;
 }
 
 .member.active .intro-box {
-    max-height: 1500px; 
+    max-height: 1000px; 
 }
 
 .intro-content {
-    padding: 15px;
-    border-radius: 10px;
-    background: rgba(0, 0, 0, 0.05);
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.25);
     margin-top: 10px;
-    font-size: 15px; 
-    line-height: 1.7; 
-    color: #1e293b;
+    font-size: 14px; 
+    line-height: 1.6; 
+    color: #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* SNSブロック */
 .sns {
-    margin-top: 12px;
+    margin-top: 8px; 
+    padding-top: 12px;
     display: flex;
     justify-content: center;
     gap: 6px;
@@ -259,10 +258,10 @@ img, video {
 
 .sns-btn {
     display: inline-block;
-    padding: 6px 14px;
-    border-radius: 8px;
+    padding: 5px 12px;
+    border-radius: 6px;
     text-decoration: none;
-    font-size: 12px;
+    font-size: 11px;
     color: white;
     transition: transform 0.2s, opacity 0.2s;
     font-weight: bold;
@@ -274,45 +273,41 @@ img, video {
 }
 
 .youtube { background: #ff4d4d; }
-.twitter { background: #111827; }
+.twitter { background: #111827; border: 1px solid rgba(255,255,255,0.2); }
 .tiktok  { background: #a855f7; }
 
 .etc {
-    font-size: 10px;
-    opacity: 0.7;
-    margin-top: 8px;
-    color: #0f172a;
-}
-
-/* 一般メンバー用グリッドレイアウト */
-.member-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    font-size: 11px;
+    opacity: 0.6;
+    margin-top: 10px;
+    color: #cbd5e1;
 }
 
 /* フッター */
 .footer {
     text-align: center;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.9);
-    color: #0f172a;
-    margin-top: 20px;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    margin-top: 30px;
     border-radius: 15px;
 }
 
 /* レスポンシブ対応 */
-@media(max-width: 768px) {
-    .member-list { grid-template-columns: repeat(2, 1fr); }
-    .nav-menu ul { gap: 20px; }
-    
-    .role { padding: 12px; }
-    .member.owner { padding: 8px; }
-    .container { padding-top: 80px; } 
+@media(max-width: 900px) {
+    .member-grid { grid-template-columns: repeat(2, 1fr); }
+    .center-grid { grid-template-columns: 1fr; }
+    .center-grid .member { grid-column: auto; } 
 }
 
-@media(max-width: 480px) {
-    .member-list { grid-template-columns: 1fr; }
+@media(max-width: 600px) {
+    .member-grid { grid-template-columns: 1fr; }
+    .nav-menu ul { gap: 15px; }
+    .nav-menu a { font-size: 14px; }
+    .role { padding: 15px; }
+    .container { padding-top: 80px; } 
 }
 </style>
 </head>
@@ -326,7 +321,8 @@ img, video {
     <nav class="nav-menu">
         <ul>
             <li><a href="index.html">ホーム</a></li>
-            <li><a href="member.html">自己紹介</a></li>
+            <li><a href="member.html">運営紹介</a></li>
+            <li><a href="member2.html">メンバー一覧</a></li>
             <li><a href="youtube.html">鯖主の動画</a></li>
             <li><a href="sava.html">サーバーの歴史</a></li>
             <li><a href="javascript:void(0);" style="cursor: default;">Coming Soon</a></li>
@@ -336,366 +332,296 @@ img, video {
 
 <div class="container">
 
+    <!-- 👑 鯖主セクション -->
     <div class="role">
         <h2>👑 鯖主</h2>
-        <div class="member owner">
-            <img src="illust.png" class="square" alt="鯖主イラスト">
-            <img src="myphoto2.png" class="icon" alt="鯖主アイコン">
-            <div class="name rainbow">よっしー</div>
+        <div class="center-grid">
+            <div class="member owner">
+                <img src="myphoto2.png" class="icon" alt="鯖主アイコン">
+                <div class="name rainbow">よっしー</div>
 
-            <div class="intro-box">
-                <div class="intro-content">
-                    こんにちは！鯖主のよっしーです！<br>
-                    軽く自己紹介をさせていただきますね。<br><br>
-                    【年齢】<br>
-                    ・17歳の高校3年生<br><br>
-                    【好きなこと】<br>
-                    ・超かぐグッズ集め<br>
-                    ・運動<br>
-                    ・模写<br><br>
-                    【特にやっているゲーム】<br>
-                    ・ホヨバース全般<br>
-                    ・フォトナ エペ ヴァロ<br><br>
-                    このサーバーでは、「超かぐや姫！」好きが集まる場所は勿論<br>
-                    雑談やゲーム, 作品共有など幅広い交流会となっております！<br>
-                    少しでも気になる方がいれば是非サーバーに入室してみてはいかがでしょうか？<br>
-                    ちなみにかなりの確率で鯖主は浮上するので権限関係なく仲良くしてもらえると嬉しいです！<br><br>
-                    管理人一同心よりお待ちしております！
+                <div class="sns">
+                    <a class="sns-btn youtube" href="https://youtube.com/@yoccie44?si=NoVAeRK-YVcSEvVA" target="_blank">YouTube</a>
+                    <a class="sns-btn twitter" href="https://x.com/yoccie044" target="_blank">X</a>
+                    <a class="sns-btn tiktok" href="https://www.tiktok.com/@yoccie44?_r=1&_t=ZS-97L6AjS58xm" target="_blank">TikTok</a>
+                </div>
+                <div class="etc">admin</div>
+
+                <div class="intro-box">
+                    <div class="intro-content">
+                        こんにちは！鯖主のよっしーです！<br>
+                        軽く自己紹介をさせていただきますね。<br><br>
+                        【年齢】<br>
+                        ・17歳の高校3年生<br><br>
+                        【好きなこと】<br>
+                        ・超かぐグッズ集め<br>
+                        ・運動<br>
+                        ・模写<br><br>
+                        【特にやっているゲーム】<br>
+                        ・ホヨバース全般<br>
+                        ・フォトナ エペ ヴァロ<br><br>
+                        このサーバーでは、「超かぐや姫！」好きが集まる場所は勿論<br>
+                        雑談やゲーム, 作品共有など幅広い交流会となっております！<br>
+                        少しでも気になる方がいれば是非サーバーに入室してみてはいかがでしょうか？<br>
+                        ちなみにかなりの確率で鯖主は浮上するので権限関係なく仲良くしてもらえると嬉しいです！<br><br>
+                        管理人一同心よりお待ちしております！
+                    </div>
                 </div>
             </div>
-
-            <div class="sns">
-                <a class="sns-btn youtube" href="https://youtube.com/@yoccie44?si=NoVAeRK-YVcSEvVA" target="_blank">YouTube</a>
-                <a class="sns-btn twitter" href="https://x.com/yoccie044" target="_blank">X</a>
-                <a class="sns-btn tiktok" href="https://www.tiktok.com/@yoccie44?_r=1&_t=ZS-97L6AjS58xm" target="_blank">TikTok</a>
-            </div>
-            <div class="etc">運営</div>
         </div>
     </div>
 
+    <!-- ⭐ 副官セクション -->
     <div class="role">
-        <h2>💻 WEB作成者</h2>
-         
-        <div class="member web">
-            <img src="yuro.png" class="mini-icon" alt="ゆろ">
-            <div class="name web-name">
-                <span>ゆろ</span>
-            </div>
-            <div class="intro-box">
-                <div class="intro-content">
-                    初めまして「ゆろ」って言います！<br>
-                    WEB作成を担当しました！メンバーの皆さんが使いやすく、楽しく見られるような公式サイトを目指して制作しました！<br>
-                    よろしくお願いします〜！
-                </div>
-            </div>
-        </div>
-
-        <div class="member web">
-            <img src="hikun.png" class="mini-icon" alt="ひーくん">
-            <div class="name web-name">
-                <span>ひーくん</span>
-            </div>
-            <div class="intro-box">
-                <div class="intro-content">
-                    公式サイトの制作に協力させていただきました！<br>
-                    みんなで作り上げた素晴らしいサイトなので、たくさん使ってもらえると嬉しいです！<br>
-                    よろしくお願いします！
-                </div>
-            </div>
-        </div>
-
-        <div class="member web">
-            <img src="matcha.png" class="mini-icon" alt="抹茶ラテ">
-            <div class="name web-name">
-                <span>抹茶ラテ</span>
-            </div>
-            <div class="intro-box">
-                <div class="intro-content">
-                    初めまして！「抹茶ラテ」です！<br>
-                    この度メンバーの皆さんが使いやすく、楽しく見られるような公式サイトを目指して制作しました！<br>
-                    仲よくしてねー！！よろしくお願いします〜！<br><br>
-                </div>
-            </div>
-        </div>
-    </div>
-
-     <div class="role">
         <h2>⭐ 副官</h2>
-         
-        <div class="member sub">
-            <img src="inono.png" class="mini-icon" alt="inono">
-            <div class="name sub-name">
-                <span>inono</span>
-            </div>
-            <div class="intro-box">
-                <div class="intro-content">
-                    サーバー副官のinonoです！<br>
-                    浮上はたまにしかしないですがちゃんとチャットは見ています。<br>
-                    高校１年生です。<br>
-                    同い年の人がいれば仲良くしてください！<br>
-                    好きなゲームはホヨバース全般とヴァロラント、フォトナです！<br>
-                    最近はヴァロラントにはまっているので、<br>
-                    一緒にやれる人がいればぜひ誘ってくれると嬉しいです！<br>
-                    よろしくお願いします！！！
+        <div class="member-grid">
+            <div class="member sub">
+                <img src="matcha.png" class="mini-icon" alt="抹茶ラテ">
+                <div class="name sub-name"><span>抹茶ラテ</span></div>
+
+                <div class="sns">
+                    <a class="sns-btn twitter" href="https://x.com/MattyaRATE_2872" target="_blank">X</a>
+                </div>
+
+                <div class="etc">adjutant</div>
+                
+                <div class="intro-box">
+                    <div class="intro-content">
+                        初めまして！副官を務めている「抹茶ラテ」です！<br>
+                        サーバーでは基本メンバー皆のお悩みなどを聞いて一緒に考えたりしています！<br>
+                        相談内容は多種受け付けているので基本何でも相談してもいいよ！<br>
+                        ゲームなどもスプラやマイクラなどやってるので参加したら仲良くしてね〜<br>
+                        よろしくお願いします〜！<br><br>
+                        後鯖主の秘書だよ😉
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="member sub">
-            <img src="matcha.png" class="mini-icon" alt="抹茶ラテ">
-            <div class="name sub-name">
-                <span>抹茶ラテ</span>
-            </div>
-            <div class="intro-box">
-                <div class="intro-content">
-                    初めまして！副官を務めている「抹茶ラテ」です！<br>
-                    サーバーでは基本メンバー皆のお悩みなどを聞いて一緒に考えたりしています！<br>
-                    相談内容は多種受け付けているので基本何でも相談してもいいよ！<br>
-                    ゲームなどもスプラやマイクラなどやってるので参加したら仲良くしてね〜<br>
-                    よろしくお願いします〜！<br><br>
-                    後鯖主の秘書だよ😉
+            <div class="member sub">
+                <img src="inono.png" class="mini-icon" alt="inono">
+                <div class="name sub-name"><span>inono</span></div>
+                <div class="etc">adjutant</div>
+
+                <div class="intro-box">
+                    <div class="intro-content">
+                        サーバー副官のinonoです！<br>
+                        浮上はたまにしかしないですがちゃんとチャットは見ています。<br>
+                        高校１年生です。<br>
+                        同い年の人がいれば仲良くしてください！<br>
+                        好きなゲームはホヨバース全般とヴァロラント、フォトナです！<br>
+                        最近はヴァロラントにはまっているので、<br>
+                        一緒にやれる人がいればぜひ誘ってくれると嬉しいです！<br>
+                        よろしくお願いします！！！
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- 🛡️ モデレーターセクション -->
     <div class="role">
         <h2>🛡️ モデレーター</h2>
+        <div class="member-grid">
+            <div class="member mod">
+                <img src="yuro.png" class="mini-icon" alt="ゆろ">
+                <div class="name mod-name"><span>ゆろ</span></div>
 
-        <div class="member mod">
-            <div class="name mod-name">りとりと</div>
-            <div class="intro-box">
-                <div class="intro-content">
-                    こんにちは～!!りとりとです～!!<br>
-                    モデレーターやってます！<br>
-                    アンダーテール好きです！<br>
-                    高校一年です！！よろしく！！
+                <div class="sns">
+                    <a class="sns-btn twitter" href="https://x.com/yuro_fuwafuwa" target="_blank">X</a>
+                </div>
+
+                <div class="etc">staff</div>
+
+                <div class="intro-box">
+                    <div class="intro-content">
+                        初めまして「ゆろ」って言います！<br>
+                        ツクヨミ交流会の<br>
+                        モデレーターをやっています！<br>
+                        質問だったり相談はいつでも大歓迎！！<br>
+                        僕はみんなを笑顔にすることが目標なのです！<br>
+                        僕は暇な時間はこのツクヨミ交流会にいるのでたくさん話しかけてくれると喜ぶよ〜( * ॑˘ ॑* )<br>
+                        よろしくお願いします。
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="member mod">
-            <div class="name mod-name">わっぴぃ</div>
-            <div class="intro-box">
-                <div class="intro-content">
-                    やほやほ〜！！わっぴぃだよ〜！！<br>
-                    モデレーターを務めさせてもらってるよ！<br>
-                    高2の学生やから同年代繋がろ〜！！<br>
-                    基本雑談、apex、ブロスタら辺をしてるよ！<br>
-                    この鯖歌枠あるから歌に自信ある人、歌うのが好きな人、歌ってみたい…って人はバシバシ来てくれ！！<br>
-                    鯖の皆のままをやらせてもらってるから新規さんも沢山可愛がってあげるからね！<br>
-                    よろしくね〜！！！ 
+            <div class="member mod">
+                <img src="tame.png" class="mini-icon" alt="ため">
+                <div class="name mod-name"><span>ため</span></div>
+                <div class="etc">staff</div>
+
+                <div class="intro-box">
+                    <div class="intro-content">
+                        よろしくお願いします。<br>
+                        ため＠てるる推しです。<br>
+                        このサーバーではモデレーターを担当しています。<br>
+                        学校やサーバー内のこと、進路の相談など、<br>
+                        気になることがあればいつでも気軽に話しかけてください。<br>
+                        基本的に対応できます。<br>
+                        サブ垢として「たっちゃん」でも活動しています。<br>
+                        ツクヨミへぜひお越しください。<br>
+                        よろしくお願いします。
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="member mod">
-            <img src="tako.png" class="mini-icon" alt="たこ">
-            <div class="name mod-name">たこ</div>
-            <div class="intro-box">
-                <div class="intro-content">
-                    こんちは〜たこだよ！<br>
-                    このサーバーで一応モデレーターやらせてもらってる人です！<br>
-                    基本的にボイチャにいてテンションが高い人だよ！<br>
-                    気軽に話しかけてね！<br>
-                    よろしくお願いします〜！！
+            <div class="member mod">
+                <img src="ritorito.png" class="mini-icon" alt="りとりと">
+                <div class="name mod-name">りとりと</div>
+                <div class="etc">staff</div>
+
+                <div class="intro-box">
+                    <div class="intro-content">
+                        こんにちは～!!りとりとです～!!<br>
+                        モデレーターやってます！<br>
+                        アンダーテール好きです！<br>
+                        高校一年です！！よろしく！！
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="member mod">
-            <img src="setojiii.png" class="mini-icon" alt="setojiii(自由)">
-            <div class="name mod-name">setojiii(自由)</div>
-            <div class="intro-box">
-                <div class="intro-content">
-                    どうもモデレーターで仲介人をしている自由がない不自由な「setojiii@自由」です！<br>
-                    基本は学校にいる時間以外はあまり姿がなく、<br>
-                    学校が終わればボイスチャットで過ごしています。<br>
-                    喧嘩などトラブルがあった場合は、<br>
-                    相談対応や仲介も行います。<br>
-                    ゲームは主にバウンティとポケGOをしています。<br>
-                    何かあれば気軽に相談してください！<br>
-                    楽しい超かぐライフを！
+            <div class="member mod">
+                <img src="wappy.png" class="mini-icon" alt="わっぴぃ">
+                <div class="name mod-name">わっぴぃ</div>
+                <div class="etc">staff</div>
+
+                <div class="intro-box">
+                    <div class="intro-content">
+                        やahoやaho〜！！わっぴぃだよ〜！！<br>
+                        モデレーターを務めさせてもらってるよ！<br>
+                        高2の学生やから同年代繋がろ〜！！<br>
+                        基本雑談、apex、ブロスタら辺をしてるよ！<br>
+                        この鯖歌枠あるから歌に自信ある人、歌うのが好きな人、歌ってみたい…って人はバシバシ来てくれ！！<br>
+                        鯖の皆のままをやらせてもらってるから新規さんも沢山可愛がってあげるからね！<br>
+                        よろしくお願いしますね〜！！！ 
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="member mod">
-            <img src="tame.png" class="mini-icon" alt="ため">
-            <div class="name mod-name">ため</div>
-            <div class="intro-box">
-                <div class="intro-content">
-                    よろしくお願いします。<br>
-                    ため＠てるる推しです。<br>
-                    このサーバーではモデレーターを担当しています。<br>
-                    学校やサーバー内のこと、進路の相談など、<br>
-                    気になることがあればいつでも気軽に話しかけてください。<br>
-                    基本的に対応できます。<br>
-                    サブ垢として「たっちゃん」でも活動しています。<br>
-                    ツクヨミへぜひお越しください。<br>
-                    よろしくお願いします。
+            <div class="member mod">
+                <img src="tako.png" class="mini-icon" alt="たこ">
+                <div class="name mod-name">たこ</div>
+                <div class="etc">staff</div>
+
+                <div class="intro-box">
+                    <div class="intro-content">
+                        こんちは〜たこだよ！<br>
+                        このサーバーで一応モデレーターやらせてもらってる人です！<br>
+                        基本的にボイチャにいてテンションが高い人だよ！<br>
+                        気軽に話しかけてね！<br>
+                        よろしくお願いします〜！！
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="member mod">
-            <img src="yuro.png" class="mini-icon" alt="ゆろ">
-            <div class="name mod-name">ゆろ</div>
-            <div class="intro-box">
-                <div class="intro-content">
-                    初めまして「ゆろ」って言います！<br>
-                    ツクヨミ交流会の<br>
-                    モデレーターをやっています！<br>
-                    質問だったり相談はいつでも大歓迎！！<br>
-                    僕はみんなを笑顔にすることが目標なのです！<br>
-                    僕は暇な時間はこのツクヨミ交流会にいるのでたくさん話しかけてくれると喜ぶよ〜( * ॑˘ ॑* )<br>
-                    よろしくお願いします。
+            <div class="member mod">
+                <img src="setojiii.png" class="mini-icon" alt="setojiii(自由)">
+                <div class="name mod-name">setojiii(自由)</div>
+                <div class="sns">
+                    <a class="sns-btn youtube" href="https://www.youtube.com/@%E8%87%AA%E7%94%B1-i2w" target="_blank">YouTube</a>
+                    <a class="sns-btn twitter" href="https://x.com/YS4539007442029" target="_blank">X</a>
+                </div>
+                <div class="etc">staff</div>
+                <div class="intro-box">
+                    <div class="intro-content">
+                        どうモモデレーターで仲介人をしている自由がない不自由な「setojiii@自由」です！<br>
+                        基本は学校にいる時間以外はあまり姿がなく、<br>
+                        学校が終わればボイスチャットで過ごしています。<br>
+                        喧喧などトラブルがあった場合は、<br>
+                        相談対応や仲介も行います。<br>
+                        ゲームは主にバウンティとポケGOをしています。<br>
+                        何かあれば気軽に相談してください！<br>
+                        楽しい超かぐライフを！
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="member mod">
-            <div class="name mod-name">みずいろ</div>
-            <div class="intro-box">
-                <div class="intro-content">
-                    よろしくお願いします！みずいろです<br>
-                    このサーバーでモデレーターやらせてもらってます<br>
-                    多分配信お笑い担当です。多分ね<br>
-                    どうぞツクヨミにお越しくださいませ～<br>
-                    よろしくお願いします。
+            <div class="member mod">
+                <img src="mizuiro.png" class="mini-icon" alt="みずいろ">
+                <div class="name mod-name">みずいろ</div>
+                <div class="etc">staff</div>
+
+                <div class="intro-box">
+                    <div class="intro-content">
+                        よろしくお願いします！みずいろです<br>
+                        このサーバーでモデレーターやらせてもらってます<br>
+                        多分配信お笑い担当です。多分ね<br>
+                        どうぞツクヨミにお越しくださいませ～<br>
+                        よろしくお願いします。
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="member mod">
-            <img src="yotya.png" class="mini-icon" alt="よっちゃ">
-            <div class="name mod-name">よっちゃ</div>
-            <div class="intro-box">
-                <div class="intro-content">
-                    どーもこんちゃっちゃ～ よっちゃ！だよ<br>
-                    現高２の暇人。<br>
-                    元のロール役割は&lt;野良&amp;回線落台パン発狂神&gt;。え？なんでこんなロールになってるかって？<br>
-                    あぁ、((普段からゲームで発狂しまくってるからなァ!!!))<br>
-                    こんな奴でも謎に評価があります。知らんけど。(👈ここ重要)<br>
-                    ゲーム時は皆を奮い立たせたり、良い鯖にするために真面目なときは真面目。<br>
-                    俺はマジのYESマンではない。<br>
-                    皆が言い難いことや、上のモデの奴らに言いたいけど言うの難しいこととかは俺に言ってくれたら全然言うし、あいつらに喧嘩も売りに行きます。<br>
-                    皆で楽しく過ごせる環境にしよな～！ 任せろ👊👊
+            
+            <div class="member mod">
+                <img src="yotya.png" class="mini-icon" alt="よっちゃ">
+                <div class="name mod-name">よっちゃ</div>
+                <div class="sns">
+                    <a class="sns-btn twitter" href="https://x.com/yo12173141" target="_blank">X</a>
+                </div>
+                <div class="etc">staff</div>
+
+                <div class="intro-box">
+                    <div class="intro-content">
+                        どーもこんちゃっちゃ～ よっちゃ！だよ<br>
+                        現高２の暇人。<br>
+                        元のロール役割は&lt;野良&amp;回線落台パン発狂神&gt;。え？なんでこんなロールになってるかって？<br>
+                        あぁ、((普段からゲームで発狂しまくってるからなァ!!!))<br>
+                        こんな奴でも謎に評価があります。知らんけど。(👈ここ重要)<br>
+                        ゲーム時は皆を奮い立たせたり、良い鯖にするために真面目なときは真面。<br>
+                        俺はマジのYESマンではない。<br>
+                        上のモデの奴らに言いたいけど言うの難しいこととかは俺に言ってくれたら全然言うし、あいつらに喧喧も売りに行きます。<br>
+                        皆で楽しく過ごせる環境にしよな～！ 任せろ👊👊
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-   
+    <!-- 💻 WEB作成者セクション -->
     <div class="role">
-        <h2>👥 メンバー</h2>
-        <div class="member-list">
-            <div class="member mem"><span class="name">ヤシロキツネ</span></div>
-            <div class="member mem"><span class="name">タモリ</span></div>
-            <div class="member mem"><span class="name">タカシ</span></div>
-            <div class="member mem"><span class="name">ひーくん</span></div>
-            <div class="member mem"><span class="name">どっかの誰か</span></div>
-            <div class="member mem"><span class="name">炊ける</span></div>
-            <div class="member mem"><span class="name">いるのか</span></div>
-            <div class="member mem"><span class="name">ゆう</span></div>
-            <div class="member mem"><span class="name">pizza</span></div>
-            <div class="member mem"><span class="name">ホワイトサンダー</span></div>
-            <div class="member mem"><span class="name">にたまご</span></div>
-            <div class="member mem"><span class="name">holo.27</span></div>
-            <div class="member mem"><span class="name">kaisan</span></div>
-            <div class="member mem"><span class="name">じゃがりこ</span></div>
-            <div class="member mem"><span class="name">WAY主</span></div>
-            <div class="member mem"><span class="name">やみ</span></div>
-            <div class="member mem"><span class="name">な</span></div>
-            <div class="member mem"><span class="name">あれこ</span></div>
-            <div class="member mem"><span class="name">しらたま</span></div>
-            <div class="member mem"><span class="name">nihoheycy</span></div>
-            <div class="member mem"><span class="name">りん</span></div>
-            <div class="member mem"><span class="name">Hase</span></div>
-            <div class="member mem"><span class="name">True</span></div>
-            <div class="member mem"><span class="name">たっちー</span></div>
-            <div class="member mem"><span class="name">UARTX10</span></div>
-            <div class="member mem"><span class="name">つきゃ</span></div>
-            <div class="member mem"><span class="name">遅刻魔</span></div>
-            <div class="member mem"><span class="name">エルピス</span></div>
-            <div class="member mem"><span class="name">めろ</span></div>
-            <div class="member mem"><span class="name">つー</span></div>
-            <div class="member mem"><span class="name">コタック</span></div>
-            <div class="member mem"><span class="name">いろかぐ</span></div>
-            <div class="member mem"><span class="name">Zephyr(ゼファー)</span></div>
-            <div class="member mem"><span class="name">りこ</span></div>
-            <div class="member mem"><span class="name">さとり</span></div>
-            <div class="member mem"><span class="name">N.なぎ</span></div>
-            <div class="member mem"><span class="name">アズマックス</span></div>
-            <div class="member mem"><span class="name">はじめん</span></div>
-            <div class="member mem"><span class="name">すけしゅん</span></div>
-            <div class="member mem"><span class="name">kuro9671</span></div>
-            <div class="member mem"><span class="name">りょた</span></div>
-            <div class="member mem"><span class="name">ほりょ</span></div>
-            <div class="member mem"><span class="name">かつたろう</span></div>
-            <div class="member mem"><span class="name">ピチュー</span></div>
-            <div class="member mem"><span class="name">Ponzu</span></div>
-            <div class="member mem"><span class="name">よっちゃ</span></div>
-            <div class="member mem"><span class="name">dammy216</span></div>
-            <div class="member mem"><span class="name">Takashi</span></div>
-            <div class="member mem"><span class="name">こめ</span></div>
-            <div class="member mem"><span class="name">名無し</span></div>
-            <div class="member mem"><span class="name">もっちゃ！</span></div>
-            <div class="member mem"><span class="name">さーど</span></div>
-            <div class="member mem"><span class="name">ゆあちゃ</span></div>
-            <div class="member mem"><span class="name">める</span></div>
-            <div class="member mem"><span class="name">春ちゃん</span></div>
-            <div class="member mem"><span class="name">バナナ</span></div>
-            <div class="member mem"><span class="name">スカーフィ</span></div>
-            <div class="member mem"><span class="name">あすぞら</span></div>
-            <div class="member mem"><span class="name">ちょこ</span></div>
-            <div class="member mem"><span class="name">ひま</span></div>
-            <div class="member mem"><span class="name">はやと</span></div>
-            <div class="member mem"><span class="name">ゆぞレモンサイダー</span></div>
-            <div class="member mem"><span class="name">SENNA</span></div>
-            <div class="member mem"><span class="name">かなてぃバー</span></div>
-            <div class="member mem"><span class="name">ポピー</span></div>
-            <div class="member mem"><span class="name">もちお</span></div>
-            <div class="member mem"><span class="name">ひびき</span></div>
-            <div class="member mem"><span class="name">えこ!!!!!</span></div>
-            <div class="member mem"><span class="name">すみ</span></div>
-            <div class="member mem"><span class="name">いさ</span></div>
-            <div class="member mem"><span class="name">コロン</span></div>
-            <div class="member mem"><span class="name">SA</span></div>
-            <div class="member mem"><span class="name">るな</span></div>
-            <div class="member mem"><span class="name">ひか</span></div>
-            <div class="member mem"><span class="name">Molluvi</span></div>
-            <div class="member mem"><span class="name">お茶虎</span></div>
-            <div class="member mem"><span class="name">オキラク</span></div>
-            <div class="member mem"><span class="name">りー</span></div>
-            <div class="member mem"><span class="name">亀</span></div>
-            <div class="member mem"><span class="name">マナ</span></div>
-            <div class="member mem"><span class="name">ROSO</span></div>
-            <div class="member mem"><span class="name">めっちゃちゅゆーま</span></div>
-            <div class="member mem"><span class="name">warabi_mochi</span></div>
-            <div class="member mem"><span class="name">kkt3139</span></div>
-            <div class="member mem"><span class="name">雪印</span></div>
-            <div class="member mem"><span class="name">もえむ</span></div>
-            <div class="member mem"><span class="name">阿全</span></div>
-            <div class="member mem"><span class="name">シュウ</span></div>
-            <div class="member mem"><span class="name">だおだお</span></div>
-            <div class="member mem"><span class="name">mui</span></div>
-            <div class="member mem"><span class="name">ケン</span></div>
-            <div class="member mem"><span class="name">和広</span></div>
-            <div class="member mem"><span class="name">Hase2</span></div>
-            <div class="member mem"><span class="name">DEBUネズミ</span></div>
-            <div class="member mem"><span class="name">サンラク</span></div>
-            <div class="member mem"><span class="name">hako86</span></div>
-            <div class="member mem"><span class="name">かしわ</span></div>
-            <div class="member mem"><span class="name">あちゅ</span></div>
-            <div class="member mem"><span class="name">かなてぇ</span></div>
-            <div class="member mem"><span class="name">きうい</span></div>
-            <div class="member mem"><span class="name">るーず</span></div>
-            <div class="member mem"><span class="name">ねこかいたい</span></div>
-            <div class="member mem"><span class="name">nikoniko</span></div>
-            <div class="member mem"><span class="name">≡刹那≡</span></div>
+        <h2>💻 WEB作成者</h2>
+        <div class="member-grid">
+            <div class="member web">
+                <img src="yuro.png" class="mini-icon" alt="ゆろ">
+                <div class="name web-name"><span>ゆろ</span></div>
+                <div class="intro-box">
+                    <div class="intro-content">
+                        初めまして「ゆろ」って言います！<br>
+                        WEB作成を担当しました！メンバーの皆さんが使いやすく、楽しく見られるような公式サイトを目指して制作しました！<br>
+                        よろしくお願いします〜！
+                    </div>
+                </div>
+            </div>
+
+            <div class="member web">
+                <img src="hikun.png" class="mini-icon" alt="ひーくん">
+                <div class="name web-name"><span>ひーくん</span></div>
+                <div class="sns">
+                    <a class="sns-btn twitter" href="https://x.com/love_orekuro" target="_blank">X</a>
+                </div>
+                <div class="intro-box">
+                    <div class="intro-content">
+                        公式サイトの制作に協力させていただきました！<br>
+                        ここは基本楽しいので！<br>
+                         ぜひ参加してねぇ ～<br>
+                   </div>
+                </div>
+            </div>
+
+            <div class="member web">
+                <img src="matcha.png" class="mini-icon" alt="抹茶ラテ">
+                <div class="name web-name"><span>抹茶ラテ</span></div>
+                <div class="intro-box">
+                    <div class="intro-content">
+                        初めまして！「抹茶ラテ」です！<br>
+                        この度メンバーの皆さんが使いやすく、楽しく見られるような公式サイトを目指して制作しました！<br>
+                        仲よくしてねー！！よろしくお願いします〜！
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
 </div>
 
 <footer class="footer">
@@ -767,14 +693,16 @@ const obs = new IntersectionObserver(entries => {
 
 document.querySelectorAll(".member").forEach(m => obs.observe(m));
 
-// --- アコーディオン開閉（一般メンバーをスキップ） ---
-document.querySelectorAll(".member .name").forEach(name => {
-    name.addEventListener("click", (e) => {
-        const memberBox = name.closest(".member");
-        if (memberBox && !memberBox.classList.contains("mem")) {
-            memberBox.classList.toggle("active");
+// --- 自己紹介アコーディオン開閉システム ---
+document.querySelectorAll(".member").forEach(member => {
+    if (!member.classList.contains("mem")) {
+        const nameToggle = member.querySelector(".name");
+        if (nameToggle) {
+            nameToggle.addEventListener("click", () => {
+                member.classList.toggle("active");
+            });
         }
-    });
+    }
 });
 </script>
 </body>

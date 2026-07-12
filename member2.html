@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>楽しい仲間たち（期生別） - ツクヨミ交流会</title>
+
+<link rel="icon" href="images/favicon.png" type="image/png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yomogi&display=swap" rel="stylesheet">
+
+<script>
+window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Yomogi', sans-serif;
+    color: white;
+    overflow-x: hidden;
+    background-color: #050d1a;
+}
+
+/* 画面全体の固定背景 */
+.bg {
+    position: fixed;
+    inset: 0;
+    background-image: url('images/bg1.png'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    opacity: 0.5; 
+}
+
+/* ヘッダーナビゲーション */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 15px 0;
+    display: flex;
+    justify-content: center;
+    background: rgba(5, 13, 26, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-menu ul {
+    list-style: none;
+    display: flex;
+    gap: 35px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.nav-menu a:hover {
+    opacity: 1;
+}
+
+/* コンテンツコンテナ */
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    padding-top: 110px;
+}
+
+/* ページメインタイトル */
+.page-title-area {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.page-title-area h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #6ee7b7, #3b82f6, #93c5fd, #6ee7b7);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: blueMove 8s linear infinite;
+    text-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+}
+
+.page-title-area p {
+    font-size: 16px;
+    opacity: 0.9;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+@keyframes blueMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* 期生ごとのコンテナ枠 */
+.generation-container {
+    background: rgba(15, 23, 42, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 35px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 期生ごとの見出しスタイル */
+.generation-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 0 0 20px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* メンバープレートが自動で綺麗に並ぶグリッド */
+.member-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+}
+
+/* メンバー個別のプレート */
+.member.mem {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 14px 10px;
+    text-align: center;
+    position: relative;
+    transition: all 0.25s ease;
+    cursor: default;
+}
+
+/* マウスホバーで浮き上がって光る効果 */
+.member.mem:hover {
+    transform: translateY(-2px);
+    background: rgba(56, 189, 248, 0.15);
+    border-color: #38bdf8;
+    box-shadow: 0 5px 15px rgba(56, 189, 248, 0.2);
+}
+
+/* 名前テキストのスタイル */
+.member.mem .name {
+    font-size: 15px;
+    font-weight: bold;
+    color: #e2e8f0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+/* 運営役職ごとの文字色を適用 */
+.member.mem .name.agent-name { color: #f43f5e; }     /* 管理人代理 */
+.member.mem .name.web-name { color: #38bdf8; }       /* WEB作成者 */
+.member.mem .name.sub-name { color: #38bdf8; }       /* 副官 */
+.member.mem .name.mod-name { color: #60a5fa; }       /* モデレーター */
+.member.mem .name.helper-name { color: #fb7185; }    /* ヘルパー */
+
+/* 鯖主用の虹色アニメーション（もし一覧に「よっしー」を追加する場合用） */
+.member.mem .name.rainbow {
+    background: linear-gradient(90deg, #ff6b6b, #feca57, #1dd1a1, #10ac84, #54a0ff, #5f27cd, #ff6b6b);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbowMove 8s linear infinite;
+}
+@keyframes rainbowMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* 空文字枠の非表示設定 */
+.member.mem:has(.name:empty) {
+    display: none;
+}
+
+/* 各期生ごとのタイトル左マークや文字色のバリエーション */
+.gen-1-title { color: #eab308; } /* 1期: ゴールド */
+.gen-2-title { color: #cbd5e1; } /* 2期: シルバー */
+.gen-3-title { color: #b45309; } /* 3期: ブロンズ */
+.gen-4-title { color: #38bdf8; } /* 4期: スカイブルー */
+.gen-5-title { color: #ec4899; } /* 5期: ピンク */
+.gen-6-title { color: #a855f7; } /* 6期: パープル */
+.gen-7-title { color: #10b981; } /* 7期: グリーン */
+
+/* フッター */
+.footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+.footer p {
+    margin: 5px 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+
+/* スマホ対応 */
+@media(max-width: 768px) {
+    .nav-menu {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 0 15px;
+    }
+    .nav-menu ul {
+        gap: 20px;
+        white-space: nowrap;
+        padding-bottom: 4px;
+    }
+    .nav-menu a {
+        font-size: 14px;
+    }
+    .container { padding-top: 90px; }
+    .page-title-area h1 { font-size: 28px; }
+    .generation-container { padding: 15px; margin-bottom: 25px; }
+    .generation-title { font-size: 18px; margin-bottom: 15px; }
+    .member-list { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 8px; }
+    .member.mem { padding: 10px 5px; }
+    .member.mem .name { font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+
+<header class="site-header">
+    <nav class="nav-menu">
+        <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="member.html">運営紹介</a></li>
+            <li><a href="member2.html">メンバー一覧</a></li>
+            <li><a href="youtube.html">鯖主の動画</a></li>
+            <li><a href="sava.html">サーバーの歴史</a></li>
+            <li><a href="javascript:void(0);" style="cursor: default;">Coming Soon</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+
+    <div class="page-title-area">
+        <h1>⭐ ツクヨミの仲間たち</h1>
+        <p>ツクヨミ交流会を彩る、1期生から7期生までのメンバー一覧ページです！</p>
+    </div>
+
+    <div class="role">
+        <h2>👥 メンバー</h2>
+        
+        <!-- ==================== 1期生 ==================== -->
+        <div class="generation-container">
+            <div class="generation-title"><span class="gen-1-title"> 1期生</span></div>
+            <div class="generation-body">
+                <div class="member-list">
+                    <div class="member mem"><span class="name">ヤシロキツネ</span></div>
+                    <div class="member mem"><span class="name mod-name">りとりと</span></div>
+                    <div class="member mem"><span class="name">タモリ</span></div>
+                    <div class="member mem"><span class="name web-name">ひーくん</span></div>
+                    <div class="member mem"><span class="name agent-name">抹茶</span></div>
+                    <div class="member mem"><span class="name mod-name">たこ</span></div>
+                    <div class="member mem"><span class="name">どっかの誰か</span></div>
+                    <div class="member mem"><span class="name">炊ける</span></div>
+                    <div class="member mem"><span class="name mod-name">setojii(自由）</span></div>
+                    <div class="member mem"><span class="name">いるのか</span></div>
+                    <div class="member mem"><span class="name">ゆう</span></div>
+                    <div class="member mem"><span class="name">pizza</span></div>
+                    <div class="member mem"><span class="name">ホワイトサンダー</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== 2期生 ==================== -->
+        <div class="generation-container">
+            <div class="generation-title"><span class="gen-2-title"> 2期生</span></div>
+            <div class="generation-body">
+                <div class="member-list">
+                    <div class="member mem"><span class="name">にたまご</span></div>
+                    <div class="member mem"><span class="name">Holo</span></div>
+                    <div class="member mem"><span class="name">kaisan</span></div>
+                    <div class="member mem"><span class="name">じゃがりこ</span></div>
+                    <div class="member mem"><span class="name">しにますた</span></div>
+                    <div class="member mem"><span class="name mod-name">わっぴぃ</span></div>
+                    <div class="member mem"><span class="name">やみ</span></div>
+                    <div class="member mem"><span class="name">じたもん</span></div>
+                    <div class="member mem"><span class="name">な</span></div>
+                    <div class="member mem"><span class="name">あれこ</span></div>
+                    <div class="member mem"><span class="name sub-name">ため</span></div>
+                    <div class="member mem"><span class="name">しらたま</span></div>
+                    <div class="member mem"><span class="name">ツクヨミの変態</span></div>
+                    <div class="member mem"><span class="name">林</span></div>
+                    <div class="member mem"><span class="name">Hase</span></div>
+                    <div class="member mem"><span class="name">True</span></div>
+                    <div class="member mem"><span class="name">uartx</span></div>
+                    <div class="member mem"><span class="name">つきゃ</span></div>
+                    <div class="member mem"><span class="name">遅刻魔</span></div>
+                    <div class="member mem"><span class="name">メルピス</span></div>
+                    <div class="member mem"><span class="name">めろ</span></div>
+                    <div class="member mem"><span class="name sub-name">ゆろ</span></div>
+                    <div class="member mem"><span class="name">つー</span></div>
+                    <div class="member mem"><span class="name mod-name">みずいろ</span></div>
+                    <div class="member mem"><span class="name">コタック</span></div>
+                    <div class="member mem"><span class="name">いろかぐ</span></div>
+                    <div class="member mem"><span class="name">Zephyr</span></div>
+                    <div class="member mem"><span class="name">りこ</span></div>
+                    <div class="member mem"><span class="name">さとり</span></div>
+                    <div class="member mem"><span class="name">なぎちゃ！</span></div>
+                    <div class="member mem"><span class="name">アズマックス</span></div>
+                    <div class="member mem"><span class="name">はじめん</span></div>
+                    <div class="member mem"><span class="name">だおだお</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== 3期生 ==================== -->
+        <div class="generation-container">
+            <div class="generation-title"><span class="gen-3-title"> 3期生</span></div>
+            <div class="generation-body">
+                <div class="member-list">
+                    <div class="member mem"><span class="name">すけしゅん</span></div>
+                    <div class="member mem"><span class="name">kuro</span></div>
+                    <div class="member mem"><span class="name">りょた</span></div>
+                    <div class="member mem"><span class="name">ほりょ</span></div>
+                    <div class="member mem"><span class="name">かつたろ</span></div>
+                    <div class="member mem"><span class="name">百合</span></div>
+                    <div class="member mem"><span class="name">エルピス</span></div>
+                    <div class="member mem"><span class="name">タグ愛好家</span></div>
+                    <div class="member mem"><span class="name mod-name">よっちゃ</span></div>
+                    <div class="member mem"><span class="name">dammy</span></div>
+                    <div class="member mem"><span class="name">Takashi</span></div>
+                    <div class="member mem"><span class="name">こめ</span></div>
+                    <div class="member mem"><span class="name">名無し</span></div>
+                    <div class="member mem"><span class="name">もちゃ</span></div>
+                    <div class="member mem"><span class="name">さーど</span></div>
+                    <div class="member mem"><span class="name">ゆあちゃ</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== 4期生 ==================== -->
+        <div class="generation-container">
+            <div class="generation-title"><span class="gen-4-title"> 4期生</span></div>
+            <div class="generation-body">
+                <div class="member-list">
+                    <div class="member mem"><span class="name">春ちゃん</span></div>
+                    <div class="member mem"><span class="name">バナナ</span></div>
+                    <div class="member mem"><span class="name">もっちぃ</span></div>
+                    <div class="member mem"><span class="name">あすぞら</span></div>
+                    <div class="member mem"><span class="name">ちょこ</span></div>
+                    <div class="member mem"><span class="name">ひま</span></div>
+                    <div class="member mem"><span class="name">はやと</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== 5期生 ==================== -->
+        <div class="generation-container">
+            <div class="generation-title"><span class="gen-5-title"> 5期生</span></div>
+            <div class="generation-body">
+                <div class="member-list">
+                    <div class="member mem"><span class="name">ゆずレモンサイダー</span></div>
+                    <div class="member mem"><span class="name">SENA</span></div>
+                    <div class="member mem"><span class="name">かなてぇ</span></div>
+                    <div class="member mem"><span class="name">ポピー</span></div>
+                    <div class="member mem"><span class="name">もちお</span></div>
+                    <div class="member mem"><span class="name">黒崎一護</span></div>
+                    <div class="member mem"><span class="name">ひびき</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== 6期生 ==================== -->
+        <div class="generation-container">
+            <div class="generation-title"><span class="gen-6-title"> 6期生</span></div>
+            <div class="generation-body">
+                <div class="member-list">
+                    <div class="member mem"><span class="name">コロン</span></div>
+                    <div class="member mem"><span class="name">SA</span></div>
+                    <div class="member mem"><span class="name">るな</span></div>
+                    <div class="member mem"><span class="name">ひか</span></div>
+                    <div class="member mem"><span class="name">No4</span></div>
+                    <div class="member mem"><span class="name">オキラク</span></div>
+                    <div class="member mem"><span class="name">りー</span></div>
+                    <div class="member mem"><span class="name">亀</span></div>
+                    <div class="member mem"><span class="name">マナ</span></div>
+                    <div class="member mem"><span class="name">ROSO</span></div>
+                    <div class="member mem"><span class="name">めちゃちゃゆーま</span></div>
+                    <div class="member mem"><span class="name">Inoko</span></div>
+                    <div class="member mem"><span class="name">warabi_mochi</span></div>
+                    <div class="member mem"><span class="name">kkt3139</span></div>
+                    <div class="member mem"><span class="name">雪印</span></div>
+                    <div class="member mem"><span class="name">もえむ</span></div>
+                    <div class="member mem"><span class="name">阿全</span></div>
+                    <div class="member mem"><span class="name">シュウ</span></div>
+                    <div class="member mem"><span class="name">米</span></div>
+                    <div class="member mem"><span class="name">mui</span></div>
+                    <div class="member mem"><span class="name">ケン</span></div>
+                    <div class="member mem"><span class="name">heguang</span></div>
+                    <div class="member mem"><span class="name">DEBUネズミ</span></div>
+                    <div class="member mem"><span class="name">サンラク</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== 7期生 ==================== -->
+        <div class="generation-container">
+            <div class="generation-title"><span class="gen-7-title"> 7期生</span></div>
+            <div class="generation-body">
+                <div class="member-list">
+                    <div class="member mem"><span class="name">ねこかいたい</span></div>
+                    <div class="member mem"><span class="name">nikoniko</span></div>
+                    <div class="member mem"><span class="name">≡ツナ≡</span></div>
+                    <div class="member mem"><span class="name">yama</span></div>
+                    <div class="member mem"><span class="name">タカピーの犯罪</span></div>
+                    <div class="member mem"><span class="name">yopuyopu</span></div>
+                    <div class="member mem"><span class="name">tonnkats2</span></div>
+                    <div class="member mem"><span class="name">にわとり</span></div>
+                    <div class="member mem"><span class="name">ひとまる</span></div>
+                    <div class="member mem"><span class="name">なぎ</span></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer class="footer">
+    <p>© 月詠交流会 作成者：ゆろ・抹茶ラテ 協力者：ひーくん</p>
+</footer>
+
+</body>
+</html>
