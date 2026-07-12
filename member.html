@@ -151,7 +151,7 @@ body {
     border-radius: 50%;
     object-fit: cover;
     display: block;
-    margin: 0  auto 12px; 
+    margin: 0 auto 12px; /* 💡 ここを正常な記述に修正しました */
     border: 3px solid #3b82f6;
 }
 
@@ -186,13 +186,15 @@ body {
 }
 
 /* 役職ごとの名前の色 */
+.agent-name { color: #f43f5e; } /* 管理人代理用カラー */
 .web-name { color: #38bdf8; } 
-.sub-name { color: #38bdf8; } /* 副官：ゴールド */ 
-.mod-name { color: #3b82f6; } /* モデレーター：エメラルドグリーン */ 
+.sub-name { color: #38bdf8; } 
+.mod-name { color: #60a5fa; } 
 .helper-name { color: #fb7185; } 
 
 /* 矢印アイコンの付与（メンバー、役職） */
 .owner .name::after,
+.agent .name::after,
 .web .name::after,
 .sub .name::after,
 .helper .name::after,
@@ -344,7 +346,7 @@ body {
                     <a class="sns-btn youtube" href="https://youtube.com/@yoccie44?si=NoVAeRK-YVcSEvVA" target="_blank">YouTube</a>
                     <a class="sns-btn twitter" href="https://x.com/yoccie044" target="_blank">X</a>
                     <a class="sns-btn tiktok" href="https://www.tiktok.com/@yoccie44?_r=1&_t=ZS-97L6AjS58xm" target="_blank">TikTok</a>
-                </div>
+                    </div>
                 <div class="etc">admin</div>
 
                 <div class="intro-box">
@@ -371,19 +373,20 @@ body {
         </div>
     </div>
 
-    <!-- ⭐ 副官セクション -->
+<!-- 👥 管理人代理セクション -->
     <div class="role">
-        <h2>⭐ 副官</h2>
-        <div class="member-grid">
-            <div class="member sub">
+        <h2>👥 管理人代理</h2>
+
+        <div class="center-grid">
+            <div class="member agent">
                 <img src="matcha.png" class="mini-icon" alt="抹茶ラテ">
-                <div class="name sub-name"><span>抹茶ラテ</span></div>
+                <div class="name agent-name"><span>抹茶ラテ</span></div>
 
                 <div class="sns">
                     <a class="sns-btn twitter" href="https://x.com/MattyaRATE_2872" target="_blank">X</a>
-                </div>
+                    </div>
 
-                <div class="etc">adjutant</div>
+                <div class="etc">administrator</div>
                 
                 <div class="intro-box">
                     <div class="intro-content">
@@ -396,7 +399,13 @@ body {
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
+    <!-- ⭐ 副官セクション -->
+    <div class="role">
+        <h2>⭐ 副官</h2>
+        <div class="member-grid">
             <div class="member sub">
                 <img src="inono.png" class="mini-icon" alt="inono">
                 <div class="name sub-name"><span>inono</span></div>
@@ -415,22 +424,16 @@ body {
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- 🛡️ モデレーターセクション -->
-    <div class="role">
-        <h2>🛡️ モデレーター</h2>
-        <div class="member-grid">
-            <div class="member mod">
+            <div class="member sub">
                 <img src="yuro.png" class="mini-icon" alt="ゆろ">
-                <div class="name mod-name"><span>ゆろ</span></div>
+                <div class="name sub-name"><span>ゆろ</span></div>
 
                 <div class="sns">
                     <a class="sns-btn twitter" href="https://x.com/yuro_fuwafuwa" target="_blank">X</a>
-                </div>
+                    </div>
 
-                <div class="etc">staff</div>
+                <div class="etc">adjutant</div>
 
                 <div class="intro-box">
                     <div class="intro-content">
@@ -445,10 +448,10 @@ body {
                 </div>
             </div>
 
-            <div class="member mod">
+            <div class="member sub">
                 <img src="tame.png" class="mini-icon" alt="ため">
-                <div class="name mod-name"><span>ため</span></div>
-                <div class="etc">staff</div>
+                <div class="name sub-name"><span>ため</span></div>
+                <div class="etc">adjutant</div>
 
                 <div class="intro-box">
                     <div class="intro-content">
@@ -464,7 +467,13 @@ body {
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
+    <!-- 🛡️ モデレーターセクション -->
+    <div class="role">
+        <h2>🛡️ モデレーター</h2>
+        <div class="member-grid">
             <div class="member mod">
                 <img src="ritorito.png" class="mini-icon" alt="りとりと">
                 <div class="name mod-name">りとりと</div>
@@ -503,7 +512,7 @@ body {
                 <div class="name mod-name">たこ</div>
                 <div class="etc">staff</div>
 
-                <div class="intro-box">
+               <div class="intro-box">
                     <div class="intro-content">
                         こんちは〜たこだよ！<br>
                         このサーバーで一応モデレーターやらせてもらってる人です！<br>
@@ -569,7 +578,7 @@ body {
                         こんな奴でも謎に評価があります。知らんけど。(👈ここ重要)<br>
                         ゲーム時は皆を奮い立たせたり、良い鯖にするために真面目なときは真面。<br>
                         俺はマジのYESマンではない。<br>
-                        上のモデの奴らに言いたいけど言うの難しいこととかは俺に言ってくれたら全然言うし、あいつらに喧喧も売りに行きます。<br>
+                        上のモデの奴らに言いたいけど言うの難しいこととかは俺に言ってくれたら全然言うし、あいつらに喧嘩も売りに行きます。<br>
                         皆で楽しく過ごせる環境にしよな～！ 任せろ👊👊
                     </div>
                 </div>
