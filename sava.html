@@ -12,24 +12,24 @@
 
         body {
             margin: 0;
-            font-family: sans-serif;
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             color: #ffffff;
             overflow-x: hidden;
             background-color: #0f172a;
             min-height: 100vh;
         }
 
-        /* 💡 背景画像固定 */
+        /* 💡 スマホの背景引き延ばしを防ぐ安全な固定背景設定 */
         .bg {
             position: fixed;
             inset: 0;
+            width: 100vw;
+            height: 100vh;
             background-image: url("images/bg1.png");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-attachment: fixed;
             z-index: -1;
-            opacity: 1;
         }
 
         /* ヘッダーナビゲーション */
@@ -42,7 +42,7 @@
             padding: 15px 0;
             display: flex;
             justify-content: center;
-            background: rgba(15, 23, 42, 0.6); 
+            background: rgba(15, 23, 42, 0.7); 
             backdrop-filter: blur(8px); 
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -125,6 +125,14 @@
             position: relative;
             background-color: transparent;
             width: 50%;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .timeline-item.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .timeline-item.left {
@@ -157,29 +165,36 @@
             right: auto;
         }
 
-        /* イベントカード本体 */
+        /* イベントカード本体（透明感のあるダークデザイン） */
         .timeline-content {
             padding: 20px;
-            background: rgba(255, 255, 255, 0.93);
-            color: #0f172a;
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
             position: relative;
-            border-radius: 12px;
+            border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             text-align: left;
+            transition: background 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            background: rgba(15, 23, 42, 0.65);
         }
 
         .timeline-date {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
-            color: #3b82f6;
+            color: #38bdf8;
             margin-bottom: 5px;
         }
 
         .timeline-content h3 {
             margin: 0 0 10px 0;
             font-size: 18px;
-            color: #1e293b;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+            color: #ffffff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding-bottom: 5px;
         }
 
@@ -187,11 +202,25 @@
             margin: 0;
             font-size: 14px;
             line-height: 1.6;
-            color: #334155;
+            color: #f1f5f9;
             white-space: pre-wrap;
         }
 
-        /* 📱 スマホ対応（完全修正版） */
+        /* フッター（二段崩れ防止・他ページと統一） */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            margin: 50px auto 20px auto;
+            max-width: 800px;
+            border-radius: 15px;
+            font-size: 14px;
+        }
+
+        /* 📱 スマホ対応 */
         @media screen and (max-width: 768px) {
             .nav-menu ul { gap: 15px 20px; }
             .container { padding-top: 130px; }
@@ -219,6 +248,10 @@
                 left: 12px;
                 right: auto;
             }
+            
+            .footer {
+                margin: 30px 15px 15px 15px;
+            }
         }
     </style>
 </head>
@@ -236,7 +269,7 @@
             <li><a href="member2.html">メンバー一覧</a></li>
             <li><a href="youtube.html">鯖主の動画</a></li>
             <li><a href="sava.html">サーバーの歴史</a></li>
-            <li><a href="javascript:void(0);" class="disabled">Coming Soon</a></li>
+            <li><a href="javascript:void(0);" style="cursor: default; opacity: 0.4;">Coming Soon</a></li>
         </ul>
     </nav>
 </header>
@@ -288,9 +321,13 @@
             </div>
         </div>
 
-    </div> <!-- 💡 追加：.timeline の閉じタグ -->
+    </div>
 
 </div>
+
+<footer class="footer">
+    <p>© 月詠交流会 作成者：ゆろ・抹茶ラテ 協力者：ひーくん</p>
+</footer>
 
 <script>
 // --- 🎵 ホームとシームレスに繋がるBGMシステム 🎵 ---
@@ -312,7 +349,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 bgm.play().then(() => {
                     document.removeEventListener("click", startPlay);
                 }).catch(err => {
-                    console.log("クリック後に再生が開始されます。");
+                    console.log("ブラウザの保護機能により、画面クリック後に再生が開始されます。");
                 });
             };
             startPlay();
@@ -332,6 +369,15 @@ if (bgm) {
         localStorage.setItem("bgm_volume", bgm.volume);
     }, 500);
 }
+
+// --- スクロール時のふわっと表示（タイムライン用） ---
+const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add("show");
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll(".timeline-item").forEach(item => obs.observe(item));
 </script>
 </body>
 </html>

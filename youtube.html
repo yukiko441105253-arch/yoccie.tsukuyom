@@ -11,23 +11,24 @@
 
         body {
             margin: 0;
-            font-family: sans-serif;
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             color: white;
             overflow-x: hidden;
-            background-color: #0f172a; /* ベース背景色 */
+            background-color: #0f172a;
+            min-height: 100vh;
         }
 
-        /* 💡 背景画像固定 */
+        /* 💡 スマホの背景引き延ばしを防ぐ安全な固定背景設定 */
         .bg {
             position: fixed;
             inset: 0;
+            width: 100vw;
+            height: 100vh;
             background-image: url("images/bg1.png");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-attachment: fixed; /* 背景画像を完全に画面に固定 */
-            z-index: -1; /* コンテンツの後ろに配置 */
-            opacity: 1;
+            z-index: -1;
         }
 
         /* ✨ 固定ヘッダーナビゲーションバー */
@@ -40,7 +41,7 @@
             padding: 15px 0;
             display: flex;
             justify-content: center;
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(15, 23, 42, 0.7);
             backdrop-filter: blur(8px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -73,13 +74,6 @@
             opacity: 1;
         }
 
-        /* Coming Soon 用の無効化スタイル */
-        .nav-menu a.disabled {
-            pointer-events: none;
-            opacity: 0.4;
-            cursor: default;
-        }
-
         /* メインコンテンツエリア */
         .container {
             position: relative;
@@ -91,7 +85,7 @@
         }
 
         h1 {
-            color: #ff0000;
+            color: #ff4d4d;
             margin-bottom: 30px;
             text-align: center;
             font-size: 28px;
@@ -108,18 +102,19 @@
 
         /* 動画カード */
         .video-card {
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(8px);
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(4px);
             border-radius: 15px;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s, background 0.3s, border-color 0.2s, box-shadow 0.2s;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
         .video-card:hover {
             transform: translateY(-3px);
-            border-color: #ff0000;
+            background: rgba(15, 23, 42, 0.65);
+            border-color: #ff4d4d;
             box-shadow: 0 6px 20px rgba(255, 0, 0, 0.2);
         }
 
@@ -192,26 +187,23 @@
             word-break: break-all;
         }
 
-        /* フッター */
+        /* フッター（他ページと統一・二段崩れ防止） */
         .footer {
-            background: rgba(255, 255, 255, 0.93);
-            color: #0f172a;
-            border-radius: 15px;
             text-align: center;
             padding: 20px;
-            margin-top: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-        }
-
-        .footer p {
-            margin: 5px 0;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            margin: 50px auto 20px auto;
+            max-width: 800px;
+            border-radius: 15px;
             font-size: 14px;
-            color: #0f172a;
         }
 
         .footer .meta-info {
             font-size: 12px;
-            color: #475569;
+            color: rgba(255, 255, 255, 0.6);
             margin-top: 8px;
         }
 
@@ -221,12 +213,15 @@
             .nav-menu ul { gap: 15px 20px; } 
             .container { padding-top: 130px; } 
             .video-title { font-size: 16px; }
+            .footer { margin: 30px 15px 15px 15px; }
         }
     </style>
 </head>
 <body>
 
-<div class="bg"></div>
+<div class="bg" id="bg"></div>
+
+<audio id="bgm" loop></audio>
 
 <header class="site-header">
     <nav class="nav-menu">
@@ -236,7 +231,7 @@
             <li><a href="member2.html">メンバー一覧</a></li>
             <li><a href="youtube.html">鯖主の動画</a></li>
             <li><a href="sava.html">サーバーの歴史</a></li>
-            <li><a href="javascript:void(0);" class="disabled">Coming Soon</a></li>
+            <li><a href="javascript:void(0);" style="cursor: default; opacity: 0.4;">Coming Soon</a></li>
         </ul>
     </nav>
 </header>
@@ -294,5 +289,46 @@
 
 </div>
 
+<script>
+// --- 🎵 ホームとシームレスに繋がるBGMシステム 🎵 ---
+const bgm = document.getElementById("bgm");
+
+window.addEventListener("DOMContentLoaded", () => {
+    const savedSrc = localStorage.getItem("bgm_src");
+    const savedTime = localStorage.getItem("bgm_time");
+    const savedVolume = localStorage.getItem("bgm_volume");
+    const isPlaying = localStorage.getItem("bgm_playing");
+
+    if (savedSrc && bgm) {
+        bgm.src = savedSrc;
+        bgm.currentTime = savedTime ? parseFloat(savedTime) : 0;
+        bgm.volume = savedVolume ? parseFloat(savedVolume) : 0.5;
+
+        if (isPlaying === "true") {
+            const startPlay = () => {
+                bgm.play().then(() => {
+                    document.removeEventListener("click", startPlay);
+                }).catch(err => {
+                    console.log("ブラウザの保護機能により、画面クリック後に再生が開始されます。");
+                });
+            };
+            startPlay();
+            document.addEventListener("click", startPlay, { once: true });
+        }
+    }
+});
+
+if (bgm) {
+    setInterval(() => {
+        if (!bgm.paused) {
+            localStorage.setItem("bgm_time", bgm.currentTime);
+            localStorage.setItem("bgm_playing", "true");
+        } else {
+            localStorage.setItem("bgm_playing", "false");
+        }
+        localStorage.setItem("bgm_volume", bgm.volume);
+    }, 500);
+}
+</script>
 </body>
 </html>
