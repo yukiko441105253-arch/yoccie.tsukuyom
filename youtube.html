@@ -127,9 +127,10 @@
             text-decoration: none;
             color: inherit;
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* スマホでは基本「縦並び」にする */
         }
 
+        /* PCサイズ以上の時は横並びにする */
         @media (min-width: 600px) {
             .video-link {
                 flex-direction: row;
@@ -138,13 +139,20 @@
 
         /* サムネイルボックス */
         .thumbnail-box {
-            flex: 2;
+            width: 100%;
             background-color: #000;
             display: flex;
             align-items: center;
             justify-content: center;
             aspect-ratio: 16 / 9;
             overflow: hidden;
+        }
+
+        @media (min-width: 600px) {
+            .thumbnail-box {
+                flex: 2;
+                width: auto;
+            }
         }
 
         .thumbnail-box img {
@@ -156,11 +164,17 @@
 
         /* テキスト情報ボックス */
         .info-box {
-            flex: 3;
             padding: 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            width: 100%;
+        }
+
+        @media (min-width: 600px) {
+            .info-box {
+                flex: 3;
+            }
         }
 
         .video-title {
@@ -197,15 +211,15 @@
 
         .footer .meta-info {
             font-size: 12px;
-            color: #475569; /* 透明度ではなく、読みやすいグレー系統の色に変更 */
+            color: #475569;
             margin-top: 8px;
         }
 
-        /* スマホ用レスポンシブ */
+        /* スマホ用レスポンシブの追加調整 */
         @media(max-width: 768px) {
             h1 { font-size: 22px; }
-            .nav-menu ul { gap: 15px 20px; } /* 縦方向の隙間も確保 */
-            .container { padding-top: 130px; } /* メニュー折り返しに備えて余白を最適化 */
+            .nav-menu ul { gap: 15px 20px; } 
+            .container { padding-top: 130px; } 
             .video-title { font-size: 16px; }
         }
     </style>
@@ -222,7 +236,7 @@
             <li><a href="member2.html">メンバー一覧</a></li>
             <li><a href="youtube.html">鯖主の動画</a></li>
             <li><a href="sava.html">サーバーの歴史</a></li>
-            <li><a href="javascript:void(0);" style="cursor: default;">Coming Soon</a></li>
+            <li><a href="javascript:void(0);" class="disabled">Coming Soon</a></li>
         </ul>
     </nav>
 </header>
@@ -274,7 +288,7 @@
     <footer class="footer">
         <p>© 月詠交流会 作成者：ゆろ・抹茶ラテ 協力者：ひーくん</p>
         <div class="meta-info">
-            <span>最終更新日: 2026年7月6日</span> │ <span>Version 1.4.8</span> 
+            <span>最終更新日: 2026年7月6日</span> │ <span>Version 1.5</span> 
         </div>
     </footer>
 

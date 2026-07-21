@@ -15,7 +15,7 @@
             font-family: sans-serif;
             color: #ffffff;
             overflow-x: hidden;
-            background-color: #0f172a; /* 画像が読み込まれるまでのベース色 */
+            background-color: #0f172a;
             min-height: 100vh;
         }
 
@@ -27,8 +27,8 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-attachment: fixed; /* 背景画像を完全に画面に固定 */
-            z-index: -1; /* コンテンツの後ろに配置 */
+            background-attachment: fixed;
+            z-index: -1;
             opacity: 1;
         }
 
@@ -53,12 +53,12 @@
             gap: 35px;
             margin: 0;
             padding: 0;
-            flex-wrap: wrap; /* スマホでの折り返し対策 */
+            flex-wrap: wrap; 
             justify-content: center;
         }
 
         .nav-menu li {
-            white-space: nowrap; /* テキストの途中で改行されるのを防ぐ */
+            white-space: nowrap; 
         }
 
         .nav-menu a {
@@ -73,13 +73,6 @@
 
         .nav-menu a:hover {
             opacity: 1;
-        }
-
-        /* Coming Soon 用の無効化スタイル */
-        .nav-menu a.disabled {
-            pointer-events: none;
-            opacity: 0.4;
-            cursor: default;
         }
 
         /* コンテンツコンテナ */
@@ -114,7 +107,7 @@
             padding: 20px 0;
         }
 
-        /* 中央を通る一本の線 */
+        /* 中央を通る一本の線（PC用） */
         .timeline::after {
             content: '';
             position: absolute;
@@ -134,13 +127,11 @@
             width: 50%;
         }
 
-        /* 左側の配置 */
         .timeline-item.left {
             left: 0;
             text-align: right;
         }
 
-        /* 右側の配置 */
         .timeline-item.right {
             left: 50%;
             text-align: left;
@@ -163,6 +154,7 @@
 
         .timeline-item.right::after {
             left: -8px;
+            right: auto;
         }
 
         /* イベントカード本体 */
@@ -176,7 +168,6 @@
             text-align: left;
         }
 
-        /* 日付・タイトルの装飾 */
         .timeline-date {
             font-size: 14px;
             font-weight: bold;
@@ -200,32 +191,32 @@
             white-space: pre-wrap;
         }
 
-        /* 📱 スマホ対応 */
+        /* 📱 スマホ対応（完全修正版） */
         @media screen and (max-width: 768px) {
             .nav-menu ul { gap: 15px 20px; }
-            .container { padding-top: 130px; } /* メニュー折り返しに備えて余白を広めに調整 */
+            .container { padding-top: 130px; }
 
+            /* 線を左側に寄せる */
             .timeline::after {
-                left: 31px;
+                left: 20px;
             }
 
             .timeline-item {
                 width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
+                padding-left: 50px;
+                padding-right: 0;
             }
 
-            .timeline-item.left {
+            .timeline-item.left,
+            .timeline-item.right {
                 left: 0;
                 text-align: left;
             }
 
-            .timeline-item.right {
-                left: 0;
-            }
-
-            .timeline-item::after {
-                left: 23px;
+            /* 丸いドットの位置を左側の線に合わせる */
+            .timeline-item::after,
+            .timeline-item.right::after {
+                left: 12px;
                 right: auto;
             }
         }
@@ -245,7 +236,7 @@
             <li><a href="member2.html">メンバー一覧</a></li>
             <li><a href="youtube.html">鯖主の動画</a></li>
             <li><a href="sava.html">サーバーの歴史</a></li>
-            <li><a href="javascript:void(0);" style="cursor: default;">Coming Soon</a></li>
+            <li><a href="javascript:void(0);" class="disabled">Coming Soon</a></li>
         </ul>
     </nav>
 </header>
@@ -291,19 +282,17 @@
 
         <div class="timeline-item left">
             <div class="timeline-content">
-                <div class="timeline-date">2026年 6月21日</div> <!-- 💡 2025年から2026年に修正 -->
+                <div class="timeline-date">2026年 6月21日</div>
                 <h3>✨ 公式サイトオープン＆現在へ</h3>
                 <p>ついに月詠交流会の公式WEBサイトが完成！これからもみんなで最高の思い出と歴史を作っていきましょう！</p>
             </div>
         </div>
 
-    </div>
+    </div> <!-- 💡 追加：.timeline の閉じタグ -->
 
 </div>
 
 <script>
-// 💡 背景自動切り替えJSシステムは、bg1.pngのみ固定にしたため削除しました。
-
 // --- 🎵 ホームとシームレスに繋がるBGMシステム 🎵 ---
 const bgm = document.getElementById("bgm");
 
