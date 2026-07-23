@@ -35,7 +35,7 @@ body {
     opacity: 1;
 }
 
-/* ヘッダーナビゲーション */
+/* ヘッダーナビゲーション（ホーム画面と完全に同じ明るさ・フォント設定に統一） */
 .site-header {
     position: fixed; 
     top: 0;
@@ -50,14 +50,27 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.nav-menu {
+    width: 100%;
+    max-width: 1000px;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox用 */
+}
+
+.nav-menu::-webkit-scrollbar {
+    display: none; /* Chrome, Safari用 */
+}
+
 .nav-menu ul {
     list-style: none;
     display: flex;
     gap: 35px;
     margin: 0;
-    padding: 0;
-    flex-wrap: wrap; /* スマホでの折り返し対策 */
+    padding: 0 20px;
     justify-content: center;
+    min-width: max-content;
 }
 
 .nav-menu li {
@@ -330,7 +343,7 @@ body {
 
 @media(max-width: 600px) {
     .member-grid { grid-template-columns: 1fr; }
-    .nav-menu ul { gap: 15px 20px; } 
+    .nav-menu ul { justify-content: flex-start; padding: 0 15px; gap: 20px; } 
     .nav-menu a { font-size: 14px; }
     .role { padding: 15px; }
     .container { padding-top: 130px; } 
