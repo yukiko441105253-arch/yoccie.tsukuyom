@@ -19,18 +19,18 @@
             min-height: 100vh;
         }
 
-        /* 💡 スマホの背景引き延ばしを防ぐ安全な固定背景設定 */
-        .bg {
-            position: fixed;
-            inset: 0;
-            width: 100vw;
-            height: 100vh;
-            background-image: url("images/bg1.png");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            z-index: -1;
-        }
+/* 1枚の写真を画面全体に完全に固定 */
+.bg {
+    position: fixed;
+    inset: 0;
+    background-image: url('images/bg1.png'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    opacity: 0.3; /* 全体を少し暗めに調整 */
+    filter: brightness(0.9);
+}
 
         /* ✨ 固定ヘッダーナビゲーションバー（スマホ横スクロール・デザイン統一版） */
         .site-header {

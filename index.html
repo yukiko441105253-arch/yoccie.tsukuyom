@@ -36,7 +36,8 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     z-index: 0;
-    opacity: 0.5; 
+    opacity: 0.3; /* 全体を少し暗めに調整 */
+    filter: brightness(0.9);
 }
 
 /* ヘッダーナビゲーション */
@@ -49,7 +50,7 @@ body {
     padding: 15px 0;
     display: flex;
     justify-content: center;
-    background: rgba(5, 13, 26, 0.6);
+    background: rgba(5, 13, 26, 0.8);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -111,7 +112,6 @@ body {
     color: white;
 }
 
-/* ツクヨミ（月）をイメージした、幻想的な輝くゴールドグラデーション */
 .hero h1 {
     font-size: 42px;
     font-weight: bold;
@@ -139,7 +139,7 @@ body {
 }
 
 .music-accordion {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.4);
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     overflow: hidden;
@@ -183,7 +183,7 @@ body {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s ease-out;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.6);
 }
 
 .accordion-inner {
@@ -195,29 +195,40 @@ body {
     overflow-y: auto;
 }
 
-.stop-btn-area {
-    position: sticky;
-    top: 0;
-    background: rgba(15, 23, 42, 0.95);
-    z-index: 10;
+/* 音量バーエリア（一番上に配置） */
+.volume-area {
+    font-size: 14px;
     text-align: center;
-    margin-bottom: 10px;
+    padding-bottom: 8px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 10px;
+    margin-bottom: 4px;
+}
+
+.volume-area input[type="range"] {
+    vertical-align: middle;
+    width: 60%;
+    max-width: 200px;
+    margin-left: 8px;
+}
+
+/* 音停止ボタンエリア */
+.stop-btn-area {
+    text-align: center;
+    margin-bottom: 4px;
 }
 
 .stop-btn-area button {
     background: #ef4444;
     color: white;
     border: none;
-    padding: 8px 30px;
-    border-radius: 8px;
+    padding: 10px 15px;
+    border-radius: 6px;
     font-weight: bold;
     cursor: pointer;
     transition: background 0.2s;
     width: 100%;
-    max-width: 200px;
     font-family: inherit;
+    font-size: 15px;
 }
 .stop-btn-area button:hover {
     background: #f87171;
@@ -253,26 +264,6 @@ body {
     transform: translateX(6px);
 }
 
-.volume-area {
-    position: sticky;
-    bottom: 0;
-    background: rgba(15, 23, 42, 0.95);
-    z-index: 10;
-    margin-top: 15px;
-    padding-top: 12px;
-    font-size: 14px;
-    text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 5px;
-}
-
-.volume-area input[type="range"] {
-    vertical-align: middle;
-    width: 60%;
-    max-width: 200px;
-    margin-left: 8px;
-}
-
 .join-btn {
     display: inline-block;
     padding: 12px 24px;
@@ -302,7 +293,6 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* 紹介セクションの読みやすさ向上 */
 .intro {
     padding: 30px 10px;
     margin: 20px 0;
@@ -329,7 +319,6 @@ body {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
 }
 
-/* 箇条書きとステップ用のスタイル */
 .intro ul, .intro ol {
     padding-left: 20px;
     margin: 16px 0;
@@ -364,7 +353,7 @@ body {
 }
 
 .time-box {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.6);
     border-left: 5px solid #eab308;
     padding: 15px;
     margin: 15px 0;
@@ -377,9 +366,8 @@ body {
     text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
 
-/* リアルタイム人数表示用スタイル */
 .server-status-container {
-    background-color: rgba(30, 41, 59, 0.7);
+    background-color: rgba(15, 23, 42, 0.85);
     border-radius: 12px;
     max-width: 400px;
     margin: 25px auto;
@@ -461,7 +449,6 @@ body {
     100% { transform: scale(2.5); opacity: 0; }
 }
 
-/* フッター */
 .footer {
     text-align: center;
     padding: 20px;
@@ -482,11 +469,8 @@ body {
     margin-top: 8px;
 }
 
-/* レスポンシブ（スマホ対応） */
 @media(max-width: 768px) {
-    .site-header {
-        padding: 10px 0;
-    }
+    .site-header { padding: 10px 0; }
     .nav-menu {
         width: 100%;
         overflow-x: auto;
@@ -498,10 +482,7 @@ body {
         white-space: nowrap;
         padding-bottom: 4px;
     }
-    .nav-menu a {
-        font-size: 14px;
-    }
-     
+    .nav-menu a { font-size: 14px; }
     .hero h1 { font-size: 30px; }
     .intro h2 { font-size: 22px; }
     .container { padding-top: 75px; }
@@ -547,9 +528,7 @@ body {
                     <h4 id="discord-server-name">サーバー名を取得中...</h4>
                     <div class="status-count-mini">
                         <div class="online-wrapper">
-                            <span class="pulse-dot"></span>オンライン: <span id="discord-online-count">0人</span> </p>
-　</span>メンバー: 156人</span>
-
+                            <span class="pulse-dot"></span>オンライン: <span id="discord-online-count">0人</span> / メンバー: 163人
                         </div>
                     </div>
                 </div>
@@ -566,10 +545,17 @@ body {
                 <div class="accordion-content">
                     <div class="accordion-inner">
                         
-                        <div class="stop-btn-area">
-                            <button onclick="stopMusic()">⏹ 全体停止</button>
+                        <!-- 音量バー（一番上に移動） -->
+                        <div class="volume-area">
+                            音量：<input type="range" id="volume" min="0" max="1" step="0.01" value="0.5">
                         </div>
 
+                        <!-- 音停止ボタン -->
+                        <div class="stop-btn-area">
+                            <button onclick="stopMusic()">⏹ 音停止</button>
+                        </div>
+
+                        <!-- 楽曲リスト -->
                         <button class="song-btn" onclick="playMusic('music1.opus', this)">🎵 星降る海</button>
                         <button class="song-btn" onclick="playMusic('music2.opus', this)">🎵 瞬間シンフォニー</button>
                         <button class="song-btn" onclick="playMusic('music3.opus', this)">🎵 remember</button>
@@ -580,10 +566,6 @@ body {
                         <button class="song-btn" onclick="playMusic('music8.opus', this)">🎵 メルト</button>
                         <button class="song-btn" onclick="playMusic('music9.opus', this)">🎵 ray</button>
                         <button class="song-btn" onclick="playMusic('music10.opus', this)">🎵 Reply</button>
-
-                        <div class="volume-area">
-                            音量：<input type="range" id="volume" min="0" max="1" step="0.01" value="0.5">
-                        </div>
 
                     </div>
                 </div>
@@ -600,7 +582,7 @@ body {
         <p>・精度高く、サーバー内のメンバーである「ひーくん」「抹茶ラテ」にツクヨミ交流会のホームページを制作していただきました！</p>
         <p>・一部のメンバーは、お悩み相談などサーバー外で起きた事などにも親身に対応して一緒に協力してくれます！</p>
         <p>・「超かぐや姫！」以外にも日常雑談・ゲームの話なども盛んで行われております！</p>
-        <p>ここの交流会の挨拶はみんなが元気よく！ｼｬｳｴｯｾｰｰｰｰｰｰﾝ!!!!!!!!!と迎え入れてくれます✨<p>
+        <p>ここの交流会の挨拶はみんなが元気よく！ｼｬｳｴｯｾｰｰｰｰｰｰﾝ!!!!!!!!!と迎え入れてくれます✨</p>
         
         <p>・様々なジャンルのゲームを遊んでるメンバー達が沢山います！もしかしたらゲーム関連で仲の良い友達が作れるかも…？？</p>
         <ul>
@@ -639,7 +621,7 @@ body {
 
 <script>
 // --- Discordからリアルタイムに人数を取得するプログラム ---
-const DISCORD_SERVER_ID = "1501639435500912650 "; 
+const DISCORD_SERVER_ID = "1501639435500912650"; 
 
 function fetchDiscordStatus() {
     if(!DISCORD_SERVER_ID) return;
@@ -647,7 +629,7 @@ function fetchDiscordStatus() {
     fetch(`https://discord.com/api/guilds/${DISCORD_SERVER_ID}/widget.json?_=${new Date().getTime()}`)
     .then(response => {
         if (!response.ok) {
-            throw new Error('サーバーデータの取得に失敗しました。ウィジェット設定を確認してください。');
+            throw new Error('サーバーデータの取得に失敗しました。');
         }
         return response.json();
     })
@@ -667,7 +649,7 @@ function fetchDiscordStatus() {
     .catch(err => {
         console.error("Discordデータの取得に失敗しました:", err);
         document.getElementById("discord-server-name").textContent = "ツクヨミ交流会";
-        document.getElementById("discord-online-count").textContent = "--人 (設定を確認してください)";
+        document.getElementById("discord-online-count").textContent = "--人";
     });
 }
 
@@ -675,7 +657,6 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchDiscordStatus();
     setInterval(fetchDiscordStatus, 60000);
 });
-
 
 // --- 音楽再生コントロール ---
 const bgm = document.getElementById("bgm");
@@ -694,57 +675,56 @@ function updateVolume() {
     bgm.volume = vol;
 }
 
-if (bgm) {
+if (bgm && volumeInput) {
     bgm.volume = 0.5;
+    volumeInput.addEventListener("input", updateVolume);
+    volumeInput.addEventListener("change", updateVolume);
+}
 
-    if (volumeInput) {
-        volumeInput.addEventListener("input", updateVolume);
-        volumeInput.addEventListener("change", updateVolume);
+function playMusic(file, btnElement) {
+    if (!bgm) return;
+    bgm.src = file;
+    updateVolume();
+
+    document.querySelectorAll('.song-btn').forEach(btn => {
+        btn.classList.remove('is-playing');
+    });
+    if(btnElement) {
+        btnElement.classList.add('is-playing');
     }
 
-    function playMusic(file, btnElement) {
-        bgm.src = file;
-        updateVolume();
-
-        document.querySelectorAll('.song-btn').forEach(btn => {
-            btn.classList.remove('is-playing');
-        });
-        if(btnElement) {
-            btnElement.classList.add('is-playing');
-        }
-
-        if (!audioCtx && window.location.protocol !== 'file:') {
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            if (AudioContext) {
-                try {
-                    audioCtx = new AudioContext();
-                    sourceNode = audioCtx.createMediaElementSource(bgm);
-                    gainNode = audioCtx.createGain();
-                    sourceNode.connect(gainNode);
-                    gainNode.connect(audioCtx.destination);
-                    gainNode.gain.value = volumeInput.value;
-                } catch (e) {
-                    console.log("Web Audio Context はスキップされました");
-                }
+    if (!audioCtx && window.location.protocol !== 'file:') {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) {
+            try {
+                audioCtx = new AudioContext();
+                sourceNode = audioCtx.createMediaElementSource(bgm);
+                gainNode = audioCtx.createGain();
+                sourceNode.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                gainNode.gain.value = volumeInput ? volumeInput.value : 0.5;
+            } catch (e) {
+                console.log("Web Audio Context はスキップされました");
             }
         }
-        
-        if (audioCtx && audioCtx.state === 'suspended') {
-            audioCtx.resume();
-        }
-
-        bgm.play().catch(err => {
-            console.log("再生エラー:", err);
-        });
+    }
+    
+    if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
     }
 
-    function stopMusic() {
-        bgm.pause();
-        bgm.currentTime = 0;
-        document.querySelectorAll('.song-btn').forEach(btn => {
-            btn.classList.remove('is-playing');
-        });
-    }
+    bgm.play().catch(err => {
+        console.log("再生エラー:", err);
+    });
+}
+
+function stopMusic() {
+    if (!bgm) return;
+    bgm.pause();
+    bgm.currentTime = 0;
+    document.querySelectorAll('.song-btn').forEach(btn => {
+        btn.classList.remove('is-playing');
+    });
 }
 
 // --- アコーディオン開閉 ---
