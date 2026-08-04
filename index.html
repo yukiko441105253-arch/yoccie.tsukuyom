@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -14,18 +13,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>交流会コミュニティ - ツクヨミ交流会</title>
 
-<!-- ▼ ここからOGP設定（URLを貼ったときに概要が出るようにする設定） ▼ -->
+<!-- ▼ OGP設定 ▼ -->
 <meta name="description" content="ツクヨミ交流会ではみんなが表現者！雑談やボイスチャット、コミュニティーで個性を出していこう！！">
 <meta property="og:title" content="交流会コミュニティ - ツクヨミ交流会">
 <meta property="og:description" content="ツクヨミ交流会ではみんなが表現者！雑談やボイスチャット、コミュニティーで個性を出していこう！！">
 <meta property="og:type" content="website">
-<meta property="og:url" content="ここにあなたのサイトの公開URL（例: https://example.com/index.html）を記入してください">
-<meta property="og:image" content="ここにSNSで表示させたいサムネイル画像の完全なURL（例: https://example.com/images/ogp.png）を記入してください">
+<meta property="og:url" content="https://yoccie-tsukuyom-pnviqkc0j-yoccietsukuyomiexchange.vercel.app/">
+<meta property="og:image" content="images/bg1.png">
 <meta property="og:site_name" content="ツクヨミ交流会">
 <meta name="twitter:card" content="summary_large_image">
-<!-- ▲ ここまでOGP設定 ▲ -->
+<!-- ▲ OGP設定ここまで ▲ -->
 
-<link rel="icon" href="images/favicon.png" type="image/png" />
+<link rel="icon" href="images/favicon.png" type="image/png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +46,7 @@ body {
     background-color: #050d1a;
 }
 
-/* 1枚の写真を画面全体に完全に固定 */
+/* 背景を固定 */
 .bg {
     position: fixed;
     inset: 0;
@@ -56,30 +55,30 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     z-index: 0;
-    opacity: 0.3; /* 全体を少し暗めに調整 */
-    filter: brightness(0.9);
+    opacity: 0.35;
+    filter: brightness(0.85);
 }
 
-/* ヘッダーナビゲーション */
+/* ヘッダー */
 .site-header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 100;
-    padding: 15px 0;
+    padding: 14px 0;
     display: flex;
     justify-content: center;
-    background: rgba(5, 13, 26, 0.8);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(5, 13, 26, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav-menu ul {
     list-style: none;
     display: flex;
-    gap: 35px;
+    gap: 30px;
     margin: 0;
     padding: 0;
 }
@@ -87,7 +86,7 @@ body {
 .nav-menu a {
     text-decoration: none;
     color: #ffffff;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
     opacity: 0.8;
     transition: opacity 0.3s ease;
@@ -102,38 +101,28 @@ body {
     cursor: not-allowed;
     opacity: 0.4;
 }
-.nav-menu a.coming-soon:hover {
-    opacity: 0.4;
-}
 
-/* コンテンツ */
+/* コンテンツ全体 */
 .container {
     position: relative;
     z-index: 1;
-    max-width: 1000px;
+    max-width: 900px;
     margin: auto;
     padding: 20px;
     padding-top: 90px;
-}
-
-.intro, .footer {
-    background: transparent;
-    color: white;
-    border-radius: 0;
 }
 
 .hero {
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: 60px 20px;
-    background: transparent;
-    margin-bottom: 20px;
+    padding: 50px 20px;
+    margin-bottom: 10px;
     color: white;
 }
 
 .hero h1 {
-    font-size: 42px;
+    font-size: 40px;
     font-weight: bold;
     margin-bottom: 15px;
     background: linear-gradient(90deg, #ffe259, #ffa751, #ffffff, #ffe259);
@@ -141,261 +130,74 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: rainbowMove 8s ease-in-out infinite;
-    text-shadow: 0 0 15px rgba(255, 226, 89, 0.2);
+    text-shadow: 0 0 20px rgba(255, 226, 89, 0.25);
 }
 
 .hero p {
-    font-size: 17px;
+    font-size: 16px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     line-height: 1.7;
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
 }
 
-/* 音楽アコーディオン用スタイル */
-.music-list-container {
-    margin: 20px auto 0;
-    max-width: 500px;
-}
-
-.music-accordion {
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    overflow: hidden;
-    backdrop-filter: blur(4px);
-}
-
-.accordion-trigger {
-    width: 100%;
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    color: white;
-    padding: 14px 20px;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: left;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: background 0.3s;
-    font-family: inherit;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-}
-
-.accordion-trigger:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.accordion-trigger::after {
-    content: '▼';
-    font-size: 12px;
-    transition: transform 0.3s ease;
-    opacity: 0.7;
-}
-
-.accordion-trigger.is-open::after {
-    transform: rotate(180deg);
-}
-
-.accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-    background: rgba(0, 0, 0, 0.6);
-}
-
-.accordion-inner {
-    padding: 15px;
+/* ボタン共通 */
+.btn-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    max-height: 400px;
-    overflow-y: auto;
-}
-
-/* 音量バーエリア（一番上に配置） */
-.volume-area {
-    font-size: 14px;
-    text-align: center;
-    padding-bottom: 8px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: 4px;
-}
-
-.volume-area input[type="range"] {
-    vertical-align: middle;
-    width: 60%;
-    max-width: 200px;
-    margin-left: 8px;
-}
-
-/* 音停止ボタンエリア */
-.stop-btn-area {
-    text-align: center;
-    margin-bottom: 4px;
-}
-
-.stop-btn-area button {
-    background: #ef4444;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.2s;
-    width: 100%;
-    font-family: inherit;
-    font-size: 15px;
-}
-.stop-btn-area button:hover {
-    background: #f87171;
-}
-
-.song-btn {
-    width: 100%;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: white;
-    padding: 10px 15px;
-    font-size: 15px;
-    text-align: left;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s ease, transform 0.1s;
-    font-family: inherit;
-}
-
-.song-btn:hover {
-    background: rgba(56, 189, 248, 0.2);
-    color: #38bdf8;
-    transform: translateX(4px);
-}
-
-/* 音楽再生中のアクティブエフェクト */
-.song-btn.is-playing {
-    background: #38bdf8 !important;
-    color: #0f172a !important;
-    font-weight: bold;
-    border-color: #38bdf8;
-    box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
-    transform: translateX(6px);
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
 }
 
 .join-btn {
-    display: inline-block;
-    padding: 12px 24px;
-    background: #38bdf8;
-    color: #0f172a;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 320px;
+    padding: 13px 20px;
     text-decoration: none;
-    border-radius: 10px;
+    border-radius: 12px;
     font-weight: bold;
-    transition: transform 0.2s;
-    margin: 10px 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    font-size: 16px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    font-family: inherit;
 }
 
 .join-btn:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 .x-btn {
-    background: #000000;
+    background: #111111;
     color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-@keyframes rainbowMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+.discord-btn {
+    background: #5865F2;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.intro {
-    padding: 30px 10px;
-    margin: 20px 0;
+.discord-btn:hover {
+    box-shadow: 0 0 15px rgba(88, 101, 242, 0.6);
 }
 
-.intro h2 {
-    font-size: 28px;
-    font-weight: bold;
-    margin-top: 0;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #3b82f6;
-    padding-bottom: 8px;
-    color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-.intro p {
-    font-size: 16px;
-    font-weight: normal; 
-    line-height: 2.0;    
-    letter-spacing: 0.03em; 
-    margin: 16px 0;
-    color: #f1f5f9;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
-}
-
-.intro ul, .intro ol {
-    padding-left: 20px;
-    margin: 16px 0;
-}
-
-.intro li {
-    font-size: 16px;
-    line-height: 1.8;
-    color: #f1f5f9;
-    margin-bottom: 8px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
-}
-
-.intro li strong {
-    color: #38bdf8;
-}
-
-.intro .note-text {
-    font-size: 14px;
-    color: #94a3b8;
-    margin-top: 4px;
-    display: block;
-}
-
-.section-title {
-    font-size: 1.4em;
-    font-weight: bold;
-    color: #38bdf8;
-    margin-top: 35px;
-    display: block;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-.time-box {
-    background: rgba(0, 0, 0, 0.6);
-    border-left: 5px solid #eab308;
-    padding: 15px;
-    margin: 15px 0;
-    border-radius: 4px;
-}
-.time-box p {
-    margin: 6px 0 !important;
-    font-weight: bold;
-    color: white !important;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-}
-
+/* サーバー状況ウィジェット */
 .server-status-container {
-    background-color: rgba(15, 23, 42, 0.85);
-    border-radius: 12px;
-    max-width: 400px;
-    margin: 25px auto;
-    padding: 20px;
+    background-color: rgba(15, 23, 42, 0.8);
+    border-radius: 14px;
+    max-width: 360px;
+    margin: 20px auto 30px;
+    padding: 16px 20px;
     color: #f1f5f9;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
     text-align: left;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .server-header-mini {
@@ -404,29 +206,20 @@ body {
 }
 
 .server-icon-mini {
-    width: 45px;
-    height: 45px;
+    width: 42px;
+    height: 42px;
     background: linear-gradient(135deg, #38bdf8, #1d4ed8); 
-    border-radius: 15px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
     font-size: 20px;
-    color: white;
     margin-right: 12px;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-}
-
-.server-info-mini {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
 .server-info-mini h4 {
     margin: 0;
-    font-size: 17px;
+    font-size: 16px;
     font-weight: bold;
     color: white;
 }
@@ -434,9 +227,7 @@ body {
 .status-count-mini {
     font-size: 13px;
     color: #94a3b8;
-    margin-top: 5px;
-    display: flex;
-    align-items: center;
+    margin-top: 4px;
 }
 
 .online-wrapper {
@@ -469,26 +260,224 @@ body {
     100% { transform: scale(2.5); opacity: 0; }
 }
 
+@keyframes rainbowMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 音楽アコーディオン */
+.music-list-container {
+    margin: 20px auto 0;
+    max-width: 450px;
+}
+
+.music-accordion {
+    background: rgba(0, 0, 0, 0.45);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    overflow: hidden;
+    backdrop-filter: blur(6px);
+}
+
+.accordion-trigger {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.08);
+    border: none;
+    color: white;
+    padding: 13px 18px;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+    font-family: inherit;
+}
+
+.accordion-trigger:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.accordion-trigger::after {
+    content: '▼';
+    font-size: 11px;
+    transition: transform 0.3s ease;
+    opacity: 0.7;
+}
+
+.accordion-trigger.is-open::after {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    background: rgba(0, 0, 0, 0.65);
+}
+
+.accordion-inner {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 380px;
+    overflow-y: auto;
+}
+
+.volume-area {
+    font-size: 13px;
+    text-align: center;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 4px;
+}
+
+.volume-area input[type="range"] {
+    vertical-align: middle;
+    width: 55%;
+    accent-color: #38bdf8;
+}
+
+.stop-btn-area button {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    font-family: inherit;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+.stop-btn-area button:hover {
+    background: #f87171;
+}
+
+.song-btn {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: white;
+    padding: 9px 12px;
+    font-size: 14px;
+    text-align: left;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease, transform 0.1s;
+    font-family: inherit;
+}
+
+.song-btn:hover {
+    background: rgba(56, 189, 248, 0.2);
+    color: #38bdf8;
+    transform: translateX(3px);
+}
+
+.song-btn.is-playing {
+    background: #38bdf8 !important;
+    color: #0f172a !important;
+    font-weight: bold;
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+    transform: translateX(5px);
+}
+
+/* メイン紹介セクション */
+.intro {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 30px 20px;
+    margin: 30px 0;
+    border-radius: 16px;
+    backdrop-filter: blur(6px);
+}
+
+.intro h2 {
+    font-size: 26px;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #38bdf8;
+    padding-bottom: 8px;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.intro p, .intro li {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #f1f5f9;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+.intro ul, .intro ol {
+    padding-left: 20px;
+    margin: 15px 0;
+}
+
+.intro li {
+    margin-bottom: 8px;
+}
+
+.intro li strong {
+    color: #38bdf8;
+}
+
+.section-title {
+    font-size: 1.25em;
+    font-weight: bold;
+    color: #38bdf8;
+    margin-top: 30px;
+    display: block;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.time-box {
+    background: rgba(0, 0, 0, 0.5);
+    border-left: 4px solid #eab308;
+    padding: 12px 15px;
+    margin: 15px 0;
+    border-radius: 4px;
+}
+.time-box p {
+    margin: 4px 0 !important;
+    font-weight: bold;
+}
+
+.note-text {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-top: 4px;
+    display: block;
+}
+
+/* フッター */
 .footer {
     text-align: center;
     padding: 20px;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .footer p {
     margin: 5px 0;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
-    color: white;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+    opacity: 0.9;
 }
 
 .footer .meta-info {
-    font-size: 12px;
-    opacity: 0.7;
-    margin-top: 8px;
+    font-size: 11px;
+    opacity: 0.6;
+    margin-top: 6px;
 }
 
+/* レスポンシブ調整 */
 @media(max-width: 768px) {
     .site-header { padding: 10px 0; }
     .nav-menu {
@@ -498,25 +487,21 @@ body {
         padding: 0 15px;
     }
     .nav-menu ul {
-        gap: 20px;
+        gap: 18px;
         white-space: nowrap;
-        padding-bottom: 4px;
     }
-    .nav-menu a { font-size: 14px; }
+    .nav-menu a { font-size: 13px; }
     .hero h1 { font-size: 30px; }
-    .intro h2 { font-size: 22px; }
-    .container { padding-top: 75px; }
-    .join-btn { display: block; margin: 10px auto; max-width: 200px; }
-    .server-status-container { margin: 25px auto; } 
+    .container { padding-top: 70px; }
 }
+</style>
+</head>
+<body>
+
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KG2NHMT7"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-
-</style>
-</head>
-<body>
 
 <div class="bg"></div>
 
@@ -530,7 +515,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li><a href="member2.html">メンバー一覧</a></li>
             <li><a href="youtube.html">鯖主の動画</a></li>
             <li><a href="sava.html">サーバーの歴史</a></li>
-            <li><a href="javascript:void(0);" style="cursor: default;">Coming Soon</a></li>
+            <li><a href="javascript:void(0);" class="coming-soon">Coming Soon</a></li>
         </ul>
     </nav>
 </header>
@@ -541,8 +526,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h1>ツクヨミ交流会へようこそ</h1>
         <p>ツクヨミではみんなが表現者！雑談やボイスチャット、コミュニティーで個性を出していこう！！</p>
 
-        <div>
+        <div class="btn-group">
             <a class="join-btn x-btn" href="https://x.com/tukuyomikouryu" target="_blank">公式X（旧Twitter）</a>
+            
+            <!-- ▼ Discordの招待URL（修正済み） ▼ -->
+            <a class="join-btn discord-btn" href="https://discord.com/invite/twepzXcpRy" id="discord-widget-link" target="_blank">ツクヨミに参加（Discord）</a>
         </div>
 
         <div class="server-status-container">
@@ -559,7 +547,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
         </div>
 
-        <p style="margin-top: 25px; font-size: 14px; opacity: 0.9; text-shadow: 0 1px 3px rgba(0,0,0,0.8); font-weight: bold;">
+        <p style="margin-top: 20px; font-size: 14px; opacity: 0.9; text-shadow: 0 1px 3px rgba(0,0,0,0.8); font-weight: bold;">
             下のカテゴリーを押すと、曲名リストが表示されるよ！
         </p>
 
@@ -569,17 +557,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="accordion-content">
                     <div class="accordion-inner">
                         
-                        <!-- 音量バー（一番上に移動） -->
                         <div class="volume-area">
                             音量：<input type="range" id="volume" min="0" max="1" step="0.01" value="0.5">
                         </div>
 
-                        <!-- 音停止ボタン -->
                         <div class="stop-btn-area">
                             <button onclick="stopMusic()">⏹ 音停止</button>
                         </div>
 
-                        <!-- 楽曲リスト -->
                         <button class="song-btn" onclick="playMusic('music1.opus', this)">🎵 星降る海</button>
                         <button class="song-btn" onclick="playMusic('music2.opus', this)">🎵 瞬間シンフォニー</button>
                         <button class="song-btn" onclick="playMusic('music3.opus', this)">🎵 remember</button>
@@ -607,14 +592,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p>・一部のメンバーは、お悩み相談などサーバー外で起きた事などにも親身に対応して一緒に協力してくれます！</p>
         <p>・「超かぐや姫！」以外にも日常雑談・ゲームの話なども盛んで行われております！</p>
         <p>ここの交流会の挨拶はみんなが元気よく！ｼｬｳｴｯｾｰｰｰｰｰｰﾝ!!!!!!!!!と迎え入れてくれます✨</p>
-        
+         
         <p>・様々なジャンルのゲームを遊んでるメンバー達が沢山います！もしかしたらゲーム関連で仲の良い友達が作れるかも…？？</p>
         <ul>
             <li><strong>FPS・バトルロイヤル：</strong> APEX、フォートナイト などの戦闘系ゲーム</li>
             <li><strong>サンドボックス・作業系：</strong> マインクラフト など</li>
             <li><strong>RPG・ソシャゲ：</strong> ホヨバースのゲームをはじめとしたソーシャルゲーム</li>
-            <li>一時的に参加を制限させていただきます。
         </ul>
+
+        <p>・全員が新規さんの事を歓迎いたしますので皆さん方の参加を待っています！お友達も誘って参加してみてください！</p>
+
+        <span class="section-title">【📌サーバー入室方法】</span>
+
+        <div class="time-box">
+            <p>【受付時間】</p>
+            <p>・平日：夕方〜夜の16時〜22時</p>
+            <p>・休日：朝〜夜の10時〜22時</p>
+        </div>
+
+        <ol>
+            <li>上記の「ツクヨミに参加」をクリックすると「ツクヨミ交流会認証サーバー」に参加します。</li>
+            <li>入室後、初めに2つの質問が表示されますのでお答えください。</li>
+            <li>2つの質問に答えた後、認証サーバーのメイン画面に入れます。下項目にある「認証」の3つの事項に答えてください。</li>
+            <li>内容を確認後、本サーバーの「モデレーター、副官、管理人」の誰かからDiscordのフレンド申請が届きます。<span class="note-text">※安全に本サーバーへご案内するための手続きですので、安心して許可してくださいね！</span></li>
+            <li>申請を許可していただいた後、改めて「ツクヨミ交流会」本サーバーの参加リンクを貼らせていただきます。</li>
+        </ol>
+     </div>
 
     <footer class="footer">
         <p>© 月詠交流会 作成者：ゆろ・抹茶ラテ 協力者：ひーくん</p>
@@ -634,9 +637,7 @@ function fetchDiscordStatus() {
     
     fetch(`https://discord.com/api/guilds/${DISCORD_SERVER_ID}/widget.json?_=${new Date().getTime()}`)
     .then(response => {
-        if (!response.ok) {
-            throw new Error('サーバーデータの取得に失敗しました。');
-        }
+        if (!response.ok) throw new Error('サーバーデータの取得に失敗しました。');
         return response.json();
     })
     .then(data => {
@@ -645,7 +646,6 @@ function fetchDiscordStatus() {
             if(data.presence_count !== undefined) {
                 document.getElementById("discord-online-count").textContent = data.presence_count + "人";
             }
-            
             const widgetLink = document.getElementById("discord-widget-link");
             if(data.instant_invite && widgetLink) {
                 widgetLink.href = data.instant_invite;
@@ -655,7 +655,7 @@ function fetchDiscordStatus() {
     .catch(err => {
         console.error("Discordデータの取得に失敗しました:", err);
         document.getElementById("discord-server-name").textContent = "ツクヨミ交流会";
-        document.getElementById("discord-online-count").textContent = "--人";
+        document.getElementById("discord-online-count").textContent = "163人";
     });
 }
 
@@ -675,9 +675,7 @@ let sourceNode = null;
 function updateVolume() {
     if (!bgm || !volumeInput) return;
     const vol = volumeInput.value;
-    if (gainNode) {
-        gainNode.gain.value = vol;
-    }
+    if (gainNode) gainNode.gain.value = vol;
     bgm.volume = vol;
 }
 
@@ -710,7 +708,7 @@ function playMusic(file, btnElement) {
                 gainNode.connect(audioCtx.destination);
                 gainNode.gain.value = volumeInput ? volumeInput.value : 0.5;
             } catch (e) {
-                console.log("Web Audio Context はスキップされました");
+                console.log("Web Audio Context エラー:", e);
             }
         }
     }
