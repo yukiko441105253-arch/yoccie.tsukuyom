@@ -324,8 +324,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    max-height: 380px;
-    overflow-y: auto;
 }
 
 .volume-area {
@@ -529,7 +527,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="btn-group">
             <a class="join-btn x-btn" href="https://x.com/tukuyomikouryu" target="_blank">公式X（旧Twitter）</a>
             
-            <!-- ▼ Discordの招待URL（修正済み） ▼ -->
             <a class="join-btn discord-btn" href="https://discord.com/invite/twepzXcpRy" id="discord-widget-link" target="_blank">ツクヨミに参加（Discord）</a>
         </div>
 
@@ -611,6 +608,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <ol>
+            <li>荒らし鯖のタグがついている人はお断りしています<li>
+            <li>例：おいしい鯖/ACVR鯖
             <li>上記の「ツクヨミに参加」をクリックすると「ツクヨミ交流会認証サーバー」に参加します。</li>
             <li>入室後、初めに2つの質問が表示されますのでお答えください。</li>
             <li>2つの質問に答えた後、認証サーバーのメイン画面に入れます。下項目にある「認証」の3つの事項に答えてください。</li>
@@ -620,9 +619,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      </div>
 
     <footer class="footer">
-        <p>© 月詠交流会 作成者：ゆろ・抹茶ラテ 協力者：ひーくん</p>
+        <p>© ツクヨミ交流会 作成者：ゆろ・抹茶ラテ 協力者：ひーくん</p>
         <div class="meta-info">
-            <span>最終更新日: 2026年7月27日</span> │ <span>Version 3.3.4</span>
+            <span>最終更新日: 2026年8月6日</span> │ <span>Version 3.3.8</span>
         </div>
     </footer>
 
@@ -652,8 +651,7 @@ function fetchDiscordStatus() {
             }
         }
     })
-    .catch(err => {
-        console.error("Discordデータの取得に失敗しました:", err);
+    .catch(() => {
         document.getElementById("discord-server-name").textContent = "ツクヨミ交流会";
         document.getElementById("discord-online-count").textContent = "163人";
     });
