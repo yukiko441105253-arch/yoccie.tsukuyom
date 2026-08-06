@@ -186,6 +186,55 @@ body {
     box-shadow: 0 0 15px rgba(88, 101, 242, 0.6);
 }
 
+/* ▼ YouTube・メンバーシップ誘導セクション用のスタイル ▼ */
+.youtube-promo-card {
+    background: rgba(15, 23, 42, 0.75);
+    border-radius: 16px;
+    max-width: 500px;
+    margin: 25px auto 35px;
+    padding: 22px 25px;
+    color: #f1f5f9;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    text-align: center;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 215, 0, 0.3); /* ゴールド系の特別感ある枠線 */
+}
+
+.youtube-promo-card h3 {
+    color: #ffd700;
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+.youtube-promo-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+    color: #e2e8f0;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+
+.youtube-promo-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #ff0000, #ff4d4d);
+    color: #ffffff;
+    font-weight: bold;
+    padding: 11px 24px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 15px;
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.youtube-promo-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 0, 0, 0.6);
+}
+/* ▲ 誘導セクションここまで ▲ */
+
 /* サーバー状況ウィジェット */
 .server-status-container {
     background-color: rgba(15, 23, 42, 0.8);
@@ -530,6 +579,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <a class="join-btn discord-btn" href="https://discord.com/invite/twepzXcpRy" id="discord-widget-link" target="_blank">ツクヨミに参加（Discord）</a>
         </div>
 
+        <!-- ▼ YouTube・メンバーシップ紹介カード ▼ -->
+        <div class="youtube-promo-card">
+            <h3>🎬 鯖主のYouTube & メンバーシップ</h3>
+            <p>なんとこのたび、鯖主のよっしーがメンバーシップを解放しました！<p>
+          <p>限定特典が楽しめるメンバーシップ情報をチェックしよう！</p>
+            <a href="youtube.html" class="youtube-promo-btn">動画・メンシプ情報を見る</a>
+        </div>
+        <!-- ▲ YouTube・メンバーシップ紹介カードここまで ▲ -->
+
         <div class="server-status-container">
             <div class="server-header-mini">
                 <div class="server-icon-mini">🌙</div>
@@ -537,7 +595,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <h4 id="discord-server-name">サーバー名を取得中...</h4>
                     <div class="status-count-mini">
                         <div class="online-wrapper">
-                            <span class="pulse-dot"></span>オンライン: <span id="discord-online-count">0人</span> / メンバー: 163人
+                            <span class="pulse-dot"></span>オンライン: <span id="discord-online-count">0人</span> / メンバー: 171人
                         </div>
                     </div>
                 </div>

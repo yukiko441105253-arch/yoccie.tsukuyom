@@ -18,20 +18,20 @@
             min-height: 100vh;
         }
 
-/* 1枚の写真を画面全体に完全に固定 */
-.bg {
-    position: fixed;
-    inset: 0;
-    background-image: url('images/bg1.png'); 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 0;
-    opacity: 0.3; /* 全体を少し暗めに調整 */
-    filter: brightness(0.9);
-}
+        /* 1枚の写真を画面全体に完全に固定 */
+        .bg {
+            position: fixed;
+            inset: 0;
+            background-image: url('images/bg1.png'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 0;
+            opacity: 0.3;
+            filter: brightness(0.9);
+        }
 
-        /* ✨ 固定ヘッダーナビゲーションバー（スマホ横スクロール・デザイン統一版） */
+        /* ✨ 固定ヘッダーナビゲーションバー */
         .site-header {
             position: fixed;
             top: 0;
@@ -52,11 +52,11 @@
             overflow-x: auto;
             white-space: nowrap;
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; /* Firefox用 */
+            scrollbar-width: none;
         }
 
         .nav-menu::-webkit-scrollbar {
-            display: none; /* Chrome, Safari用 */
+            display: none;
         }
 
         .nav-menu ul {
@@ -99,11 +99,58 @@
 
         h1 {
             color: #ff4d4d;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             text-align: center;
             font-size: 28px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.6);
         }
+
+        /* ▼ メンバーシップ紹介エリアのスタイル ▼ */
+        .membership-card {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(6px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.3); /* ゴールド系の枠線で特別感を演出 */
+            padding: 25px;
+            margin-bottom: 35px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+
+        .membership-card h2 {
+            color: #ffd700;
+            font-size: 22px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .membership-card p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #f1f5f9;
+            margin-bottom: 20px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+        }
+
+        .membership-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            color: #0f172a;
+            font-weight: bold;
+            padding: 12px 28px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .membership-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+        }
+        /* ▲ メンバーシップ紹介エリアここまで ▲ */
 
         /* 動画リスト */
         .video-list {
@@ -135,17 +182,15 @@
             text-decoration: none;
             color: inherit;
             display: flex;
-            flex-direction: column; /* スマホでは基本「縦並び」にする */
+            flex-direction: column;
         }
 
-        /* PCサイズ以上の時は横並びにする */
         @media (min-width: 600px) {
             .video-link {
                 flex-direction: row;
             }
         }
 
-        /* サムネイルボックス */
         .thumbnail-box {
             width: 100%;
             background-color: #000;
@@ -166,11 +211,10 @@
         .thumbnail-box img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* 画像が歪んだり引き伸ばされたりするのを防ぐ */
+            object-fit: cover;
             display: block;
         }
 
-        /* テキスト情報ボックス */
         .info-box {
             padding: 20px;
             display: flex;
@@ -200,7 +244,7 @@
             word-break: break-all;
         }
 
-        /* フッター（他ページと統一・二段崩れ防止） */
+        /* フッター */
         .footer {
             text-align: center;
             padding: 20px;
@@ -220,7 +264,6 @@
             margin-top: 8px;
         }
 
-        /* スマホ用レスポンシブの追加調整 */
         @media(max-width: 768px) {
             h1 { font-size: 22px; }
             .nav-menu ul { justify-content: flex-start; padding: 0 15px; gap: 20px; } 
@@ -228,6 +271,7 @@
             .container { padding-top: 130px; } 
             .video-title { font-size: 16px; }
             .footer { margin: 30px 15px 15px 15px; }
+            .membership-card { padding: 20px 15px; }
         }
     </style>
 </head>
@@ -253,6 +297,15 @@
 <div class="container">
 
     <h1>🎬 鯖主の投稿動画一覧</h1>
+
+    <!-- ▼ 鯖主のメンバーシップ紹介エリア ▼ -->
+    <div class="membership-card">
+        <h2>👑 鯖主のYouTubeメンバーシップ</h2>
+        <p>メンバーシップ限定の色々な特典が付いてきて、さらに深く活動を応援したい方へ！<br>ぜひチェックしてね！</p>
+        <!-- 下記の href="ここにYouTubeメンバーシップのリンクを貼る" を書き換えてください -->
+        <a href="https://www.youtube.com/channel/UCSp5CQ3MDvI3Z5Rxgkuz5Kw/membership" class="membership-btn" target="_blank" rel="noopener noreferrer">メンバーシップに参加する</a>
+    </div>
+    <!-- ▲ メンバーシップ紹介エリアここまで ▲ -->
     
     <div class="video-list">
 
@@ -316,7 +369,6 @@
 </div>
 
 <script>
-// --- 🎵 ホームとシームレスに繋がるBGMシステム 🎵 ---
 const bgm = document.getElementById("bgm");
 
 window.addEventListener("DOMContentLoaded", () => {
