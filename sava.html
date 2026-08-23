@@ -19,18 +19,18 @@
             min-height: 100vh;
         }
 
-/* 1枚の写真を画面全体に完全に固定 */
-.bg {
-    position: fixed;
-    inset: 0;
-    background-image: url('images/bg1.png'); 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 0;
-    opacity: 0.3; /* 全体を少し暗めに調整 */
-    filter: brightness(0.9);
-}
+        /* 1枚の写真を画面全体に完全に固定 */
+        .bg {
+            position: fixed;
+            inset: 0;
+            background-image: url('images/bg1.png'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 0;
+            opacity: 0.3; /* 全体を少し暗めに調整 */
+            filter: brightness(0.9);
+        }
 
         /* ✨ 固定ヘッダーナビゲーションバー（スマホ横スクロール・デザイン統一版） */
         .site-header {
@@ -219,6 +219,15 @@
             white-space: pre-wrap;
         }
 
+        /* 🎯 168人目の隠し要素（ホバー時にクリックできる雰囲気を出す） */
+        #secret-item {
+            cursor: pointer;
+        }
+        #secret-item .timeline-content:hover {
+            border-color: #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+
         /* フッター（他ページと統一・二段崩れ防止） */
         .footer {
             text-align: center;
@@ -349,7 +358,7 @@
             </div>
         </div>
 
-        <!-- 🎯 168人目の項目（見た目は他と全く同じ）[cite: 1] -->
+        <!-- 🎯 168人目の項目（クリックするとパスワード認証） -->
         <div class="timeline-item left" id="secret-item">
             <div class="timeline-content">
                 <div class="timeline-date">2026年 8月7日</div>
@@ -402,10 +411,8 @@ if (bgm) {
     setInterval(() => {
         if (!bgm.paused) {
             localStorage.setItem("bgm_time", bgm.currentTime);
-            localStorage.setItem("bgm_playing", "true");
-        } else {
-            localStorage.setItem("bgm_playing", "false");
         }
+        localStorage.setItem("bgm_playing", !bgm.paused ? "true" : "false");
         localStorage.setItem("bgm_volume", bgm.volume);
     }, 500);
 }
@@ -419,18 +426,24 @@ const obs = new IntersectionObserver(entries => {
 
 document.querySelectorAll(".timeline-item").forEach(item => obs.observe(item));
 
-// --- 🔐 168人目の隠し要素（別ページへ移動） ---
+// --- 🔐 168人目の隠し要素（クリックでパスワード認証後にシークレットルームへ） ---
 const secretItem = document.getElementById("secret-item");
+const SECRET_PASSWORD = "814"; // ← ここに暗証番号を設定
 
 if (secretItem) {
     secretItem.addEventListener("click", () => {
-        const inputCode = prompt("🔐 隠しコードを入力してください:");
+        const inputPassword = prompt("シークレットルームの暗証番号を入力してください:");
         
-        if (inputCode === "814") {
-            // 正しいコードの場合、専用の別HTMLへ移動
-            window.location.href = "secret.html";
-        } else if (inputCode !== null) {
-            alert("❌ コードが違います。");
+        if (inputPassword === null) return;
+
+        if (inputPassword === SECRET_PASSWORD) {
+            // ⭐ 許可証（合図）をブラウザに一時保存する
+            sessionStorage.setItem("secret_authorized", "true");
+            
+            // シークレットページへ移動
+            window.location.href = "secret.html"; 
+        } else {
+            alert("パスワードが違います。");
         }
     });
 }
