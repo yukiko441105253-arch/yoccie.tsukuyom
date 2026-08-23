@@ -341,7 +341,6 @@
             </div>
         </div>
 
-
         <div class="timeline-item right">
             <div class="timeline-content">
                 <div class="timeline-date">2026年 7月30日</div>
@@ -350,7 +349,8 @@
             </div>
         </div>
 
-        <div class="timeline-item left">
+        <!-- 🎯 168人目の項目（見た目は他と全く同じ）[cite: 1] -->
+        <div class="timeline-item left" id="secret-item">
             <div class="timeline-content">
                 <div class="timeline-date">2026年 8月7日</div>
                 <h3>✨🎉 メンバー168人突破！</h3>
@@ -418,6 +418,22 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll(".timeline-item").forEach(item => obs.observe(item));
+
+// --- 🔐 168人目の隠し要素（別ページへ移動） ---
+const secretItem = document.getElementById("secret-item");
+
+if (secretItem) {
+    secretItem.addEventListener("click", () => {
+        const inputCode = prompt("🔐 隠しコードを入力してください:");
+        
+        if (inputCode === "814") {
+            // 正しいコードの場合、専用の別HTMLへ移動
+            window.location.href = "secret.html";
+        } else if (inputCode !== null) {
+            alert("❌ コードが違います。");
+        }
+    });
+}
 </script>
 </body>
 </html>
