@@ -296,9 +296,7 @@
             <li><a href="index.html">ホーム</a></li>
             <li><a href="member.html">運営紹介</a></li>
             <li><a href="member2.html">メンバー一覧</a></li>
-            <li><a href="youtube.html">鯖主の動画</a></li>
             <li><a href="sava.html">サーバーの歴史</a></li>
-            <li><a href="javascript:void(0);" style="cursor: default; opacity: 0.4;">Coming Soon</a></li>
         </ul>
     </nav>
 </header>
@@ -358,7 +356,7 @@
             </div>
         </div>
 
-        <!-- 🎯 168人目の項目（クリックするとパスワード認証） -->
+        <!-- 🎯 168人目の項目（クリックするとそのまま secret.html へ移動） -->
         <div class="timeline-item left" id="secret-item">
             <div class="timeline-content">
                 <div class="timeline-date">2026年 8月7日</div>
@@ -426,25 +424,12 @@ const obs = new IntersectionObserver(entries => {
 
 document.querySelectorAll(".timeline-item").forEach(item => obs.observe(item));
 
-// --- 🔐 168人目の隠し要素（クリックでパスワード認証後にシークレットルームへ） ---
+// --- 🎯 168人目の隠し要素（クリックで直接 secret.html へ移動） ---
 const secretItem = document.getElementById("secret-item");
-const SECRET_PASSWORD = "814"; // ← ここに暗証番号を設定
 
 if (secretItem) {
     secretItem.addEventListener("click", () => {
-        const inputPassword = prompt("シークレットルームの暗証番号を入力してください:");
-        
-        if (inputPassword === null) return;
-
-        if (inputPassword === SECRET_PASSWORD) {
-            // ⭐ 許可証（合図）をブラウザに一時保存する
-            sessionStorage.setItem("secret_authorized", "true");
-            
-            // シークレットページへ移動
-            window.location.href = "secret.html"; 
-        } else {
-            alert("パスワードが違います。");
-        }
+        window.location.href = "secret.html"; 
     });
 }
 </script>
