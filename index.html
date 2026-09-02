@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KG2NHMT7');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>交流会コミュニティ - ツクヨミ交流会</title>
+
+<!-- ▼ OGP設定 ▼ -->
+<meta name="description" content="ツクヨミ交流会ではみんなが表現者！雑談やボイスチャット、コミュニティーで個性を出していこう！！">
+<meta property="og:title" content="交流会コミュニティ - ツクヨミ交流会">
+<meta property="og:description" content="ツクヨミ交流会ではみんなが表現者！雑談やボイスチャット、コミュニティーで個性を出していこう！！">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yoccie-tsukuyom-pnviqkc0j-yoccietsukuyomiexchange.vercel.app/">
+<meta property="og:image" content="images/bg1.png">
+<meta property="og:site_name" content="ツクヨミ交流会">
+<meta name="twitter:card" content="summary_large_image">
+<!-- ▲ OGP設定ここまで ▲ -->
+
+<link rel="icon" href="images/favicon.png" type="image/png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yomogi&display=swap" rel="stylesheet">
+
+<script>
+window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Yomogi', sans-serif;
+    color: white;
+    overflow-x: hidden;
+    background-color: #050d1a;
+}
+
+/* 背景を固定 */
+.bg {
+    position: fixed;
+    inset: 0;
+    background-image: url('images/bg1.png'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    opacity: 0.35;
+    filter: brightness(0.85);
+}
+
+/* ヘッダー */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 14px 0;
+    display: flex;
+    justify-content: center;
+    background: rgba(5, 13, 26, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-menu ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.nav-menu li {
+    display: flex;
+    align-items: center;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: bold;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav-menu a:hover {
+    opacity: 1;
+}
+
+/* コンテンツ全体 */
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: auto;
+    padding: 24px;
+    padding-top: 90px;
+}
+
+.hero {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 40px 15px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.hero h1 {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    background: linear-gradient(90deg, #ffe259, #ffa751, #ffffff, #ffe259);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbowMove 8s ease-in-out infinite;
+    text-shadow: 0 0 20px rgba(255, 226, 89, 0.25);
+}
+
+.hero p {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    line-height: 1.7;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+}
+
+/* ボタン共通の洗練されたデザイン */
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    margin-top: 25px;
+}
+
+.join-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 320px;
+    padding: 14px 24px;
+    text-decoration: none;
+    border-radius: 14px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    font-family: inherit;
+    position: relative;
+    overflow: hidden;
+}
+
+.join-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+}
+
+.x-btn {
+    background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.x-btn:hover {
+    background: linear-gradient(135deg, #2a2a2a, #111111);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.discord-btn {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.discord-btn:hover {
+    background: linear-gradient(135deg, #818cf8, #6366f1);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+}
+
+/* ▼ サーバー状況ウィジェット（目立つリッチデザイン） ▼ */
+.server-status-container {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9));
+    border-radius: 16px;
+    max-width: 420px;
+    margin: 20px auto 10px;
+    padding: 20px 24px;
+    color: #f1f5f9;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.15);
+    text-align: left;
+    backdrop-filter: blur(10px);
+    border: 1.5px solid rgba(56, 189, 248, 0.35);
+}
+
+.server-header-mini {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.server-icon-mini {
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, #38bdf8, #1d4ed8); 
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.4);
+    flex-shrink: 0;
+}
+
+.server-info-mini {
+    width: 100%;
+}
+
+.server-info-mini h4 {
+    margin: 0 0 6px 0;
+    font-size: 17px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+.status-counts-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.online-wrapper {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #e2e8f0;
+}
+
+.pulse-dot {
+    width: 9px;
+    height: 9px;
+    background-color: #22c55e; 
+    border-radius: 50%;
+    margin-right: 6px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.pulse-dot::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #22c55e;
+    border-radius: 50%;
+    animation: pulseAnimate 2s infinite;
+}
+
+.highlight-num {
+    color: #4ade80;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 4px;
+    text-shadow: 0 0 10px rgba(74, 222, 128, 0.4);
+}
+
+.member-wrapper {
+    font-size: 14px;
+    color: #94a3b8;
+    font-weight: bold;
+}
+
+.member-num {
+    color: #38bdf8;
+    font-size: 16px;
+    margin-left: 4px;
+}
+/* ▲ サーバー状況ウィジェットここまで ▲ */
+
+@keyframes pulseAnimate {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(2.5); opacity: 0; }
+}
+
+@keyframes rainbowMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* メイン紹介セクション */
+.intro {
+    background: rgba(15, 23, 42, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 35px 28px;
+    margin: 30px 0;
+    border-radius: 18px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.intro h2 {
+    font-size: 26px;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #38bdf8;
+    padding-bottom: 10px;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.intro p, .intro li {
+    font-size: 15px;
+    line-height: 1.85;
+    color: #f1f5f9;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+.intro ul, .intro ol {
+    padding-left: 20px;
+    margin: 15px 0;
+}
+
+.intro li {
+    margin-bottom: 10px;
+}
+
+.intro li strong {
+    color: #38bdf8;
+}
+
+.section-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.section-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #38bdf8;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.time-box {
+    background: rgba(0, 0, 0, 0.45);
+    border-left: 4px solid #eab308;
+    padding: 14px 18px;
+    margin: 15px 0;
+    border-radius: 6px;
+    border: 1px solid rgba(234, 179, 8, 0.2);
+}
+.time-box p {
+    margin: 4px 0 !important;
+    font-weight: bold;
+}
+
+.note-text {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-top: 6px;
+    display: block;
+}
+
+/* フッター */
+.footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.footer p {
+    margin: 5px 0;
+    font-size: 13px;
+    font-weight: bold;
+    opacity: 0.9;
+}
+
+.footer .meta-info {
+    font-size: 11px;
+    opacity: 0.6;
+    margin-top: 6px;
+}
+
+/* スマホ表示（レスポンシブ） */
+@media(max-width: 768px) {
+    .site-header { padding: 10px 0; }
+    .nav-menu {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 0 15px;
+    }
+    .nav-menu ul {
+        gap: 15px;
+        white-space: nowrap;
+    }
+    .nav-menu a { font-size: 13px; }
+    .hero h1 { font-size: 28px; }
+    .container { 
+        padding: 15px;
+        padding-top: 75px; 
+    }
+    .intro {
+        padding: 20px 16px;
+    }
+    .section-card {
+        padding: 14px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KG2NHMT7"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="bg"></div>
+
+<header class="site-header">
+    <nav class="nav-menu">
+        <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="member.html">運営紹介</a></li>
+            <li><a href="member2.html">メンバー一覧</a></li>
+            <li><a href="sava.html">サーバーの歴史</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+
+    <div class="hero">
+        <h1>ツクヨミ交流会へようこそ</h1>
+        <p>ツクヨミではみんなが表現者！雑談やボイスチャット、コミュニティーで個性を出していこう！！</p>
+
+        <!-- ▼ サーバー状況ウィジェット ▼ -->
+        <div class="server-status-container">
+            <div class="server-header-mini">
+                <div class="server-icon-mini">🌙</div>
+                <div class="server-info-mini">
+                    <h4 id="discord-server-name">サーバー名を取得中...</h4>
+                    <div class="status-counts-row">
+                        <div class="online-wrapper">
+                            <span class="pulse-dot"></span>オンライン: <span id="discord-online-count" class="highlight-num">0人</span>
+                        </div>
+                        <div class="member-wrapper">
+                            メンバー: <span class="member-num">206人</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ▲ サーバー状況ウィジェットここまで ▲ -->
+
+        <div class="btn-group">
+            <a class="join-btn discord-btn" href="https://discord.com/invite/twepzXcpRy" id="discord-widget-link" target="_blank">ツクヨミに参加（Discord）</a>
+            
+            <a class="join-btn x-btn" href="https://x.com/tukuyomikouryu" target="_blank">公式X（旧Twitter）</a>
+        </div>
+
+    </div>
+
+    <div class="intro">
+        <h2>🌙 サーバー紹介</h2>
+         
+        <div class="section-card">
+            <span class="section-title">✨ 【初めに】</span>
+            <p>・「yoccie よっしー」が率いる「ツクヨミ交流会！」では毎日楽しく活動をしています！</p>
+            <p>・クオリティ高く、サーバー内のメンバーである「ひーくん」「抹茶ラテ」にツクヨミ交流会のホームページを制作していただきました！</p>
+            <p>・一部のメンバーは、お悩み相談などサーバー外で起きた事などにも親身に対応して一緒に協力してくれます！</p>
+            <p>・「超かぐや姫！」以外にも日常雑談・ゲームの話なども盛んに行われております！</p>
+            <p>ここの交流会の挨拶はみんなが元気よく！ｼｬｳｴｯｾｰｰｰｰｰｰﾝ!!!!!!!!!と迎え入れてくれます✨</p>
+             
+            <p style="margin-top: 15px;">・様々なジャンルのゲームを遊んでるメンバー達が沢山います！もしかしたらゲーム関連で仲の良い友達が作れるかも…？？</p>
+            <ul>
+                <li><strong>FPS・バトルロイヤル：</strong> APEX、フォートナイト などの戦闘系ゲーム</li>
+                <li><strong>サンドボックス・作業系：</strong> マインクラフト など</li>
+                <li><strong>RPG・ソシャゲ：</strong> ホヨバースのゲームをはじめとしたソーシャルゲーム</li>
+            </ul>
+
+            <p style="margin-top: 15px;">・全員が新規さんの事を歓迎いたしますので皆さん方の参加を待っています！お友達も誘って参加してみてください！</p>
+        </div>
+
+        <div class="section-card" style="margin-bottom: 0;">
+            <span class="section-title">📌 【サーバー入室方法】</span>
+
+            <div class="time-box">
+                <p>【受付時間】</p>
+                <p>・平日：16:00 〜 22:00</p>
+                <p>・休日：10:00 〜 22:00</p>
+            </div>
+
+            <ol>
+                <li>荒らし鯖のタグがついている人はお断りしています</li>
+                <li>例：おいしい鯖 / ACVR鯖</li>
+                <li>上記の「ツクヨミに参加」をクリックすると「ツクヨミ交流会認証サーバー」に参加します。</li>
+                <li>入室後、初めに2つの質問が表示されますのでお答えください。</li>
+                <li>2つの質問に答えた後、認証サーバーのメイン画面に入れます。下項目にある「認証」の3つの事項に答えてください。</li>
+                <li>内容を確認後、本サーバーの「モデレーター、副官、管理人」の誰かからDiscordのフレンド申請が届きます。<span class="note-text">※安全に本サーバーへご案内するための手続きですので、安心して許可してくださいね！</span></li>
+                <li>申請を許可していただいた後、改めて「ツクヨミ交流会」本サーバーの参加リンクを貼らせていただきます。</li>
+            </ol>
+        </div>
+     </div>
+
+    <footer class="footer">
+        <p>© ツクヨミ交流会 作成者：ひーくん・ゆろ・抹茶ラテ</p>
+        <div class="meta-info">
+            <span>最終更新日: 2026年8月26日</span> │ <span>Version 10.0.0</span>
+        </div>
+    </footer>
+
+</div>
+
+<script>
+// --- Discordからリアルタイムに人数を取得するプログラム ---
+const DISCORD_SERVER_ID = "1501639435500912650"; 
+
+function fetchDiscordStatus() {
+    if(!DISCORD_SERVER_ID) return;
+    
+    fetch(`https://discord.com/api/guilds/${DISCORD_SERVER_ID}/widget.json?_=${new Date().getTime()}`)
+    .then(response => {
+        if (!response.ok) throw new Error('サーバーデータの取得に失敗しました。');
+        return response.json();
+    })
+    .then(data => {
+        if(data) {
+            if(data.name) document.getElementById("discord-server-name").textContent = data.name;
+            if(data.presence_count !== undefined) {
+                document.getElementById("discord-online-count").textContent = data.presence_count + "人";
+            }
+            const widgetLink = document.getElementById("discord-widget-link");
+            if(data.instant_invite && widgetLink) {
+                widgetLink.href = data.instant_invite;
+            }
+        }
+    })
+    .catch(() => {
+        document.getElementById("discord-server-name").textContent = "ツクヨミ交流会";
+        document.getElementById("discord-online-count").textContent = "206人";
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    fetchDiscordStatus();
+    setInterval(fetchDiscordStatus, 60000);
+});
+</script>
+
+</body>
+</html>

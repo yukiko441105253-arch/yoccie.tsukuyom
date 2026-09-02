@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>月詠交流会 公式サイト - サーバーの歴史</title>
+
+    <link rel="icon" href="/images/favicon.png" type="image/png" />
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+            background-color: #0f172a;
+            min-height: 100vh;
+        }
+
+        /* 1枚の写真を画面全体に完全に固定 */
+        .bg {
+            position: fixed;
+            inset: 0;
+            background-image: url('images/bg1.png'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 0;
+            opacity: 0.3; /* 全体を少し暗めに調整 */
+            filter: brightness(0.9);
+        }
+
+        /* ✨ 固定ヘッダーナビゲーションバー（スマホ横スクロール・デザイン統一版） */
+        .site-header {
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100; 
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            background: rgba(15, 23, 42, 0.7); 
+            backdrop-filter: blur(8px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-menu {
+            width: 100%;
+            max-width: 1000px;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox用 */
+        }
+
+        .nav-menu::-webkit-scrollbar {
+            display: none; /* Chrome, Safari用 */
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+            gap: 35px;
+            margin: 0;
+            padding: 0 20px;
+            justify-content: center;
+            min-width: max-content;
+        }
+
+        .nav-menu li {
+            white-space: nowrap; 
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #ffffff; 
+            font-size: 16px;
+            font-weight: bold;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); 
+        }
+
+        .nav-menu a:hover {
+            opacity: 1;
+        }
+
+        /* コンテンツコンテナ */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            padding-top: 100px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            color: #ffffff;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 40px;
+        }
+
+        /* ⏳ タイムライン（年表）スタイル */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        /* 中央を通る一本の線（PC用） */
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: rgba(255, 255, 255, 0.2);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        /* 各イベントの枠 */
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: transparent;
+            width: 50%;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .timeline-item.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item.left {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item.right {
+            left: 50%;
+            text-align: left;
+        }
+
+        /* タイムライン上の丸い点 */
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            right: -8px;
+            background-color: #3b82f6;
+            border: 4px solid #ffffff;
+            top: 25px;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 8px rgba(59, 130, 246, 0.8);
+        }
+
+        .timeline-item.right::after {
+            left: -8px;
+            right: auto;
+        }
+
+        /* イベントカード本体（透明感のあるダークデザイン） */
+        .timeline-content {
+            padding: 20px;
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            position: relative;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-align: left;
+            transition: background 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            background: rgba(15, 23, 42, 0.65);
+        }
+
+        .timeline-date {
+            font-size: 13px;
+            font-weight: bold;
+            color: #38bdf8;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content h3 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            color: #ffffff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 5px;
+        }
+
+        .timeline-content p {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #f1f5f9;
+            white-space: pre-wrap;
+        }
+
+        /* 🎯 168人目の隠し要素（ホバー時にクリックできる雰囲気を出す） */
+        #secret-item {
+            cursor: pointer;
+        }
+        #secret-item .timeline-content:hover {
+            border-color: #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+
+        /* フッター（他ページと統一・二段崩れ防止） */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            margin: 50px auto 20px auto;
+            max-width: 800px;
+            border-radius: 15px;
+            font-size: 14px;
+        }
+
+        .footer .meta-info {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 8px;
+        }
+
+        /* 📱 スマホ対応 */
+        @media screen and (max-width: 768px) {
+            .nav-menu ul { justify-content: flex-start; padding: 0 15px; gap: 20px; } 
+            .nav-menu a { font-size: 14px; }
+            .container { padding-top: 130px; }
+
+            /* 線を左側に寄せる */
+            .timeline::after {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 50px;
+                padding-right: 0;
+            }
+
+            .timeline-item.left,
+            .timeline-item.right {
+                left: 0;
+                text-align: left;
+            }
+
+            /* 丸いドットの位置を左側の線に合わせる */
+            .timeline-item::after,
+            .timeline-item.right::after {
+                left: 12px;
+                right: auto;
+            }
+            
+            .footer {
+                margin: 30px 15px 15px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg" id="bg"></div>
+
+<audio id="bgm" loop></audio>
+
+<header class="site-header">
+    <nav class="nav-menu">
+        <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="member.html">運営紹介</a></li>
+            <li><a href="member2.html">メンバー一覧</a></li>
+            <li><a href="sava.html">サーバーの歴史</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+
+    <div class="section-title">📜 ツクヨミ交流会の歴史</div>
+    <div class="section-subtitle">サーバー設立から現在までの歩みと、大切な思い出の記録</div>
+    
+    <div class="timeline">
+        
+        <div class="timeline-item left">
+            <div class="timeline-content">
+                <div class="timeline-date">2026年 5月10日</div>
+                <h3>🚀 ツクヨミ交流会 誕生！</h3>
+                <p>鯖主のよっしーによって、すべてがここから始まりました。最初は小さなコミュニティとしてのスタートでした。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item right">
+            <div class="timeline-content">
+                <div class="timeline-date">2026年 5月17日</div>
+                <h3>👥 メンバー50人突破</h3>
+                <p>YouTubeの投稿を中心に、少しずつ新しい仲間が増えて賑やかになり始めました!</p>
+            </div>
+        </div>
+
+        <div class="timeline-item left">
+            <div class="timeline-content">
+                <div class="timeline-date">2026年 6月15日</div>
+                <h3>🎉 メンバー100人突破！</h3>
+                <p>コミュニティがさらに拡大！毎日ボイスチャンネルやチャットで活発な交流が行われる、大人気サーバーへ成長しました。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item right">
+            <div class="timeline-content">
+                <div class="timeline-date">2026年 6月19日</div>
+                <h3>🌐 公式ホームページ計画が始動</h3>
+                <p>「もっと多くの人にサーバーの魅力を知ってほしい！」という思いから、ひーくんと抹茶ラテによるWEB作成プロジェクトがスタート。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item left">
+            <div class="timeline-content">
+                <div class="timeline-date">2026年 6月21日</div>
+                <h3>✨ 公式サイトオープン＆現在へ</h3>
+                <p>ついに月詠交流会の公式WEBサイトが完成！これからもみんなで最高の思い出と歴史を作っていきましょう！</p>
+            </div>
+        </div>
+
+        <div class="timeline-item right">
+            <div class="timeline-content">
+                <div class="timeline-date">2026年 7月30日</div>
+                <h3>📞 通話時間が168時間を突破</h3>
+                <p>サーバーの皆さんがゲームや雑談をして通話時間が168時間を突破</p>
+            </div>
+        </div>
+
+        <!-- 🎯 168人目の項目（クリックするとそのまま secret.html へ移動） -->
+        <div class="timeline-item left" id="secret-item">
+            <div class="timeline-content">
+                <div class="timeline-date">2026年 8月7日</div>
+                <h3>✨🎉 メンバー168人突破！</h3>
+                <p>YouTubeやX（旧Twitter）での投稿を経て、168人にまで成長しました！</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<footer class="footer">
+    <p>© 月詠交流会 作成者：ひーくん・ゆろ・抹茶ラテ</p>
+    <div class="meta-info">
+        <span>最終更新日: 2026年8月11日</span> │ <span>Version 1.8</span> 
+    </div>
+</footer>
+
+<script>
+// --- 🎵 ホームとシームレスに繋がるBGMシステム 🎵 ---
+const bgm = document.getElementById("bgm");
+
+window.addEventListener("DOMContentLoaded", () => {
+    const savedSrc = localStorage.getItem("bgm_src");
+    const savedTime = localStorage.getItem("bgm_time");
+    const savedVolume = localStorage.getItem("bgm_volume");
+    const isPlaying = localStorage.getItem("bgm_playing");
+
+    if (savedSrc && bgm) {
+        bgm.src = savedSrc;
+        bgm.currentTime = savedTime ? parseFloat(savedTime) : 0;
+        bgm.volume = savedVolume ? parseFloat(savedVolume) : 0.5;
+
+        if (isPlaying === "true") {
+            const startPlay = () => {
+                bgm.play().then(() => {
+                    document.removeEventListener("click", startPlay);
+                }).catch(err => {
+                    console.log("ブラウザの保護機能により、画面クリック後に再生が開始されます。");
+                });
+            };
+            startPlay();
+            document.addEventListener("click", startPlay, { once: true });
+        }
+    }
+});
+
+if (bgm) {
+    setInterval(() => {
+        if (!bgm.paused) {
+            localStorage.setItem("bgm_time", bgm.currentTime);
+        }
+        localStorage.setItem("bgm_playing", !bgm.paused ? "true" : "false");
+        localStorage.setItem("bgm_volume", bgm.volume);
+    }, 500);
+}
+
+// --- スクロール時のふわっと表示（タイムライン用） ---
+const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add("show");
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll(".timeline-item").forEach(item => obs.observe(item));
+
+// --- 🎯 168人目の隠し要素（クリックで直接 secret.html へ移動） ---
+const secretItem = document.getElementById("secret-item");
+
+if (secretItem) {
+    secretItem.addEventListener("click", () => {
+        window.location.href = "secret.html"; 
+    });
+}
+</script>
+</body>
+</html>
